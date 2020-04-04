@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bili33.top/About/index.html</loc>
+    
+    <lastmod>2020-04-04T09:38:33.147Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://bili33.top/link/index.html</loc>
     
-    <lastmod>2020-04-04T08:35:59.403Z</lastmod>
+    <lastmod>2020-04-04T09:31:36.293Z</lastmod>
     
   </url>
   
@@ -54,13 +61,6 @@
     <loc>http://bili33.top/steamgames/index.html</loc>
     
     <lastmod>2020-03-29T02:52:32.970Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://bili33.top/comment/index.html</loc>
-    
-    <lastmod>2020-03-29T02:52:32.966Z</lastmod>
     
   </url>
   
@@ -257,20 +257,6 @@
     <loc>http://bili33.top/Donate/index.html</loc>
     
     <lastmod>2020-03-29T02:52:32.884Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://bili33.top/Beta/index.html</loc>
-    
-    <lastmod>2020-03-29T02:52:32.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://bili33.top/About/index.html</loc>
-    
-    <lastmod>2020-03-29T02:52:32.876Z</lastmod>
     
   </url>
   
