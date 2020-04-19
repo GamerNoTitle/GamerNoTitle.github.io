@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://bili33.top/2019/09/07/hexo-deploy-guide/</loc>
+    <lastmod>2020-04-19</lastmod>
+  </url>  <url>
     <loc>http://bili33.top/2020/02/08/jsDelivr-Usage/</loc>
     <lastmod>2020-04-18</lastmod>
   </url>  <url>
@@ -14,9 +17,6 @@
     <lastmod>2020-04-05</lastmod>
   </url>  <url>
     <loc>http://bili33.top/2019/09/19/srs/</loc>
-    <lastmod>2020-03-29</lastmod>
-  </url>  <url>
-    <loc>http://bili33.top/2019/09/07/hexo-deploy-guide/</loc>
     <lastmod>2020-03-29</lastmod>
   </url>  <url>
     <loc>http://bili33.top/2020/03/08/diary5/</loc>

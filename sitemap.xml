@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bili33.top/2019/09/07/hexo-deploy-guide/</loc>
+    
+    <lastmod>2020-04-19T01:14:45.413Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://bili33.top/2020/02/08/jsDelivr-Usage/</loc>
     
     <lastmod>2020-04-18T13:42:45.747Z</lastmod>
@@ -103,13 +110,6 @@
     <loc>http://bili33.top/2019/09/19/srs/</loc>
     
     <lastmod>2020-03-29T02:52:32.956Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://bili33.top/2019/09/07/hexo-deploy-guide/</loc>
-    
-    <lastmod>2020-03-29T02:52:32.954Z</lastmod>
     
   </url>
   
