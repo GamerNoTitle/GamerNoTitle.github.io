@@ -101,115 +101,191 @@ ga('send', 'pageview');
 </blockquote>
 <a href="https://steamcommunity.com/profiles/76561198309889674/" target="_blank"><img src=""></a>
 <style>
-    .steam-game-tabs {
-    margin-bottom: 15px;
-    margin-top: 15px;
+    #steam-item1 a,
+#steam-item1 a:hover {
+  text-decoration: none;
+}
+
+.steam-game-tabs {
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .steam-game-tab {
-    padding: 5px;
-}
-
-a.steam-game-tab {
-    text-decoration: none;
+  padding: 5px;
 }
 
 .steam-game-active {
-    background: #657b83;
-    color: #fff;
+  background: #657b83;
+  color: #fff;
 }
 
 .steam-game-item {
-    padding-bottom: 10px;
-    position: relative;
-    clear: both;
-    min-height: 100px;
-    padding: 10px 0;
-    border-bottom: 1px #ddd solid;
+  padding-bottom: 10px;
+  position: relative;
+  clear: both;
+  min-height: 100px;
+  padding: 10px 0;
+  border-bottom: 1px #ddd solid;
 }
 
 @media screen and (max-width: 600px) {
-    .steam-game-item {
-        width: 100%;
-    }
+  .steam-game-item {
+    width: 100%;
+  }
 }
 
 .steam-game-picture {
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 184px;
-    padding-top: 5px;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 188px;
+  height: 99px;
 }
 
 .steam-game-info {
-    margin: 10px 0;
-    padding-left: 194px;
+  height: 80px;
+  padding-left: 204px;
 }
 
 .steam-game-meta {
-    font-size: 12px;
-    padding-right: 10px;
+  font-size: 12px;
+  padding-right: 10px;
 }
 
 .steam-game-pagination {
-    margin-top: 15px;
-    text-align: center;
-    margin-bottom: 10px;
+  margin-top: 15px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .steam-game-button {
-    padding: 5px;
-    text-decoration: none;
-    display: inline-block;
+  padding: 5px;
+  display: inline-block;
 }
 
 .steam-game-button:hover {
-    background: #657b83;
-    color: #fff;
+  background: #657b83;
+  color: #fff;
 }
 
 .steam-game-hide {
-    display: none;
+  display: none;
 }
 
 .steam-game-show {
-    display: block;
+  display: block;
 }
 
 .steam-game-title {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .steam-game-title a {
-    line-height: 1;
-    text-decoration: none;
+  line-height: 1;
+  padding: 5px;
 }
 
-.steam-game-link{
-    min-height: 50px;
+.steam-game-title a:hover {
+  padding: 5px;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border: 1px solid rgba(123, 123, 123, .5);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+.steam-game-link {
+  min-height: 50px;
 }
 
 @media (max-width:400px) {
-    .steam-game-picture {
-        padding-left:5px;
-    }
-    .steam-game-info{
-        margin: 10px 0;
-        padding: 85px 0 0 5px;
-    }
-}</style>
+  .steam-game-picture {
+    padding-left: 5px;
+  }
+
+  .steam-game-info {
+    margin: 10px 0;
+    padding: 85px 0 0 5px;
+  }
+}
+
+.steam-game-picture img {
+  border: 2px solid #7b7b7b;
+  border-radius: 20px 7px;
+}
+
+.steam-game-button {
+  color: #00b8ff !important;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+  position: relative;
+}
+
+.steam-game-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border: 1px solid rgba(123, 123, 123, .5);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+.steam-game-button:hover::before {
+  opacity: 0;
+  -webkit-transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
+}
+
+.steam-game-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  background-color: rgba(255, 255, 255, .25);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  -webkit-transform: scale(.5, .5);
+  transform: scale(.5, .5);
+}
+
+.steam-game-button:hover::after {
+  opacity: 1;
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+}
+</style>
 <div>
     <div id="steam-item1">
         
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/239140/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://steamcdn-a.akamaihd.net/steam/apps/236870/capsule_184x69.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/DyingLight/">Dying Light</a>
+            <a target="_blank" href="https://store.steampowered.com/app/236870/">HITMAN™</a>
         </div>
         <div class="steam-game-meta">
             <span class="steam-game-info-time">
@@ -219,27 +295,27 @@ a.steam-game-tab {
     </div>
     <div class="steam-game-link">
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/DyingLight">storePage</a>
+            href="https://store.steampowered.com/app/236870">storePage</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/DyingLight">forums</a>
+            href="https://store.steampowered.com/forum/236870">forums</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Dying Light">groups</a>
+            href="https://steamcommunity.com/search/groups/?text=HITMAN™">groups</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/DyingLight">website</a>
+            href="https://store.steampowered.com/appofficialsite/236870">website</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=DyingLight">news</a>
+            href="https://store.steampowered.com/news/?appids=236870">news</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/DyingLight">SteamDB</a>
+            href="https://steamdb.info/app/236870">SteamDB</a>
     </div>
 </div>        
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/225540/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://steamcdn-a.akamaihd.net/steam/apps/774171/capsule_184x69.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/225540/">Just Cause 3</a>
+            <a target="_blank" href="https://store.steampowered.com/app/774171/">Muse Dash</a>
         </div>
         <div class="steam-game-meta">
             <span class="steam-game-info-time">
@@ -249,77 +325,17 @@ a.steam-game-tab {
     </div>
     <div class="steam-game-link">
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/225540">storePage</a>
+            href="https://store.steampowered.com/app/774171">storePage</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/225540">forums</a>
+            href="https://store.steampowered.com/forum/774171">forums</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Just Cause 3">groups</a>
+            href="https://steamcommunity.com/search/groups/?text=Muse Dash">groups</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/225540">website</a>
+            href="https://store.steampowered.com/appofficialsite/774171">website</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=225540">news</a>
+            href="https://store.steampowered.com/news/?appids=774171">news</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/225540">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/524220/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/524220/">NieR:Automata™</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/524220">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/524220">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=NieR:Automata™">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/524220">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=524220">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/524220">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/1085660/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/1085660/">Destiny 2</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/1085660">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/1085660">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Destiny 2">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/1085660">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=1085660">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/1085660">SteamDB</a>
+            href="https://steamdb.info/app/774171">SteamDB</a>
     </div>
 </div>        
         <div class="steam-game-item">
@@ -355,11 +371,11 @@ a.steam-game-tab {
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/236870/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://steamcdn-a.akamaihd.net/steam/apps/1085660/capsule_184x69.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/236870/">HITMAN™</a>
+            <a target="_blank" href="https://store.steampowered.com/app/1085660/">Destiny 2</a>
         </div>
         <div class="steam-game-meta">
             <span class="steam-game-info-time">
@@ -369,17 +385,137 @@ a.steam-game-tab {
     </div>
     <div class="steam-game-link">
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/236870">storePage</a>
+            href="https://store.steampowered.com/app/1085660">storePage</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/236870">forums</a>
+            href="https://store.steampowered.com/forum/1085660">forums</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=HITMAN™">groups</a>
+            href="https://steamcommunity.com/search/groups/?text=Destiny 2">groups</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/236870">website</a>
+            href="https://store.steampowered.com/appofficialsite/1085660">website</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=236870">news</a>
+            href="https://store.steampowered.com/news/?appids=1085660">news</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/236870">SteamDB</a>
+            href="https://steamdb.info/app/1085660">SteamDB</a>
+    </div>
+</div>        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
+            data-src="https://steamcdn-a.akamaihd.net/steam/apps/447040/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/447040/">Watch_Dogs 2</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                totalHours
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/447040">storePage</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/447040">forums</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Watch_Dogs 2">groups</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/447040">website</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=447040">news</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/447040">SteamDB</a>
+    </div>
+</div>        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
+            data-src="https://steamcdn-a.akamaihd.net/steam/apps/239140/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/DyingLight/">Dying Light</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                totalHours
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/DyingLight">storePage</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/DyingLight">forums</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Dying Light">groups</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/DyingLight">website</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=DyingLight">news</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/DyingLight">SteamDB</a>
+    </div>
+</div>        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
+            data-src="https://steamcdn-a.akamaihd.net/steam/apps/524220/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/524220/">NieR:Automata™</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                totalHours
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/524220">storePage</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/524220">forums</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=NieR:Automata™">groups</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/524220">website</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=524220">news</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/524220">SteamDB</a>
+    </div>
+</div>        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
+            data-src="https://steamcdn-a.akamaihd.net/steam/apps/225540/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/225540/">Just Cause 3</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                totalHours
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/225540">storePage</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/225540">forums</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Just Cause 3">groups</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/225540">website</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=225540">news</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/225540">SteamDB</a>
     </div>
 </div>        
         <div class="steam-game-item">
@@ -440,756 +576,6 @@ a.steam-game-tab {
             href="https://store.steampowered.com/news/?appids=274920">news</a>
         <a class="steam-game-button" target="_blank"
             href="https://steamdb.info/app/274920">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/203140/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/HitmanAbsolution/">Hitman: Absolution</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/HitmanAbsolution">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/HitmanAbsolution">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Hitman: Absolution">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/HitmanAbsolution">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=HitmanAbsolution">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/HitmanAbsolution">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/400040/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/400040/">ShareX</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/400040">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/400040">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=ShareX">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/400040">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=400040">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/400040">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/230410/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/Warframe/">Warframe</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/Warframe">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/Warframe">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Warframe">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/Warframe">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=Warframe">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/Warframe">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/55150/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/SpaceMarine/">Warhammer 40,000: Space Marine</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/SpaceMarine">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/SpaceMarine">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Warhammer 40,000: Space Marine">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/SpaceMarine">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=SpaceMarine">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/SpaceMarine">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/204880/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/SinsofaSolarEmpireRebellion/">Sins of a Solar Empire: Rebellion</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/SinsofaSolarEmpireRebellion">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/SinsofaSolarEmpireRebellion">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Sins of a Solar Empire: Rebellion">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/SinsofaSolarEmpireRebellion">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=SinsofaSolarEmpireRebellion">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/SinsofaSolarEmpireRebellion">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/491950/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/491950/">Orwell</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/491950">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/491950">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Orwell">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/491950">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=491950">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/491950">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/638070/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/638070/">Murderous Pursuits</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/638070">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/638070">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Murderous Pursuits">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/638070">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=638070">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/638070">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/674940/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/674940/">Stick Fight: The Game</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/674940">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/674940">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Stick Fight: The Game">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/674940">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=674940">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/674940">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/343710/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/343710/">KHOLAT</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/343710">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/343710">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=KHOLAT">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/343710">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=343710">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/343710">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/370910/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/370910/">Kathy Rain</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/370910">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/370910">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Kathy Rain">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/370910">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=370910">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/370910">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/222880/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/222880/">Insurgency</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/222880">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/222880">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Insurgency">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/222880">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=222880">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/222880">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/44350/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/GRID2/">GRID 2</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/GRID2">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/GRID2">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=GRID 2">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/GRID2">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=GRID2">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/GRID2">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/510840/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/510840/">Evolvation</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/510840">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/510840">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Evolvation">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/510840">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=510840">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/510840">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/208140/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/EndlessSpace/">Endless Space</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/EndlessSpace">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/EndlessSpace">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Endless Space">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/EndlessSpace">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=EndlessSpace">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/EndlessSpace">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/292910/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/292910/">Deponia: The Complete Journey</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/292910">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/292910">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Deponia: The Complete Journey">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/292910">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=292910">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/292910">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/231430/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/COH2/">Company of Heroes 2</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/COH2">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/COH2">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Company of Heroes 2">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/COH2">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=COH2">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/COH2">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/602770/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/602770/">Clatter</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/602770">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/602770">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Clatter">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/602770">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=602770">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/602770">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/696370/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/696370/">BROKE PROTOCOL: Online City RPG</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/696370">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/696370">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=BROKE PROTOCOL: Online City RPG">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/696370">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=696370">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/696370">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/226840/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/226840/">Age of Wonders III</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/226840">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/226840">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Age of Wonders III">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/226840">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=226840">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/226840">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/1048100/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/1048100/">Peekaboo</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/1048100">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/1048100">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Peekaboo">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/1048100">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=1048100">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/1048100">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/391220/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/391220/">Rise of the Tomb Raider</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/391220">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/391220">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Rise of the Tomb Raider">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/391220">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=391220">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/391220">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/255710/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/255710/">Cities: Skylines</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/255710">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/255710">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Cities: Skylines">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/255710">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=255710">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/255710">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/269670/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/269670/">BADLAND: Game of the Year Edition</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/269670">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/269670">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=BADLAND: Game of the Year Edition">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/269670">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=269670">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/269670">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/203160/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/TombRaider/">Tomb Raider</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/TombRaider">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/TombRaider">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Tomb Raider">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/TombRaider">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=TombRaider">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/TombRaider">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png"
-            data-src="https://steamcdn-a.akamaihd.net/steam/apps/304390/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/304390/">For Honor</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                totalHours
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/304390">storePage</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/304390">forums</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=For Honor">groups</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/304390">website</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=304390">news</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/304390">SteamDB</a>
     </div>
 </div>        
         <div class="steam-game-pagination">
