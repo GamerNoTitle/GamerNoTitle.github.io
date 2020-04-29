@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://bili33.top/2019/10/25/CloudFlare-Workers-Section1/</loc>
+    <lastmod>2020-04-29</lastmod>
+  </url>  <url>
+    <loc>http://bili33.top/2020/04/19/Valine-Magic/</loc>
+    <lastmod>2020-04-29</lastmod>
+  </url>  <url>
     <loc>http://bili33.top/2019/08/30/Office365/</loc>
     <lastmod>2020-04-27</lastmod>
   </url>  <url>
     <loc>http://bili33.top/2020/04/27/Office365-Renew-Project/</loc>
     <lastmod>2020-04-27</lastmod>
-  </url>  <url>
-    <loc>http://bili33.top/2020/04/19/Valine-Magic/</loc>
-    <lastmod>2020-04-26</lastmod>
   </url>  <url>
     <loc>http://bili33.top/2020/03/14/Valine-Admin/</loc>
     <lastmod>2020-04-24</lastmod>
@@ -74,9 +77,6 @@
     <lastmod>2020-03-29</lastmod>
   </url>  <url>
     <loc>http://bili33.top/2020/01/17/Cloudflare-Workers-Section2/</loc>
-    <lastmod>2020-03-29</lastmod>
-  </url>  <url>
-    <loc>http://bili33.top/2019/10/25/CloudFlare-Workers-Section1/</loc>
     <lastmod>2020-03-29</lastmod>
   </url>  <url>
     <loc>http://bili33.top/2019/08/04/BaiduNetDisk-Limit-Break/</loc>
