@@ -43,6 +43,32 @@
   </entry>
   
   <entry>
+    <title>白嫖？给我也整一个！白嫖网易云游戏平台时长</title>
+    <link href="https://bili33.top/2020/12/06/NeteaseCloudGameFree/"/>
+    <id>https://bili33.top/2020/12/06/NeteaseCloudGameFree/</id>
+    <published>2020-12-06T03:14:53.000Z</published>
+    <updated>2020-12-06T03:38:24.311Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo-v1@master/img/NeteaseCloudGameFree/bili33@ADMIN-PC%E4%B8%A82020.12.06%E4%B8%A811%EF%BC%9A32%EF%BC%9A55.png" alt="网易云游戏平台"></p><p>有谁不爱白嫖呢，特别是配置好的东西</p><p>网易云游戏平台我在它内测期间用过，那个时候游戏变动太大（指可玩的游戏下周就变得不一样了），然后就放弃了</p><p>几个月前不是原神公测了嘛，就发现这个平台有原神（主要是自己手机玩不动），所以就开始该平台的使用</p><p>但是！！！它每天只有120~180分钟的游戏时长（不签到120mins，签到不等），而且电脑游戏的时长是累计制的，不签到就等于没有！！！</p><p>于是，我开始了我的白嫖之旅……我写了一个自动签到脚本，用Github Action帮我运行，就可以自动签到了！（耶<del>~</del>）</p><p>你可以在Github搜索<code>wyycg-autocheckin</code>找到这个脚本，也可以直接访问<a href="https://github.com/GamerNoTitle/wyycg-autocheckin">https://github.com/GamerNoTitle/wyycg-autocheckin</a>来获取使用</p><hr><p>喜欢就给我点个STAR吧！</p><p>签到时间是早上10点，如果有需要就自己修改.github/workflows/AutoSignin.yml中第12行的时间，时间遵循UTC时间，+8才是我们的时间</p><p><strong>请不要使用非master分支脚本，他们通常正在开发新功能，会有BUG出现</strong></p><h2 id="赞助"><a href="#赞助" class="headerlink" title="赞助"></a>赞助</h2><p>点击下面的Badge其中一个就可以跳转到相应页面，感谢老板的支持！</p><p><a href="https://afdian.net/@GamerNoTitle"><img src="https://img.shields.io/badge/%E7%88%B1%E5%8F%91%E7%94%B5-GamerNoTitle-%238e8cd8?style=for-the-badge" alt="前往爱发电赞助" width=auto height=auto border="0" /></a> <a href="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo@master/img/Donate/WeChatPay.png"><img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-GamerNoTitle-%2304BE02?style=for-the-badge" alt="使用微信赞助" width=auto height=auto border="0" /></a> <a href="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo@master/img/Donate/AliPay.jpg"><img src="https://img.shields.io/badge/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98-GamerNoTitle-%231678FF?style=for-the-badge" alt="使用支付宝赞助" width=auto height=auto border="0" /></a></p><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul><li><a href="#使用方法">使用方法</a></li><li><a href="#变量内容获取">变量获取</a></li><li><a href="#qa">Q&amp;A</a></li></ul><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="变量添加"><a href="#变量添加" class="headerlink" title="变量添加"></a>变量添加</h3><p>1、Fork本仓库，按右上角的分支按钮（如图）</p><p><img src="https://upimage.alexhchu.com/2020/11/22/e9b4bcf8e6a1d.png" alt=""></p><p>2、进入设置，设置变量<code>cookie</code>和<code>teleid</code> <code>teletoken</code> <code>SCKEY</code>（这三个可选）</p><p><a href="#变量内容获取">如何获取变量内容？请点这里</a></p><p><img src="https://upimage.alexhchu.com/2020/11/22/988724b77ca62.png" alt=""></p><p><img src="https://upimage.alexhchu.com/2020/11/22/a7958e9f5582f.png" alt=""></p><p><img src="https://upimage.alexhchu.com/2020/11/22/7213627d41fc1.png" alt=""></p><h3 id="测试脚本"><a href="#测试脚本" class="headerlink" title="测试脚本"></a>测试脚本</h3><p><strong>请在当天没有签到的情况下测试！！！</strong></p><p>我们先进入Action界面，启用Action</p><p><img src="https://upimage.alexhchu.com/2020/11/22/70dd262ae54f0.png" alt=""></p><p>然后我们进入对应的脚本，启用脚本，并进行测试</p><p><img src="https://upimage.alexhchu.com/2020/11/22/457403bb7d3bb.png" alt=""></p><p><strong>只要测试通过就是没问题，如果你配置了TELEGRAM还会收到你的BOT给你发送的消息</strong></p><p>测试通过后，你就可以放着它不用管了，它会自己运行的~</p><h2 id="变量内容获取"><a href="#变量内容获取" class="headerlink" title="变量内容获取"></a>变量内容获取</h2><h3 id="cookie获取"><a href="#cookie获取" class="headerlink" title="cookie获取"></a>cookie获取</h3><p>首先我们进入<a href="https://cg.163.com">官网</a>，进行登录，然后用<kbd>F12</kbd>打开开发者工具后使用<kbd>Ctrl</kbd>+<kbd>F5</kbd>进行刷新，会刷出很多结果</p><p>我们在里面找到<code>@me</code>这一项，然后在右边找到<code>Authorization</code>将冒号后面的内容复制下来就是我们所需要的Cookie</p><p><img src="https://upimage.alexhchu.com/2020/11/22/bfb0e2dbd347a.png" alt=""></p><h3 id="teleid获取"><a href="#teleid获取" class="headerlink" title="teleid获取"></a>teleid获取</h3><p>用你的Telegram找到@userinfobot，点个Start，会直接给你回复你的ID，复制下id后面的数字就是teleid了</p><p><img src="https://upimage.alexhchu.com/2020/11/22/e4c50250626a6.png" alt=""></p><h3 id="teletoken获取"><a href="#teletoken获取" class="headerlink" title="teletoken获取"></a>teletoken获取</h3><p>找@BotFather进行机器人的创建，按照提示创建即可，会给你一个API TOKEN，如果一不小心点过去了可以用命令<code>/mybots</code>管理自己的bot，找到自己想要使用的bot并获取API就可以了</p><p><img src="https://upimage.alexhchu.com/2020/11/22/0428751a3925e.png" alt=""></p><h3 id="SCKEY获取"><a href="#SCKEY获取" class="headerlink" title="SCKEY获取"></a>SCKEY获取</h3><p>访问<a href="http://sc.ftqq.com/?c=code">ServerChan官网</a>，用你的Github账户登录，在<code>发送信息</code>可以看到你的SCKEY</p><p><img src="https://upimage.alexhchu.com/2020/12/05/dff25704763d8.png" alt=""></p><h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h2 id="错误代码"><a href="#错误代码" class="headerlink" title="错误代码"></a>错误代码</h2><h3 id="telepot-exception-TelegramError"><a href="#telepot-exception-TelegramError" class="headerlink" title="telepot.exception.TelegramError"></a>telepot.exception.TelegramError</h3><h4 id="Chat-not-found"><a href="#Chat-not-found" class="headerlink" title="Chat not found"></a>Chat not found</h4><p>请先用你要接受信息的账户发个<code>/start</code>给你的bot，或者检查用户ID是否正确！</p><h4 id="Not-found"><a href="#Not-found" class="headerlink" title="Not found"></a>Not found</h4><p>请检查自己的Telebot Token是否正确！</p><h3 id="urllib3-exceptions"><a href="#urllib3-exceptions" class="headerlink" title="urllib3.exceptions"></a>urllib3.exceptions</h3><h4 id="MaxRetryError"><a href="#MaxRetryError" class="headerlink" title="MaxRetryError"></a>MaxRetryError</h4><p><code>HTTPSConnectionPool(host=&#39;api.telegram.org&#39;, port=443): Max retries exceeded with url: /bot1166372402:AAFihK9Bq8_dPuBMDni8y90cZJvprqMFmAs/sendMessage</code></p><p>出现这个错误，那就是Telegram的问题，Github连接不上Telegram服务器（大半是TG服务器炸了）</p><h4 id="ReadTimeoutError"><a href="#ReadTimeoutError" class="headerlink" title="ReadTimeoutError"></a>ReadTimeoutError</h4><p><code>HTTPSConnectionPool(host=&#39;api.telegram.org&#39;, port=443): Read timed out. (read timeout=30)</code></p><p>出现这个错误，那就是Telegram的问题，Github连接不上Telegram服务器（大半是TG服务器炸了）<del>（复制粘贴大法）</del></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="Tech" scheme="https://bili33.top/categories/Tech/"/>
+    
+    
+      <category term="Tech" scheme="https://bili33.top/tags/Tech/"/>
+    
+  </entry>
+  
+  <entry>
     <title>日常吐槽08 - 换用Blackberry9720三个月后的感受</title>
     <link href="https://bili33.top/2020/11/15/diary8/"/>
     <id>https://bili33.top/2020/11/15/diary8/</id>
@@ -507,32 +533,6 @@
     
     
       <category term="Software" scheme="https://bili33.top/tags/Software/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>日常吐槽04</title>
-    <link href="https://bili33.top/2020/02/06/diary4/"/>
-    <id>https://bili33.top/2020/02/06/diary4/</id>
-    <published>2020-02-06T12:00:00.000Z</published>
-    <updated>2020-03-29T02:52:32.951Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>最近甚是无聊，因为做完了作业又不能出门（这都要从一只蝙蝠说起……），天天在家里打命(tu)运(ming)2，在家里躺着都算给国家做贡献……也没干什么技术活，就还是来吐槽一下吧</p><p><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo@1.0/Diary/04/origin.jpg" width="256" height="364.8"></img></p><p>首先先感谢2019-ncov送来的寒假延长消息，让我们的寒假至少延迟到了2020.2.17（原来是9号回校，10号正式开学），也让我肝土命2的时间变多了（这赛季等级莫不是要冲100，正因如此，周末双休可能就要变成单休了，而且准高三的暑假估计要被阉割掉了）。因为病毒的影响，导致人人不能出门，出门必戴口罩。因为口罩太畅销了，有些地方的口罩纷纷涨价。涨价一点点能接受对吧，但是我看到我们班上有人20买个医用口罩，真心贵……（强烈斥责坐地起价的行为）昨天早上还去排队买口罩，凭身份证一人买五个5￥，买完了还去别的地方看看有没有口罩买，最后十一点半回到家……</p><p><img src="https://cdn.jsdelivr.net/gh/NotFoundNEKKO/BQBTwT@1.0/真叫人质壁分离.jpg" width="300" height="300"></img></p><p>既然学校延迟开学，那也不能闲着，让学生开始用起了钉钉，想着用钉钉的会议模式上课（什么脑洞……）钉钉的商店评分骤降（XSWL），这算是躺枪_(:з」∠)_吧……但是也让钉钉首次超过微信拿到了iOS榜单第一（嘿嘿）</p><p><img src="https://cdn.jsdelivr.net/gh/NotFoundNEKKO/BQBTwT@1.0/嗯？.jpg" width="300" height="300"></img></p><p>最近特别喜欢用twitter（我也不知道为什么，我的Twitter<a href="https://twitter.com/GamerNoTitle">@GamerNoTitle</a>），天天早上就打开手机看推，然后看到@PlayWarframe（WARFRAME官方账号）关注了@Bungie（命运2开发商）和@Destiny2（命运2官方账号），这两家公司莫非有啥关系？？？（不过话说是同一题材的游戏撒）</p><p><img src="https://cdn.jsdelivr.net/gh/NotFoundNEKKO/BQBTwT@1.0/歪头.jpg" width="300" height="300"></img></p><p>15天前，我在Valine-Admin的仓库发布了issue<a href="https://github.com/DesertsP/Valine-Admin/issues/75">#75</a>，主要是邮件的发送上的问题，直到今天，终于有人回复我啦^v^，感谢大佬<strong><a href="https://github.com/tnrzy">@tnrzy</a></strong>帮我解决了邮件发送的问题*v*</p><p><img src="https://camo.githubusercontent.com/5f08fd71196a826d3a7efee0b526eab78aec658b/68747470733a2f2f63646e2e62696c6933332e746f702f4e6f74466f756e644e454b4b4f2f53746f726167652f6d61737465722f2545382541312541382545362538332538352545352538432538352f2545382542302541322545382542302541322545372538422542382545372538432541422e6a7067" alt=""></p><p>前几天还是在刷Twitter的时候，想去Soundcloud上听大佬的歌曲，然后发现国内访问不了Soundcloud，而且用cloudflare反代也不行，我就只能翻墙上soundcloud了。话说到底为啥soundcloud不能在国内用？？？</p><p><img src="https://cdn.jsdelivr.net/gh/NotFoundNEKKO/BQBTwT@1.0/灵梦FL.jpg" width="300" height="350"></img></p><hr><p>近期想做的事情：</p><p>1、想玩VR！！！想玩Beat Saber！！！（没有VR的人哭了）</p><p>2、趁着现在闲，想继续学一下C++和Python（目前只会基础撒）</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="diary" scheme="https://bili33.top/categories/diary/"/>
-    
-    
-      <category term="diary" scheme="https://bili33.top/tags/diary/"/>
     
   </entry>
   
