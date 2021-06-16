@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>音灵INVAXION解锁工具制作全纪录</title>
+      <link href="posts/INVAXION-Unlock-Log/"/>
+      <url>posts/INVAXION-Unlock-Log/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><blockquote><p>PS：音灵解锁补丁是我在高考前1个月左右的时候摸的，具体可以看Commit记录√</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo-v1@master/img/INVAXION-Unlock-Log/Announcement.png" alt=""></p><p>音灵在2021.2.5宣布停运，我直到五月左右上游戏的时候才发现，我卡在了加载页面，翻了一下讨论区才发现，游戏停运了</p><p><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo-v1@master/img/INVAXION-Unlock-Log/Loading.png" alt=""></p><p>但是我还在讨论区里找到了这个</p><p><a href="steamcommunity.com/app/921630/discussions/0/5350815203296872967/"><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo-v1@master/img/INVAXION-Unlock-Log/Unlock-Level.png" alt=""></a></p><p>然后我就下了这个使用了，发现，诶，我的铺面确实全解锁了，于是我开始了我的星舰解锁工具和角色解锁工具的制作</p><hr><p>星舰这个东西，我翻了一下我自己的存档（在注册表）</p><p><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo-v1@master/img/INVAXION-Unlock-Log/Regedit-Theme.png" alt="注：本图是解锁完成后的注册表"></p><p>发现数字都在个位数，而我数了一下星舰的数量是13，我就在想，星舰的编号是不是从1~13，然后我就开始了我的解锁之旅</p><p>一开始我先将里面的内容换成了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;&quot;themeID&quot;:1&#125;,&#123;&quot;themeID&quot;:2&#125;,&#123;&quot;themeID&quot;:3&#125;,&#123;&quot;themeID&quot;:4&#125;,&#123;&quot;themeID&quot;:5&#125;,&#123;&quot;themeID&quot;:6&#125;,&#123;&quot;themeID&quot;:7&#125;,&#123;&quot;themeID&quot;:8&#125;,&#123;&quot;themeID&quot;:9&#125;,&#123;&quot;themeID&quot;:10&#125;,&#123;&quot;themeID&quot;:11&#125;,&#123;&quot;themeID&quot;:12&#125;,&#123;&quot;themeID&quot;:13&#125;]</span><br></pre></td></tr></table></figure><p>这样一长串（拿Python生成的，毕竟我可不想一个一个打）</p><p>转成Hex就变成了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5b,7b,22,74,68,65,6d,65,49,44,22,3a,31,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,32,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,33,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,34,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,35,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,36,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,37,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,38,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,39,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,31,30,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,31,31,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,31,32,7d,2c,7b,22,74,68,65,6d,65,49,44,22,3a,31,33,7d,5d</span><br></pre></td></tr></table></figure><p>然后导入注册表，接着发现</p><p><strong>爷进不了离线模式了……</strong></p><p>有点崩溃，一开始还以为是思路有问题，先恢复了一下（谁在操作存档的时候不备份呀）</p><p>恢复以后再次打开注册表发现：<strong>是<code>themeId</code>不是<code>themeID</code></strong></p><p>哎呀犯了一个低级错误，重新来</p><p>将所有的<code>ID</code>改成<code>Id</code>重新导入，诶成了，但是巨蟹号（最后含金量的主题）没有解锁</p><p>然后试了一下ID0和ID14，终于搞定了，ID14是巨蟹号的</p><p>人物当然也一样啦，但是人物那么多，而且ID还不是像主题这样连着的</p><p><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo-v1@master/img/INVAXION-Unlock-Log/Regedit-Char.png" alt="注：本图是解锁完成后的注册表"></p><p>我就去翻了一下文件，在<code>音灵 INVAXION\INVAXION_Data\StreamingAssets</code>这个目录下找到了所有的角色文件，在文件名上附有ID</p><p><img src="https://cdn.jsdelivr.net/gh/GamerNoTitle/Picture-repo-v1@master/img/INVAXION-Unlock-Log/File-Char.png" alt=""></p><p>再次掏出工具（Python），生成对应的列表，然后导入，果然不出所料，所有角色都已经解锁了</p><p>接着打包，发布在Steam社区，在Github配布文件，搞定√</p><p>星舰解锁：<a href="https://steamcommunity.com/app/921630/discussions/0/3150808675338262041">https://steamcommunity.com/app/921630/discussions/0/3150808675338262041</a></p><p>人物解锁：<a href="https://steamcommunity.com/app/921630/discussions/0/3150808675345244413">https://steamcommunity.com/app/921630/discussions/0/3150808675345244413</a></p><p>铺面解锁（不是我做的，但是是我参考的）：<a href="https://steamcommunity.com/app/921630/discussions/0/5350815203296872967/">https://steamcommunity.com/app/921630/discussions/0/5350815203296872967/</a></p><p>存档配布（只打了全铺面，我的个人存档）：<a href="https://steamcommunity.com/app/921630/discussions/0/3130541756147189784/">https://steamcommunity.com/app/921630/discussions/0/3130541756147189784/</a>（中文）</p><p><a href="https://steamcommunity.com/app/921630/discussions/0/3150808588793019131/">https://steamcommunity.com/app/921630/discussions/0/3150808588793019131/</a>（英文）</p><p>要是你有Steam点数可以稍微给我打赏一点，谢谢老板(*^▽^*)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Tech </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Tech </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>网站优化：网站目录缩短及重定向</title>
       <link href="posts/301Redirect/"/>
       <url>posts/301Redirect/</url>
