@@ -375,29 +375,29 @@
 
   <url>
     <loc>https://bili33.top/</loc>
-    <lastmod>2021-06-16</lastmod>
+    <lastmod>2021-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://bili33.top/tags/Tech/</loc>
-    <lastmod>2021-06-16</lastmod>
+    <loc>https://bili33.top/tags/Software/</loc>
+    <lastmod>2021-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://bili33.top/tags/Software/</loc>
-    <lastmod>2021-06-16</lastmod>
+    <loc>https://bili33.top/tags/Tech/</loc>
+    <lastmod>2021-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://bili33.top/tags/diary/</loc>
-    <lastmod>2021-06-16</lastmod>
+    <lastmod>2021-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -405,22 +405,22 @@
 
   
   <url>
-    <loc>https://bili33.top/categories/Tech/</loc>
-    <lastmod>2021-06-16</lastmod>
+    <loc>https://bili33.top/categories/Software/</loc>
+    <lastmod>2021-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://bili33.top/categories/Software/</loc>
-    <lastmod>2021-06-16</lastmod>
+    <loc>https://bili33.top/categories/Tech/</loc>
+    <lastmod>2021-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://bili33.top/categories/diary/</loc>
-    <lastmod>2021-06-16</lastmod>
+    <lastmod>2021-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
