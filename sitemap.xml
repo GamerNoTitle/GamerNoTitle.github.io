@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bili33.top/About/index.html</loc>
+    
+    <lastmod>2021-06-26</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://bili33.top/posts/301Redirect/</loc>
     
     <lastmod>2021-06-24</lastmod>
@@ -129,13 +136,6 @@
   
   <url>
     <loc>https://bili33.top/posts/diary6/</loc>
-    
-    <lastmod>2020-08-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://bili33.top/About/index.html</loc>
     
     <lastmod>2020-08-22</lastmod>
     
@@ -375,7 +375,7 @@
 
   <url>
     <loc>https://bili33.top/</loc>
-    <lastmod>2021-06-24</lastmod>
+    <lastmod>2021-06-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -383,21 +383,21 @@
   
   <url>
     <loc>https://bili33.top/tags/Software/</loc>
-    <lastmod>2021-06-24</lastmod>
+    <lastmod>2021-06-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://bili33.top/tags/Tech/</loc>
-    <lastmod>2021-06-24</lastmod>
+    <lastmod>2021-06-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://bili33.top/tags/diary/</loc>
-    <lastmod>2021-06-24</lastmod>
+    <lastmod>2021-06-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -406,21 +406,21 @@
   
   <url>
     <loc>https://bili33.top/categories/Software/</loc>
-    <lastmod>2021-06-24</lastmod>
+    <lastmod>2021-06-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://bili33.top/categories/Tech/</loc>
-    <lastmod>2021-06-24</lastmod>
+    <lastmod>2021-06-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://bili33.top/categories/diary/</loc>
-    <lastmod>2021-06-24</lastmod>
+    <lastmod>2021-06-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
