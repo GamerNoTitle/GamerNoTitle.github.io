@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可换表Base64编码/解码器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+            position: relative;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        textarea, input {
+            width: 100%;
+            max-width: 600px;
+            font-size: 16px;
+            padding: 10px;
+            margin-bottom: 20px;
+            resize: none;
+        }
+        #inputText, #outputText {
+            height: 200px;
+            overflow-wrap: break-word;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        label {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        footer {
+            margin-top: auto;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            padding: 10px;
+        }
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .language-switcher button {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #4CAF50;
+        }
+        .language-switcher button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button onclick="setLanguage('en')">EN</button>
+        <button onclick="setLanguage('zh-CN')">中</button>
+        <button onclick="setLanguage('zh-TW')">繁</button>
+    </div>
+
+    <h1 id="title">可换表Base64编码/解码器</h1>
+
+    <textarea id="inputText" placeholder=""></textarea>
+
+    <div>
+        <button id="encodeBtn" onclick="encodeBase64()">🔒 编码</button>
+        <button id="decodeBtn" onclick="decodeBase64()">🔓 解码</button>
+        <button id="swapBtn" onclick="swapText()">↕ 交换</button>
+    </div>
+    <br>
+
+    <textarea id="outputText" placeholder="" readonly></textarea>
+
+    <label for="customTable" id="tableLabel">自定义编码表（默认为base64标准表）</label>
+    <input type="text" id="customTable" value="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/">
+
+    <script>
+        const translations = {
+            "en": {
+                "title": "Base64 Encoder/Decoder with Custom Table",
+                "encodeBtn": "🔒 Encode",
+                "decodeBtn": "🔓 Decode",
+                "swapBtn": "↕ Swap",
+                "tableLabel": "Custom Encoding Table (default is base64 standard table)",
+                "tableLengthError": "Custom table must contain exactly 64 unique characters.",
+                "tableDuplicateError": "Custom table contains duplicate characters!",
+                "invalidBase64": "Invalid Base64 string."
+            },
+            "zh-CN": {
+                "title": "可换表Base64编码/解码器",
+                "encodeBtn": "🔒 编码",
+                "decodeBtn": "🔓 解码",
+                "swapBtn": "↕ 交换",
+                "tableLabel": "自定义编码表（默认为base64标准表）",
+                "tableLengthError": "自定义表格必须为64字符长",
+                "tableDuplicateError": "自定义表中有重复字符！",
+                "invalidBase64": "不合法的base64字符串"
+            },
+            "zh-TW": {
+                "title": "可換表Base64編碼/解碼器",
+                "encodeBtn": "🔒 編碼",
+                "decodeBtn": "🔓 解碼",
+                "swapBtn": "↕ 交換",
+                "tableLabel": "自定義編碼表（默認為base64標準表）",
+                "tableLengthError": "自定義表格必須為64字符長",
+                "tableDuplicateError": "自定義表中有重複字符！",
+                "invalidBase64": "不合法的base64字串"
+            }
+        };
+
+        let currentLang = "en";
+
+        function isValidTable(table) {
+            if (table.length !== 64) {
+                alert(translations[currentLang]["tableLengthError"]);
+                return false;
+            }
+            const uniqueChars = new Set(table);
+            if (uniqueChars.size !== 64) {
+                alert(translations[currentLang]["tableDuplicateError"]);
+                return false;
+            }
+            return true;
+        }
+
+        function encodeBase64() {
+            const inputText = document.getElementById("inputText").value;
+            const customTable = document.getElementById("customTable").value;
+            const base64Table = customTable.length === 64 && isValidTable(customTable) ? customTable : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+            let binaryString = "";
+            for (let i = 0; i < inputText.length; i++) {
+                binaryString += inputText.charCodeAt(i).toString(2).padStart(8, '0');
+            }
+
+            let encodedText = "";
+            for (let i = 0; i < binaryString.length; i += 6) {
+                const segment = binaryString.substring(i, i + 6).padEnd(6, '0');
+                const index = parseInt(segment, 2);
+                encodedText += base64Table[index];
+            }
+
+            while (encodedText.length % 4 !== 0) {
+                encodedText += "=";
+            }
+
+            document.getElementById("outputText").value = encodedText;
+        }
+
+        function decodeBase64() {
+            const inputText = document.getElementById("inputText").value.replace(/=/g, '');
+            const customTable = document.getElementById("customTable").value;
+            const base64Table = customTable.length === 64 && isValidTable(customTable) ? customTable : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+            let binaryString = "";
+            for (let i = 0; i < inputText.length; i++) {
+                const index = base64Table.indexOf(inputText[i]);
+                if (index === -1) {
+                    document.getElementById("outputText").value = translations[currentLang]["invalidBase64"];
+                    return;
+                }
+                binaryString += index.toString(2).padStart(6, '0');
+            }
+
+            let decodedText = "";
+            for (let i = 0; i < binaryString.length; i += 8) {
+                const byte = binaryString.substring(i, i + 8);
+                if (byte.length === 8) {
+                    decodedText += String.fromCharCode(parseInt(byte, 2));
+                }
+            }
+
+            document.getElementById("outputText").value = decodedText;
+        }
+
+        function swapText() {
+            const inputText = document.getElementById("inputText");
+            const outputText = document.getElementById("outputText");
+            const temp = inputText.value;
+            inputText.value = outputText.value;
+            outputText.value = temp;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const elements = ["title", "encodeBtn", "decodeBtn", "swapBtn", "tableLabel"];
+            elements.forEach(id => {
+                document.getElementById(id).textContent = translations[lang][id];
+            });
+        }
+
+        function updateFooter() {
+            const footer = document.getElementById("footer");
+            const currentYear = new Date().getFullYear();
+            footer.innerHTML = `© ${currentYear === 2024 ? '2024' : '2024-' + currentYear} <a href="https://bili33.top" target="_blank">GamerNoTitle</a>. All rights reserved.`;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            const defaultLang = userLang.includes("zh") ? (userLang === "zh-TW" ? "zh-TW" : "zh-CN") : "en";
+            setLanguage(defaultLang);
+            updateFooter();
+        });
+    </script>
+
+    <footer id="footer"></footer>
+</body>
+</html>
