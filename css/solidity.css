@@ -1,0 +1,131 @@
+pre.one-dark-pro {
+    background-color: #282c34;
+    color: #abb2bf;
+    border-radius: 5px;
+    margin: 0;
+    overflow: auto;
+    line-height: 1.6;
+    padding: 0;
+    position: relative;
+}
+
+div.custom-code-block {
+    background: #282c34;
+    border-radius: 5px;
+    margin: 0 0 20px;
+    position: relative;
+    /* overflow: hidden; */
+    margin: 0 0 24px;
+    border-radius: 7px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+}
+
+pre.line-numbers {
+    padding: 0 !important;
+}
+
+.custom-tools {
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+}
+
+.custom-tools .code-lang {
+    text-transform: uppercase;
+    margin-right: auto;
+    font-size: 1.15em;
+    font-weight: bold;
+    user-select: none;
+    left: 75px;
+    position: absolute;
+}
+
+.custom-tools .copy-button {
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 0px 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+    transition: background 0.3s;
+}
+
+.custom-tools .copy-button:hover {
+    background: #666;
+}
+
+.custom-tools .copy-button:after {
+    position: absolute;
+    left: 14px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fc625d;
+    -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+    box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+    content: ' ';
+}
+
+table.code-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+}
+
+table.code-table tbody,
+table.code-table tr {
+    display: table-row-group;
+    border: 0;
+}
+
+table.code-table td {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0;
+    border: 0;
+}
+
+table.code-table .gutter {
+    background: rgba(0, 0, 0, 0.1);
+    color: #888;
+    text-align: right;
+    padding: 10px 5px 10px 10px;
+    user-select: none;
+    width: 2em;
+}
+
+table.code-table .gutter .line-numbers {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+table.code-table .gutter .line-number {
+    display: block;
+    min-height: 1.6em;
+}
+
+table.code-table .code {
+    width: 100%;
+    /* padding: 10px; */
+}
+
+table.code-table .code .code-wrapper {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+pre.one-dark-pro .line {
+    display: block;
+    min-height: 1.6em;
+    line-height: 1.6;
+}
