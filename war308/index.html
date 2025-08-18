@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP-LINK WAR308路由器root密码计算器</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f9;
+    }
+    .container {
+        width: 300px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    h2 {
+        margin-bottom: 15px;
+        font-size: 20px;
+        color: #333;
+    }
+    input[type="text"] {
+        width: 92%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 3px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #passwordOutput {
+        margin-top: 15px;
+        font-size: 18px;
+        color: #007bff;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>TP-LINK WAR308 路由器<br>root 密码计算器</h2>
+    <p>通过Mac地址可以计算出root的密码<br>（v3固件确认有效，其他版本自行尝试）</p>
+    <input type="text" id="macInput" placeholder="输入 MAC 地址">
+    <button onclick="generatePassword()">生成密码</button>
+    <div id="passwordOutput"></div>
+    <p>&copy; 2024 <a href="https://bili33.top" target="_blank">GamerNoTitle</a></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+<script>
+    // 监听 MAC 地址输入框，自动去除冒号
+    document.getElementById('macInput').addEventListener('input', function () {
+        this.value = this.value.replace(/:/g, '');
+    });
+
+    // 生成密码函数
+    function generatePassword() {
+        var mac = document.getElementById('macInput').value.trim();
+        
+        if (mac === '' || mac.length !== 12) {
+            alert('请输入正确的 MAC 地址（格式：12位字符，无冒号）');
+            return;
+        }
+        
+        // 计算 MAC 地址的 MD5 哈希值
+        var hash = CryptoJS.MD5(mac).toString(CryptoJS.enc.Hex);
+
+        // 取前8位作为密码
+        var password = hash.slice(0, 8);
+
+        // 显示密码
+        document.getElementById('passwordOutput').textContent = '生成的密码是：' + password;
+    }
+</script>
+
+</body>
+</html>
