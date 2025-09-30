@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 虚空终端 | GamerNoTitle</title>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({ id: "3KdcwFGRWCpapHjZ", ck: "3KdcwFGRWCpapHjZ", autoTrack: true, hashMode: true, screenRecord: true })</script>
+    <style>
+        body {
+            background-color: #282a36;
+            color: #f8f8f2;
+            font-family: 'Consolas', monospace;
+            padding: 0px;
+            margin: 0;
+            overflow-x: hidden;
+            cursor: text;
+        }
+
+        .ascii-art {
+            font-family: 'Consolas', monospace;
+            white-space: pre;
+        }
+
+        /*整个顶部栏*/
+        #top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #44475a;
+            color: #ff5555;
+            font-size: 1.2em;
+            margin-bottom: 0px;
+        }
+
+        #first-line-prompt img {
+            vertical-align: middle;
+            max-height: 1.2em;
+        }
+
+        #first-line-prompt span {
+            vertical-align: middle;
+        }
+
+        #terminal-container {
+            padding-top: 20px;
+            position: relative;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        #terminal {
+            white-space: pre-wrap;
+            word-break: break-all;
+            padding-left: 20px;
+        }
+
+        #input-line {
+            display: flex;
+            align-items: baseline;
+            padding-left: 20px;
+        }
+
+        #prompt {
+            margin-right: 8px;
+            background-color: #6272a4;
+            color: #f8f8f2;
+            padding: 2px 8px;
+            border-radius: 5px 0 0 5px;
+        }
+
+        #command {
+            background-color: transparent;
+            border: none;
+            color: #f8f8f2;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex-grow: 1;
+            padding: 0;
+            width: 90%;
+        }
+
+        #command:focus {
+            outline: none;
+        }
+
+        #login-message {
+            white-space: pre;
+        }
+
+        #home-button {
+            background-color: transparent;
+            color: #f8f8f2;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #6272a4;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #home-button:hover {
+            background-color: #6272a4;
+            color: #fff;
+        }
+
+        .dir {
+            color: #8be9fd;
+        }
+
+        .file {
+            color: #f1fa8c;
+        }
+
+        .error {
+            color: #ff5555;
+        }
+
+        .prompt-style {
+            margin-right: 8px;
+            background-color: #6272a4;
+            color: #f8f8f2;
+            padding: 2px 8px;
+            border-radius: 5px 0 0 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .autocomplete-list {
+            position: absolute;
+            background: #44475a;
+            border: 1px solid #6272a4;
+            padding: 5px;
+            z-index: 1000;
+        }
+
+        .autocomplete-item {
+            padding: 2px 5px;
+            cursor: pointer;
+        }
+
+        .autocomplete-item:hover {
+            background-color: #6272a4;
+        }
+
+        a {
+            color: #ff79c6;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top-bar">
+        <span id="first-line-prompt"><!-- 404提示信息 --></span>
+        <a href="/" id="home-button">返回首页</a>
+    </div>
+    <div id="terminal-container">
+        <div id="terminal">
+            <div id="login-message">
+                <!-- 登录消息 -->
+            </div>
+            <!-- 404消息和帮助提示 -->
+        </div>
+    </div>
+
+    <div id="input-line">
+        <span id="prompt"><!-- 提示符 --></span>
+        <input type="text" id="command" autofocus>
+    </div>
+
+    <script>
+        // --- 可配置项开始 ---
+        const config = {
+            username: 'guest',
+            hostname: 'voidterm',
+            defaultDirectory: '/',
+            loginMessage: `<pre class="ascii-art">
+ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄     ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄   ▄▄   ▄▄ 
+█  █ █  █       █   █      █   █       █       █   ▄  █ █  █▄█  █
+█  █▄█  █   ▄   █   █  ▄    █  █▄     ▄█    ▄▄▄█  █ █ █ █       █
+█       █  █ █  █   █ █ █   █    █   █ █   █▄▄▄█   █▄▄█▄█       █
+█       █  █▄█  █   █ █▄█   █    █   █ █    ▄▄▄█    ▄▄  █       █
+ █     ██       █   █       █    █   █ █   █▄▄▄█   █  █ █ ██▄██ █
+  █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄█▄▄▄▄▄▄█     █▄▄▄█ █▄▄▄▄▄▄▄█▄▄▄█  █▄█▄█   █▄█
+</pre>`,
+            notFoundMessage: "404 - 你访问的页面或资源不存在哦，留在这里的只有这个终端",
+            helpIntro: `输入 'help' 可以查看可用的命令列表
+为了保证原生 linux 终端的体验，这里的命令反馈会以英文的形式展示哦
+你可以在本终端探索一下，说不定可以找到什么 (∩^o^)⊃━☆ﾟ.*･｡
+
+VoidTerm is a simple terminal emulator that simulates a basic Linux shell. It is created by <a href="https://bili33.top">GamerNoTitle</a>.
+CopyRight © ${getCopyrightYear()} <a href="https://bili33.top">GamerNoTitle</a>. All rights reserved.
+`,
+            info: `
+VoidTerm is a simple terminal emulator that simulates a basic Linux shell. It is created by <a href="https://bili33.top">GamerNoTitle</a>.
+CopyRight © ${getCopyrightYear()} <a href="https://bili33.top">GamerNoTitle</a>. All rights reserved.
+            `,
+            initialFileSystem: {
+                '/': { type: 'dir', content: ['bin', 'boot', 'dev', 'etc', 'home', 'lib', 'media', 'mnt', 'opt', 'proc', 'root', 'run', 'sbin', 'srv', 'sys', 'tmp', 'usr', 'var', 'README.txt'], hidden: false },
+                '/bin': { type: 'dir', content: ['cat', 'cd', 'clear', 'env', 'help', 'home', 'info', 'ls', 'pwd', 'voidterm', 'whoami'], hidden: false },       // 常用命令
+                '/bin/cat': { type: 'binary', hidden: false },
+                '/bin/cd': { type: 'binary', hidden: false },
+                '/bin/clear': { type: 'binary', hidden: false },
+                '/bin/help': { type: 'binary', hidden: false },
+                '/bin/home': { type: 'binary', hidden: false },
+                '/bin/info': { type: 'binary', hidden: false },
+                '/bin/ls': { type: 'binary', hidden: false },
+                '/bin/pwd': { type: 'binary', hidden: false },
+                '/bin/voidterm': { type: 'binary', hidden: false },
+                '/bin/whoami': { type: 'binary', hidden: false },
+
+                '/boot': { type: 'dir', content: ['grub', 'initramfs-linux.img', 'vmlinuz-linux'], hidden: false },      // 启动文件
+                '/boot/grub': { type: 'dir', content: ['grub.cfg'], hidden: false },
+                '/boot/grub/grub.cfg': { type: 'file', content: '', hidden: false },
+                '/boot/initramfs-linux.img': { type: 'file', content: '', hidden: false },
+                '/boot/vmlinuz-linux': { type: 'file', content: '', hidden: false },
+
+                '/dev': { type: 'dir', content: ['null', 'zero', 'random', 'urandom', 'tty'], hidden: false },       // 设备文件
+                '/dev/null': { type: 'file', content: '', hidden: false },
+                '/dev/zero': { type: 'file', content: '', hidden: false },
+                '/dev/random': { type: 'file', content: '', hidden: false },
+                '/dev/urandom': { type: 'file', content: '', hidden: false },
+                '/dev/tty': { type: 'file', content: '', hidden: false },
+
+                '/etc': { type: 'dir', content: ['passwd', 'group', 'shadow', 'hosts', 'resolv.conf', 'fstab', 'hostname'], hidden: false },  // 配置文件
+                '/etc/passwd': { type: 'file', content: 'root:x:0:0:root:/root:/bin/voidterm', hidden: false },
+                '/etc/group': { type: 'file', content: 'root:x:0', hidden: false },
+                '/etc/shadow': { type: 'file', content: 'root:$6$7gcLoyD2.vfQUWh7$BbjhVjTxAet6m0B485zlrqZxEeg2KkZ2BnVwenfV4.Ve7bIFJBd7kzn4Od6IsZCbMGvr87Y.N4aR7pR2YxbD10', hidden: false },
+                '/etc/hosts': { type: 'file', content: '127.0.0.1 localhost\n100.100.100.1 voidterm.bili33.top', hidden: false },
+                '/etc/resolv.conf': { type: 'file', content: 'nameserver 8.8.8.8', hidden: false },
+                '/etc/fstab': { type: 'file', content: '', hidden: false }, //for mount
+                '/etc/hostname': { type: 'file', content: '', hidden: false },
+
+                '/home': { type: 'dir', content: ['guest'], hidden: false },      // 用户目录
+                '/home/guest': { type: 'dir', content: ['Documents', 'Downloads', 'Pictures', 'flag'], hidden: false }, // 模拟用户家目录
+                '/home/guest/flag': { type: 'file', content: 'Nyan{WOW_yOu-4RE-@-HtM1-bAS3D_SHelL_M@sTer~}', hidden: false },
+                '/home/guest/Documents': { type: 'dir', content: ['diary.txt'], hidden: false },
+                '/home/guest/Documents/diary.txt': { type: 'file', content: '日々早八、日々早八、烦たま死、この天天让我早八の世界早晚爆破する、この日々早八の生活いつまで是个头、早八我されにま、早く西内、早八不西内私就要天に昇る了。', hidden: false },
+                
+                '/lib': { type: 'dir', content: ['modules', 'firmware'], hidden: false },       // 库文件
+                '/lib/modules': { type: 'dir', content: [], hidden: false },
+                '/lib/firmware': { type: 'dir', content: [], hidden: false },
+
+                '/media': { type: 'dir', content: ['cdrom', 'usb'], hidden: false },     // 挂载点
+                '/media/cdrom': { type: 'dir', content: [], hidden: false },
+                '/media/usb': { type: 'dir', content: [], hidden: false },
+
+                '/mnt': { type: 'dir', content: [], hidden: false },       // 挂载点
+
+                '/opt': { type: 'dir', content: ['app1', 'app2'], hidden: false },       // 可选软件包
+                '/opt/app1': { type: 'dir', content: [], hidden: false },
+                '/opt/app2': { type: 'dir', content: [], hidden: false },
+
+                '/proc': { type: 'dir', content: ['1', 'cpuinfo', 'meminfo', 'version', 'mounts', 'swaps'], hidden: false },      // 进程信息
+                '/proc/1': { type: 'dir', content: ['cmdline', 'status'], hidden: false },
+                '/proc/1/cmdline': { type: 'file', content: '', hidden: false },
+                '/proc/1/status': { type: 'file', content: '', hidden: false },
+                '/proc/cpuinfo': { type: 'file', content: '', hidden: false },
+                '/proc/meminfo': { type: 'file', content: '', hidden: false },
+                '/proc/version': { type: 'file', content: '', hidden: false },
+                '/proc/mounts': { type: 'file', content: '', hidden: false },
+                '/proc/swaps': { type: 'file', content: '', hidden: false },
+
+                '/root': { type: 'dir', content: [], hidden: false },      // root用户目录
+
+                '/run': { type: 'dir', content: ['user'], hidden: false },       // 运行时数据
+                '/run/user': { type: 'dir', content: ['1000'], hidden: false },
+                '/run/user/1000': { type: 'dir', content: [], hidden: false },
+
+                '/sbin': { type: 'dir', content: [], hidden: false },      // 系统管理命令
+
+                '/srv': { type: 'dir', content: ['ftp', 'www'], hidden: false },       // 服务数据
+                '/srv/ftp': { type: 'dir', content: [], hidden: false },
+                '/srv/www': { type: 'dir', content: [], hidden: false },
+
+                '/sys': { type: 'dir', content: ['block', 'bus', 'class', 'dev', 'devices', 'firmware', 'fs', 'kernel', 'module', 'power'], hidden: false },       // 系统信息
+                '/sys/block': { type: 'dir', content: [], hidden: false },
+                '/sys/bus': { type: 'dir', content: [], hidden: false },
+                '/sys/class': { type: 'dir', content: [], hidden: false },
+                '/sys/dev': { type: 'dir', content: [], hidden: false },
+                '/sys/devices': { type: 'dir', content: [], hidden: false },
+                '/sys/firmware': { type: 'dir', content: [], hidden: false },
+                '/sys/fs': { type: 'dir', content: [], hidden: false },
+                '/sys/kernel': { type: 'dir', content: [], hidden: false },
+                '/sys/module': { type: 'dir', content: [], hidden: false },
+                '/sys/power': { type: 'dir', content: [], hidden: false },
+
+                '/tmp': { type: 'dir', content: ['flag1145141919810'], hidden: false },       // 临时文件
+                '/tmp/flag1145141919810': { type: 'file', content: 'Nyan{1iYo_kOIyo_lKuIku-Yajuu_5enp@1===>_<}', hidden: false },
+
+                '/usr': { type: 'dir', content: ['bin', 'lib', 'local', 'share', 'src', 'include'], hidden: false },  // 用户程序
+                '/usr/bin': { type: 'dir', content: [], hidden: false },
+                '/usr/lib': { type: 'dir', content: [], hidden: false },
+                '/usr/local': { type: 'dir', content: ['bin', 'etc', 'games', 'include', 'lib', 'man', 'sbin', 'share', 'src'], hidden: false },
+                '/usr/local/bin': { type: 'dir', content: [], hidden: false },
+                '/usr/local/etc': { type: 'dir', content: [], hidden: false },
+                '/usr/local/games': { type: 'dir', content: [], hidden: false },
+                '/usr/local/include': { type: 'dir', content: [], hidden: false },
+                '/usr/local/lib': { type: 'dir', content: [], hidden: false },
+                '/usr/local/man': { type: 'dir', content: [], hidden: false },
+                '/usr/local/sbin': { type: 'dir', content: [], hidden: false },
+                '/usr/local/share': { type: 'dir', content: [], hidden: false },
+                '/usr/local/src': { type: 'dir', content: [], hidden: false },
+                '/usr/share': { type: 'dir', content: ['man'], hidden: false },
+                '/usr/share/man': { type: 'dir', content: [], hidden: false },
+                '/usr/src': { type: 'dir', content: [], hidden: false },
+                '/usr/include': { type: 'dir', content: [], hidden: false },
+
+                '/var': { type: 'dir', content: ['log', 'www'], hidden: false },       // 可变数据
+                '/var/log': { type: 'dir', content: [], hidden: false },   // 日志文件
+                '/var/www': { type: 'dir', content: ['index.html'], hidden: false },   // 网站文件
+                '/var/www/index.html': { type: 'file', content: 'Nyan{yOu-foUnd-tHe_FL@g-ln-tHe-web51t31!}', hidden: false },
+
+                '/README.txt': { type: 'file', content: '欢迎来到我的 404 终端页面，很遗憾的是，你访问的页面不存在哦~\n为了感谢你有兴趣在本页面进行探索，这里有一个挑战：请基于本页面的模拟终端，找到隐藏在本终端下的三个flag\n你看到的 flag 应该以 Nyan 为 flag 头，例如 Nyan{TH1s-iS-aN_EX@mpLE_fI@G-q@Q}\n2025.03.21更新：现在多了一个 flag，但不是显式的，需要动用一点小手段。', hidden: false }
+            },
+            commandPrompt: (currentDir) => `${config.username}@${config.hostname}:${currentDir}$ `,
+            helpMessages: {
+                cat: 'cat [file] - Display file content',
+                cd: 'cd [directory] - Change directory',
+                clear: 'clear - Clear the terminal',
+                env: 'env - Display environment variables',
+                help: 'help - Display this help message',
+                home: 'home - Return to the homepage',
+                info: 'info - Display information about this terminal',
+                ls: 'ls - List files and directories',
+                pwd: 'pwd - Print working directory',
+                whoami: 'whoami - Display current user'
+            },
+            colors: {
+                prompt: '#f8f8f2',
+                command: '#50fa7b',
+                error: '#ff5555',
+                output: '#f8f8f2',
+                dir: '#8be9fd',
+                file: '#f1fa8c',
+                binary: '#18cf5c'
+            },
+            environmentVariables: {
+                USER: () => config.username,
+                HOSTNAME: () => config.hostname,
+                PWD: () => currentDirectory,
+                TERM: 'xterm-256color',
+                SHELL: '/bin/voidterm',
+                LANG: 'en_US.UTF-8',
+                PATH: '/bin:/usr/bin:/usr/local/bin'
+            },
+        };
+        // --- 可配置项结束 ---
+
+        const terminal = document.getElementById('terminal');
+        const commandInput = document.getElementById('command');
+        const prompt = document.getElementById('prompt');
+        const loginMessageDiv = document.getElementById('login-message');
+        const firstLinePrompt = document.getElementById('first-line-prompt');
+
+        // 设置初始值
+        let currentDirectory = config.defaultDirectory;
+        const fileSystem = JSON.parse(JSON.stringify(config.initialFileSystem)); // 深拷贝初始文件系统
+
+        // 检查URL模式并重定向,需要在初始化显示之前
+        const path = window.location.pathname;
+        const fullPath = window.location.toString();
+        firstLinePrompt.innerHTML = `<img src="https://assets.bili33.top/img/Mail/Mail-Logo.png" height=45px> 你访问的链接 ${fullPath} 不存在哦 。･\`･(つд\`ﾟ)･ﾟ･`; // 设置404提示信息
+        const regex = /^\/\d{4}\/\d{2}\/\d{2}\/(.+)$/;
+        const match = path.match(regex);
+        if (match) {
+            const newPath = '/posts/' + match[1];
+            window.location.href = newPath;
+        }
+        // 初始化显示,需要在检查url之后
+        loginMessageDiv.innerHTML = config.loginMessage;
+        appendToTerminal(config.notFoundMessage);
+        appendToTerminal(config.helpIntro);
+        updatePrompt();
+
+        function getCopyrightYear() {
+            const date = new Date();
+            return date.getFullYear() === 2025 ? "2025" : "2025-" + date.getFullYear();
+        }
+
+        function updatePrompt() {
+            prompt.textContent = config.commandPrompt(currentDirectory);
+            prompt.style.color = config.colors.prompt;
+        }
+
+        function appendToTerminal(text, color = config.colors.output, isPrompt = false) {
+            const line = document.createElement('div');
+            if (isPrompt) {
+                line.classList.add('prompt-style');
+            }
+            if (typeof text === 'string' && text.includes('<')) { // 更宽松的检查
+                // 如果包含HTML标签，则使用innerHTML
+                line.innerHTML = text;
+            } else {
+                line.style.color = color;
+                line.textContent = text;
+            }
+            terminal.appendChild(line);
+        }
+
+        function isHidden(path) {
+            const parts = path.split('/');
+            for (const part of parts) {
+                if (part.startsWith('.')) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        function processCommand(command) {
+            const args = command.trim().split(/\s+/);
+            const cmd = args[0];
+            let showHidden = false;
+
+            // 先输出旧的、带样式的提示符 + 命令
+            appendToTerminal(`<span class="prompt-style">${config.commandPrompt(currentDirectory)}</span>${command}`, config.colors.command);
+
+            terminalContainer = document.getElementById('terminal-container');
+            // 滚动到底部
+            terminalContainer.scrollTop = terminalContainer.scrollHeight;
+
+            switch (cmd) {
+                case 'help':
+                    let helpText = 'Available commands:<br>';
+                    for (const commandKey in config.helpMessages) {
+                        helpText += `  ${config.helpMessages[commandKey]}<br>`;
+                    }
+                    appendToTerminal(helpText); // help 命令也使用 innerHTML
+                    break;
+
+                case 'ls':
+                    // 检查是否有 -la 参数
+                    if (args.includes('-la') || args.includes('-a') || args.includes('-l')) {
+                        showHidden = true;
+                    }
+                    if (fileSystem[currentDirectory] && fileSystem[currentDirectory].type === 'dir') {
+                        let output = '';
+                        for (const itemName of fileSystem[currentDirectory].content) {
+                            const itemPath = currentDirectory === '/' ? `/${itemName}` : `${currentDirectory}/${itemName}`;
+                            if (fileSystem[itemPath]) {
+                                const item = fileSystem[itemPath];
+                                // 只有当需要显示隐藏文件，或者文件不是隐藏的时才显示
+                                if (showHidden || !item.hidden) {
+                                    const color = item.type === 'dir' ? config.colors.dir : item.type === 'file' ? config.colors.file : config.colors.binary;
+                                    output += `<span class="${item.type}" style="color: ${color};">${itemName}</span>  `;
+                                }
+                            }
+                        }
+                        // 使用innerHTML
+                        appendToTerminal(output);
+                    } else {
+                        appendToTerminal(`ls: ${currentDirectory}: No such file or directory`, config.colors.error);
+                    }
+                    break;
+                case 'cd':
+                    var targetDir = args[1];  //args[1]是cd的第一个参数
+                    if (!targetDir) {
+                        currentDirectory = '/'; // cd 没有参数回到根目录
+                    }
+                    else if (targetDir === '..') {
+                        // 处理 "cd .." 返回上级目录
+                        const pathParts = currentDirectory.split('/').filter(part => part !== '');
+                        if (pathParts.length > 1) {
+                            pathParts.pop();  //删除最后一个元素
+                            currentDirectory = '/' + pathParts.join('/');
+                            if (currentDirectory === "/") {
+                                currentDirectory = "/";
+                            }
+                        } else {
+                            currentDirectory = '/'; // 已经在根目录
+                        }
+
+                    }
+                    else {
+                        // 尝试进入指定目录
+                        let newPath = targetDir;
+                        let originDir = targetDir;
+                        if (targetDir.endsWith('/') && targetDir.length > 1) {
+                            targetDir = targetDir.slice(0, -1);
+                        }
+
+                        if (targetDir === '~') {
+                            newPath = `/home/${config.username}`;
+                        }
+                        else if (!targetDir.startsWith('/')) {
+                            // 相对路径
+                            newPath = currentDirectory === '/' ? '/' + targetDir : currentDirectory + '/' + targetDir;
+                        }
+                        if (fileSystem[newPath] && fileSystem[newPath].type === 'dir') {
+                            currentDirectory = newPath;
+                        } else {
+                            appendToTerminal('cd: ' + originDir + ': No such file or directory', config.colors.error);
+                        }
+                    }
+                    //更新prompt
+                    updatePrompt();
+                    break;
+                case 'pwd':
+                    appendToTerminal(currentDirectory);
+                    break;
+                case 'clear':
+                    terminal.innerHTML = ''; // 清空
+                    loginMessageDiv.innerHTML = config.loginMessage; // 重新添加登录消息
+                    appendToTerminal(config.notFoundMessage);          // 重新添加404和帮助
+                    appendToTerminal(config.helpIntro);
+                    updatePrompt();
+                    break;
+                case 'cat':
+                    const fileName = args[1];
+                    if (fileName) {
+                        let filePath = fileName;
+                        if (!fileName.startsWith('/')) {
+                            filePath = currentDirectory === '/' ? '/' + fileName : currentDirectory + '/' + fileName;
+                        }
+
+                        if (fileSystem[filePath] && fileSystem[filePath].type === 'file') {
+                            // 模拟权限检查
+                            if (filePath.startsWith('/root/') || filePath.startsWith('/var/log') || filePath.startsWith('/boot') || filePath.startsWith('/dev') || filePath.startsWith('/lib') || filePath.startsWith('/media') || filePath.startsWith('/mnt') || filePath.startsWith('/proc') || filePath.startsWith('/run') || filePath.startsWith('/sbin') || filePath.startsWith('/srv') || filePath.startsWith('/sys') || filePath.startsWith('/usr')) {
+                                appendToTerminal('cat: ' + fileName + ': Permission denied', config.colors.error); //提示权限不足
+                            } else {
+                                appendToTerminal(fileSystem[filePath].content); //允许访问
+                            }
+                        } else if (fileSystem[filePath] && fileSystem[filePath].type === 'dir') {
+                            appendToTerminal('cat: ' + fileName + ': Is a directory', config.colors.error);
+                        } else if (fileSystem[filePath] && fileSystem[filePath].type === 'binary') {
+                            appendToTerminal('cat: ' + fileName + ': cannot open binary file', config.colors.error);
+                        }
+                        else {
+                            appendToTerminal('cat: ' + fileName + ': No such file or directory', config.colors.error);
+                        }
+
+                    } else {
+                        appendToTerminal('cat: missing file operand', config.colors.error);
+                    }
+                    break;
+                case 'home':
+                    window.location.href = '/';
+                    appendToTerminal('redirecting...');
+                    break;
+                case 'info':
+                    appendToTerminal(config.info);
+                    break;
+                case 'env':
+                    let envOutput = '';
+                    for (const [key, value] of Object.entries(config.environmentVariables)) {
+                        const val = typeof value === 'function' ? value() : value;
+                        envOutput += `${key}=${val}<br>`;
+                    }
+                    appendToTerminal(envOutput);
+                    break;
+                case 'whoami':
+                    appendToTerminal(config.username);
+                case '':
+                    break;
+                default:
+                    appendToTerminal(`${cmd}: Command not found`, config.colors.error);
+            }
+            //每次命令执行后滚动
+            let outputContainer = document.getElementById('terminal');
+            let lastLine = outputContainer.lastElementChild;
+
+            if (lastLine) {
+                lastLine.scrollIntoView({ behavior: "smooth", block: "end" }); // 平滑滚动到最后一行
+            }
+        }
+        //事件监听代码
+        // 监听按键
+        commandInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Tab') {
+                event.preventDefault();
+                handleTabCompletion();
+            } else if (event.key === 'Enter') {
+                const command = commandInput.value;
+                processCommand(command);
+                commandInput.value = '';
+            }
+        });
+        //页面加载事件
+        window.addEventListener('load', function () {
+            commandInput.focus(); // 聚焦到输入框
+        });
+        // 点击页面其他区域时，聚焦到输入框
+        document.addEventListener('click', function (event) {
+            if (event.target !== commandInput && event.target.id !== 'home-button') {
+                commandInput.focus();
+            }
+        });
+
+        // 路径规范化函数
+        function normalizePath(path) {
+            const parts = path.split('/').filter(part => part !== '');
+            const resolvedParts = [];
+            for (const part of parts) {
+                if (part === '..') {
+                    if (resolvedParts.length > 0) resolvedParts.pop();
+                } else if (part !== '.') {
+                    resolvedParts.push(part);
+                }
+            }
+            return '/' + resolvedParts.join('/');
+        }
+
+        // 查找共同前缀函数
+        function findCommonPrefix(strings) {
+            if (!strings || strings.length === 0) return '';
+            let prefix = strings[0];
+            for (const str of strings) {
+                while (!str.startsWith(prefix)) {
+                    prefix = prefix.slice(0, -1);
+                    if (!prefix) return '';
+                }
+            }
+            return prefix;
+        }
+
+        // 解析路径为绝对路径
+        function resolvePath(path) {
+            if (path.startsWith('/')) {
+                return normalizePath(path);
+            } else {
+                const combined = currentDirectory.endsWith('/') ?
+                    `${currentDirectory}${path}` :
+                    `${currentDirectory}/${path}`;
+                return normalizePath(combined);
+            }
+        }
+
+        function handleTabCompletion() {
+            const input = commandInput.value;
+            const args = input.split(/\s+/);
+            const currentArgIndex = args.length - 1;
+            let currentArg = args[currentArgIndex] || '';
+
+            // 解析为绝对路径
+            const absolutePath = resolvePath(currentArg);
+
+            // 分割目录和文件名部分
+            const lastSlashIndex = absolutePath.lastIndexOf('/');
+            const dirPath = absolutePath.slice(0, lastSlashIndex + 1);
+            const fileNamePrefix = absolutePath.slice(lastSlashIndex + 1);
+
+            // 规范化目录路径
+            const normalizedDirPath = normalizePath(dirPath);
+
+            // 检查目录是否存在
+            if (!fileSystem[normalizedDirPath] || fileSystem[normalizedDirPath].type !== 'dir') {
+                return;
+            }
+
+            // 获取匹配项
+            const entries = fileSystem[normalizedDirPath].content;
+            const matches = [];
+            for (const entry of entries) {
+                const entryPath = normalizedDirPath === '/' ?
+                    `/${entry}` :
+                    `${normalizedDirPath}/${entry}`;
+                const entryObj = fileSystem[entryPath];
+
+                // 显示逻辑：如果前缀以.开头则显示隐藏文件，否则过滤隐藏文件
+                const showHidden = fileNamePrefix.startsWith('.');
+                if ((showHidden || !entryObj.hidden) && entry.startsWith(fileNamePrefix)) {
+                    matches.push({
+                        name: entry,
+                        type: entryObj.type
+                    });
+                }
+            }
+
+            if (matches.length === 0) return;
+
+            // 处理匹配结果
+            if (matches.length === 1) {
+                const match = matches[0];
+                const suffix = match.type === 'dir' ? '/' : '';
+                const newArg = currentArg.replace(new RegExp(`${fileNamePrefix}$`), match.name + suffix);
+                args[currentArgIndex] = newArg;
+                commandInput.value = args.join(' ');
+            } else {
+                // 查找共同前缀
+                const commonPrefix = findCommonPrefix(matches.map(m => m.name));
+                if (commonPrefix.length > fileNamePrefix.length) {
+                    const completed = currentArg + commonPrefix.slice(fileNamePrefix.length);
+                    args[currentArgIndex] = completed;
+                    commandInput.value = args.join(' ');
+                } else {
+                    // 显示所有匹配项
+                    const matchList = matches.map(m =>
+                        `<span class="${m.type}" style="color: ${m.type === 'dir' ? config.colors.dir : config.colors.file};">${m.name}${m.type === 'dir' ? '/' : ''}</span>`
+                    ).join('  ');
+                    appendToTerminal(matchList);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
