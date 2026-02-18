@@ -1,0 +1,440 @@
+<!DOCTYPE html><html lang="zh-cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>逃离订阅！在Surface Pro 5上安装FydeOS for PC (NOT YOU) | GamerNoTitle</title><meta name="author" content="GamerNoTitle,admin@bili33.top"><meta name="copyright" content="GamerNoTitle"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="FydeOS这个系统我以前用过v17，用的也是FydeOS for You，但当时系统说实话，不太完善，所以我后面就没用了 前两天心血来潮，想在Surface上装个双系统，使用了BlissOS以后发现BlissOS的调教问题很大，触屏不灵敏（估计是驱动问题），然后我又想起了FydeOS这个系统，一看现在已经更新到v18.1了，决定再给它一个机会 FydeOS for YOU双模式之前我在使用v17">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逃离订阅！在Surface Pro 5上安装FydeOS for PC (NOT YOU)">
+<meta property="og:url" content="https://bili33.top/posts/FydeOS-for-PC-on-Surface/index.html">
+<meta property="og:site_name" content="GamerNoTitle">
+<meta property="og:description" content="FydeOS这个系统我以前用过v17，用的也是FydeOS for You，但当时系统说实话，不太完善，所以我后面就没用了 前两天心血来潮，想在Surface上装个双系统，使用了BlissOS以后发现BlissOS的调教问题很大，触屏不灵敏（估计是驱动问题），然后我又想起了FydeOS这个系统，一看现在已经更新到v18.1了，决定再给它一个机会 FydeOS for YOU双模式之前我在使用v17">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.29.14.png">
+<meta property="article:published_time" content="2024-08-08T05:43:05.000Z">
+<meta property="article:modified_time" content="2026-02-18T14:32:18.990Z">
+<meta property="article:author" content="GamerNoTitle">
+<meta property="article:tag" content="Surface">
+<meta property="article:tag" content="FydeOS">
+<meta property="article:tag" content="System">
+<meta property="article:tag" content="ChromeOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.29.14.png"><link rel="shortcut icon" href="https://assets.bili33.top/img/AboutMe/logo-mini.png"><link rel="canonical" href="https://bili33.top/posts/FydeOS-for-PC-on-Surface/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1a9dfff1b560a523701cb01384373c75";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-138072700-2"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-138072700-2');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;b259d35cad514e45a226d03906d8fed1&quot;}"></script><link rel="stylesheet" href="https://font.sec.miui.com/font/css?family=MiSans:400,500,700:Chinese_Simplify,Latin&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":180,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"Author: GamerNoTitle","link":"Link: ","source":"Source: GamerNoTitle","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '逃离订阅！在Surface Pro 5上安装FydeOS for PC (NOT YOU)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-02-18 22:32:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"3KdcwFGRWCpapHjZ",ck:"3KdcwFGRWCpapHjZ",autoTrack:true,hashMode:true,screenRecord:true})</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta itemprop="name" content="GamerNoTitle"><meta itemprop="image" content="https://assets.bili33.top/img/AboutMe/logo-mini.png"><meta name="description" itemprop="description" content="欢迎来到GamerNoTitle的博客~"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-height.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/BB.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-emotion.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/Valine-Emotion.css"><script src="https://assets.bili33.top/js/IPblock.js"></script><script src='https://assets.bili33.top/js/console.js'></script><script src="https://cdn.bili33.top/npm/cardlink"></script><script src="//cdn.bili33.top/npm/matter-js@0.19.0"></script><script>(new Date().getDate() === 1 && new Date().getMonth() === 3) && document.write('<script src="https://cdn.bili33.top/gh/Vikutorika/newassets@master/js/smooth-April-Fools.js"><\/script>')</script><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><script src="https://npm.elemecdn.com/echarts@4.9.0/map/js/china.js"></script><script defer src="https://analytics.bili33.top/script.js" data-website-id="eb23a18b-6650-4776-8ded-29107aba832b"></script><script src="/js/solidity.js"></script><link rel="stylesheet" href="/css/solidity.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="http://assets.bili33.top/css/waline-style.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="GamerNoTitle" type="application/atom+xml">
+</head><body><link rel="stylesheet" href="https://cdn.bili33.top/npm/gamernotitle-oss@1.0.10/css/barber-shop.css"/><script src="https://cdn.bili33.top/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="onerror=null;src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.29.14.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">GamerNoTitle</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">逃离订阅！在Surface Pro 5上安装FydeOS for PC (NOT YOU)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-08-08T05:43:05.000Z" title="Created 2024-08-08 13:43:05">2024-08-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-18T14:32:18.990Z" title="Updated 2026-02-18 22:32:18">2026-02-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tech/">Tech</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>7min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="逃离订阅！在Surface Pro 5上安装FydeOS for PC (NOT YOU)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>FydeOS这个系统我以前用过v17，用的也是FydeOS for You，但当时系统说实话，不太完善，所以我后面就没用了</p>
+<p>前两天心血来潮，想在Surface上装个双系统，使用了BlissOS以后发现BlissOS的调教问题很大，触屏不灵敏（估计是驱动问题），然后我又想起了FydeOS这个系统，一看现在已经更新到v18.1了，决定再给它一个机会</p>
+<h2 id="FydeOS-for-YOU"><a href="#FydeOS-for-YOU" class="headerlink" title="FydeOS for YOU"></a>FydeOS for YOU</h2><h3 id="双模式"><a href="#双模式" class="headerlink" title="双模式"></a>双模式</h3><p>之前我在使用<code>v17</code>的时候，忘了是哪一次更新，直接把平板模式给我砍了，本来可以全屏应用列表然后点击应用的（类似于安卓那样），但是后面改成了左下角启动菜单，真的让我很不爽，但是<code>v18</code>里面多了一个按钮，可以自行切换（虽然要自己打开开关的显示，而且Surface插拔键盘会自动触发切换）</p>
+<p>个人更偏向于用平板模式，平板就该有平板的样子</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.10.04.png" alt="电脑模式"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.10.14.png" alt="平板模式"></p>
+<h3 id="使用体验"><a href="#使用体验" class="headerlink" title="使用体验"></a>使用体验</h3><p>应该是经过了一定的调教，现在的FydeOS <code>v18.1</code>比之前的<code>v17</code>更好用了一些，安卓没有莫名其妙的卡顿，但是还是不能够调用显卡</p>
+<p>我尝试了明日方舟、崩坏：星穹铁道、FGO这三款二游，其中崩铁因为显卡无法调用，会出现奇怪的粉色块块</p>
+<p>音游方面，我装了Phigros和Cytus Ⅱ（Google Play版），就凭这Surface Pro 5的60Hz屏幕，跟现在的手机完全没法比，而Phigros又是那种下落式音游，重影超级严重，容易一个键看作两个（GiveUp.jpg）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.21.12.png"></p>
+<p>而Cytus Ⅱ动的是线，这个倒没啥问题（<del>你有一个Bad.png</del> 爬！大屏没习惯，手挡住键了）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.28.28.png"></p>
+<p>而应用方面，我装了酷安、ApkPure、Surfboard、网易云音乐、哔哩哔哩HD（B站手机版因为无法调用显卡装不了）</p>
+<p>B站HD看1080P60会卡顿，估计最高就1080P30了</p>
+<p>网易云音乐有明显卡顿，不知道是不是网易方面的问题，但是其他的应用没啥问题，特别是Material You做的Surfboard丝滑如德芙，两个应用商店能够正常使用</p>
+<p>讲真，网易云音乐的平板适配不太行……</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.11.28.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.11.45.png"></p>
+<p>在Android开的VPN服务能够在ChromeOS中正常使用，也就是说，我打开了Surfboard后，我的FydeOS本体是可以正常搭梯子的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.12.29.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.45.51.png" alt="IP检测"></p>
+<blockquote>
+<p>注：Surfboard加了GEO判断，国内网站直连</p>
+</blockquote>
+<h3 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h3><p>就算是FydeOS for YOU，专门为了Surface Pro 5做的系统，从我知道这个系统开始，已经进行了3年的迭代，但是你的蓝牙和摄像头还是不能用啊！！！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.10.40.png" alt="蓝牙不适配，无法搜索到设备"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.10.49.png" alt="摄像头不适配，没有画面"></p>
+<h3 id="收费"><a href="#收费" class="headerlink" title="收费"></a>收费</h3><p>是的你没听错，这个系统是订阅制，一年120RMB，新机自安装后第一次联网进入试用期90天（大版本更新会重置试用期，例如 <code>v17 -&gt; v18</code> 会记<code>v18</code>的试用期为90天）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.10.28.png"></p>
+<h2 id="FydeOS-for-PC"><a href="#FydeOS-for-PC" class="headerlink" title="FydeOS for PC"></a>FydeOS for PC</h2><div class="note warning flat"><p>不可否认的是，官方调教过的FydeOS for You肯定是要比没有经过条件的FydeOS for PC更好用，如果你是要平常长时间使用这个系统，我更推荐你去用FydeOS for You而不是瞎折腾用FydeOS for PC</p>
+<p>如果你执意要用FydeOS for PC，请确保你拥有能自己解决问题的能力</p>
+</div>
+
+<p>这个版本的系统是没有付费的，FydeOS的付费只针对于它的YOU服务，那么就很简单了</p>
+<blockquote>
+<p>我只要装个FydeOS for PC，然后把内核一换不就行了？</p>
+</blockquote>
+<p>当我为这个想法寻找出路的时候，我发现了这个帖子 &#x3D;&gt; <a href="https://community.fydeos.com/t/topic/39713/83">[教程]如何在fydeos&#x2F;openfyde上替换6.6内核 - 求助答疑 - Community</a></p>
+<h3 id="安装FydeOS-for-PC"><a href="#安装FydeOS-for-PC" class="headerlink" title="安装FydeOS for PC"></a>安装FydeOS for PC</h3><p>这个很简单了，用个能刷写img文件的软件都可以，把镜像刷写到U盘就行，我用的Rufus</p>
+<p><strong>不要用balenaEtcher！！！这东西在刷写FydeOS的镜像时会不通过，请使用其他工具！！！</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/rufus-4.5p_QM7Kx24Ay3.png"></p>
+<p>接着到Surface的启动菜单，从U盘启动FydeOS，根据提示安装FydeOS（傻瓜式操作，下面略）</p>
+<p>第一次开机的时候，Surface的WIFI是不可用的，请接上有线连接，可以使用拓展坞；另外，请接上你的Surface Cover键盘</p>
+<h3 id="更换内核"><a href="#更换内核" class="headerlink" title="更换内核"></a>更换内核</h3><div class="note warning flat"><p>如果你还没有安装FydeOS，我推荐你先选择使用FydeOS并使用本地账户登录后，先进行这一节的操作，确定这一节的操作对你的电脑有效再安装，能有效降低数据暴毙的概率</p>
+<p>请先初始化你的FydeOS后再看这一节，因为这一节不好截图，所以就基本上只有文字了</p>
+</div>
+
+<p>初始化完成后，我们就要对内核进行更换了，不然我们的触屏什么的都用不了</p>
+<h4 id="打开开发者模式"><a href="#打开开发者模式" class="headerlink" title="打开开发者模式"></a>打开开发者模式</h4><p>这个简单，我们来到设置，选择左边的<code>FydeOS设置</code>，在里面找到开发者选项，然后打开就可以了，打开了以后需要重启电脑</p>
+<p>如果你找不到，你可以在官方的文档中找到相应的指导 &#x3D;&gt; <a href="https://fydeos.com/question/enable-developer-mode/">如何切换到「开发者模式」？ - FydeOS</a></p>
+<h4 id="禁用根系统文件验证"><a href="#禁用根系统文件验证" class="headerlink" title="禁用根系统文件验证"></a>禁用根系统文件验证</h4><p>FydeOS的根系统<code>/</code>默认是有写入保护的，如果我们不关掉它的话，后面我们替换内核的操作会被阻止，所以我们得先关掉它</p>
+<p>我们按<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>（就是Linux中的打开终端的快捷键，在ChromeOS中同样适用），然后输入shell进入终端模式</p>
+<p>接着我们需要获取root权限，运行下面的命令来获取root权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br></pre></td></tr></table></figure>
+
+<p>然后再通过官方的脚本来禁用根系统文件验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/crossystem_mode-switch.sh disable-rootfs-verification</span><br></pre></td></tr></table></figure>
+
+<p>命令运行后，会提示我们重启设备，我们输入一个<code>y</code>然后回车重启</p>
+<h4 id="内核替换"><a href="#内核替换" class="headerlink" title="内核替换"></a>内核替换</h4><p>我们需要来到这个仓库<a href="https://github.com/Damenly/brunch-unstable/releases">Releases · Damenly&#x2F;brunch-unstable (github.com)</a>，下载最新的Release，因为我们用的是Surface，所以我们需要下载Surface开头的那个文件，同时，我们还需要下载<code>firmware.tar.gz</code></p>
+<p>我们把它们放在一个自己能够找到的目录（我放在了<code>下载内容</code>文件夹下面）</p>
+<p>接着我们需要逐行运行下面的命令，进行替换</p>
+<div class="note warning flat"><p>一定要逐行运行，这个系统的终端并不能运行多行命令，此外最后的<code>vmlinuz.A</code>和<code>vmlinux.B</code>是FydeOS的两个启动项，你可以只更换一个，然后开机的时候就逮着你换的那个启动就行了</p>
+</div>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">mount -o remount,rw /</span><br><span class="line">[ -d /efi ] || <span class="built_in">mkdir</span> /efi</span><br><span class="line"><span class="built_in">rm</span> -rf /lib/modules/* </span><br><span class="line"><span class="built_in">rm</span> -rf /lib/firmware</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面这行请替换为你实际存放两个tar.gz位置的目录！！</span></span><br><span class="line"><span class="built_in">cd</span> /home/chronos/user/Downloads</span><br><span class="line"></span><br><span class="line">tar -xvf surface-6.6.tar.gz -C /</span><br><span class="line">tar -xvf firmware.tar.gz -C /</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> /vmlinux /efi/syslinux/vmlinuz.A</span><br><span class="line"><span class="built_in">cp</span> /vmlinux /efi/syslinux/vmlinuz.B</span><br><span class="line"><span class="built_in">cp</span> /vmlinux /boot/vmlinuz</span><br></pre></td></tr></table></figure>
+
+<p>换完以后我们重启电脑，再次进行测试，这个时候我的触屏和WIFI就已经恢复正常了，同时也没有了烦人的FydeOS订阅</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2015.37.01.png"></p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>Surface Pen无法使用</li>
+<li>蓝牙、摄像头仍然无法使用</li>
+<li>VPN不互通，需要使用SwitchyOmega来打通</li>
+<li>还没发现……</li>
+</ul>
+<h3 id="温馨提醒"><a href="#温馨提醒" class="headerlink" title="温馨提醒"></a>温馨提醒</h3><p>没事不要更新系统，更新过程中可能会把我们替换好的内核换掉！！</p>
+<p>如果再更换完内核后再安装OpenGapps，需要重新替换内核！</p>
+<h2 id="Google-设备认证"><a href="#Google-设备认证" class="headerlink" title="Google 设备认证"></a>Google 设备认证</h2><p>如果你登录Google的时候，提示设备未通过Play认证，我们就需要自己给我们的设备注册</p>
+<p>先在设备上安装<a href="https://apkpure.net/cn/device-id/com.evozi.deviceid">deviceID（Apkpure）</a>这个软件，然后打开能看到我们的GSF ID</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2016.32.56.png"></p>
+<p>我们再访问谷歌设备注册页面 <a href="https://www.google.com/android/uncertified/">https://www.google.com/android/uncertified/</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2016.33.27.png"></p>
+<p>将我们的GSF ID贴进去，框框闪红色不用管，直接打一个验证码然后注册就可以了</p>
+<h2 id="关于有人在FydeOS的论坛吐槽我"><a href="#关于有人在FydeOS的论坛吐槽我" class="headerlink" title="关于有人在FydeOS的论坛吐槽我"></a><a href="https://community.fydeos.com/t/topic/39713/167">关于有人在FydeOS的论坛吐槽我</a></h2><p><a href="https://community.fydeos.com/t/topic/39713/167"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/msedge_WEZ6bIG3Rt.png"></a></p>
+<blockquote>
+<p>请不要去攻击人家的评论区，做一个系统是很难的，做好更难</p>
+</blockquote>
+<p>首先第一，我的观点就是好产品值得付费，但是FydeOS for You目前没有达到我付费的标准</p>
+<p>本身FydeOS这个产品我就是偶尔使用，并不是说我一直要用着它，我主用还是Windows，纯粹是想要另外一种体验才装的</p>
+<p>其次，我上面说“它的适配就是把linux-surface项目搬过来替换掉内核”确实缺乏考证，就因为我看它跟linux-surface项目有同样的问题，我就如此断定，这点确实是我的不对，还请大家理性看待</p>
+<p>如果将来，FydeOS for You能够成为真正能够日常使用的，没有较大槽点的产品，我愿意为之付费，当然我是持着<code>未来可期</code>的态度的</p>
+<p>当然，如果FydeOS有像微软那样的Insider许可证（即安装Insider版本的系统后免费提供许可证，相当于用户自己承担新版不稳定系统的后果，向官方汇报）的话我很乐意成为Insider</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://github.com/GamerNoTitle">GamerNoTitle</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bili33.top/posts/FydeOS-for-PC-on-Surface/">https://bili33.top/posts/FydeOS-for-PC-on-Surface/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Surface/">Surface</a><a class="post-meta__tags" href="/tags/FydeOS/">FydeOS</a><a class="post-meta__tags" href="/tags/System/">System</a><a class="post-meta__tags" href="/tags/ChromeOS/">ChromeOS</a></div><div class="post_share"><div class="social-share" data-image="https://assets.bili33.top/img/FydeOS-for-PC-on-Surface/Screenshot%202024-08-08%2014.29.14.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/WeChat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/WeChat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/AliPay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/AliPay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/Openwrt-on-friendlyarm-R2S/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Openwrt-on-friendlyarm-R2S/msedge_V2UKIS3zTB.jpg" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">使用友善R2S打造GDUT专属软路由 不再受学校设备限制</div></div></a></div><div class="next-post pull-right"><a href="/posts/Giffgaff-Activate/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Giffgaff-Activate/msedge_JO6DoNlusm.png" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">英国Giffgaff卡激活记录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/Enchance-my-Surface-Pro-5/" title="就决定是你啦！苏菲婆5！ —— 谈谈我对Surface Pro 5的使用体验以及各种骚操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Enchance-my-Surface-Pro-5/379d60dc4b2e0e6e78fe593ec38a69d.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-24</div><div class="title">就决定是你啦！苏菲婆5！ —— 谈谈我对Surface Pro 5的使用体验以及各种骚操作</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="author-info__name">GamerNoTitle</div><div class="author-info__description">TECH OTAKUS SAVE THE WORLD</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/GamerNoTitle"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GamerNoTitle" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/44666814" target="_blank" title="bilibili"><i class="fas fa-tv"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a><a class="social-icon" href="mailto:GamerNoTitle@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><div align="center"><pre style="font-family: monospace; white-space: pre; line-height: 1 !important;">
+.------.--------.---------.
+| .=====================. |\
+| | 7  3  5  5  6  0  8 | | |
+| +=====================+ | |
+|----------------------\\-. |
+|    *   |      ^|^    || |\|
+|   .-----------------.|| | |
+|   |  1  |  2  |  3  ||| | |
+|   |-----+-----+-----||| | |
+|   |  4  |  5  |  6  ||| | |
+|   |-----+-----+-----||| | |
+|   |  7  |  8  |  9  ||| | |
+|   |-----+-----+-----|// | |
+|   |  *  |  0  |  #  |/  | |
+|   +-----------------+   | |
+|       |       |         | |
++-------+-------+---------+ |
+\______\_______\_________+\/
+</pre></div>
+<div align="center"><span style="color: #e9b891;">gamernotitle</span>@<span style="color: #c5966d;">site_web</span> > <span style="color: #4a6d42;">./plant.sh</span><br>
+Boom has been planted.
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FydeOS-for-YOU"><span class="toc-number">1.</span> <span class="toc-text">FydeOS for YOU</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">双模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">使用体验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bug"><span class="toc-number">1.3.</span> <span class="toc-text">Bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E8%B4%B9"><span class="toc-number">1.4.</span> <span class="toc-text">收费</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FydeOS-for-PC"><span class="toc-number">2.</span> <span class="toc-text">FydeOS for PC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85FydeOS-for-PC"><span class="toc-number">2.1.</span> <span class="toc-text">安装FydeOS for PC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E5%86%85%E6%A0%B8"><span class="toc-number">2.2.</span> <span class="toc-text">更换内核</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E5%BC%80%E5%8F%91%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.1.</span> <span class="toc-text">打开开发者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A6%81%E7%94%A8%E6%A0%B9%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E9%AA%8C%E8%AF%81"><span class="toc-number">2.2.2.</span> <span class="toc-text">禁用根系统文件验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E6%9B%BF%E6%8D%A2"><span class="toc-number">2.2.3.</span> <span class="toc-text">内核替换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">2.3.</span> <span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%A9%E9%A6%A8%E6%8F%90%E9%86%92"><span class="toc-number">2.4.</span> <span class="toc-text">温馨提醒</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Google-%E8%AE%BE%E5%A4%87%E8%AE%A4%E8%AF%81"><span class="toc-number">3.</span> <span class="toc-text">Google 设备认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%89%E4%BA%BA%E5%9C%A8FydeOS%E7%9A%84%E8%AE%BA%E5%9D%9B%E5%90%90%E6%A7%BD%E6%88%91"><span class="toc-number">4.</span> <span class="toc-text">关于有人在FydeOS的论坛吐槽我</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Migrate-from-Valine-to-Waline/msedge_1kiyjac8P9.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="从 Valine 迁移到 Waline 全记录"/></a><div class="content"><a class="title" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录">从 Valine 迁移到 Waline 全记录</a><time datetime="2026-02-15T19:00:46.000Z" title="Created 2026-02-16 03:00:46">2026-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Reverse-Engineering-Cracking-MailMaster/at-748365_1920.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="记一次对某邮箱软件账户数量上限破解"/></a><div class="content"><a class="title" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解">记一次对某邮箱软件账户数量上限破解</a><time datetime="2026-01-19T12:34:03.000Z" title="Created 2026-01-19 20:34:03">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025-Year-End-Summary/" title="2025 年终总结"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/2025-Year-End-Summary/image-20251231025211777.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 年终总结"/></a><div class="content"><a class="title" href="/posts/2025-Year-End-Summary/" title="2025 年终总结">2025 年终总结</a><time datetime="2025-12-30T17:10:19.000Z" title="Created 2025-12-31 01:10:19">2025-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"/></a><div class="content"><a class="title" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破">使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破</a><time datetime="2025-12-19T12:59:03.000Z" title="Created 2025-12-19 20:59:03">2025-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-PCB2025-Preliminary-Round-Writeup/cover.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"/></a><div class="content"><a class="title" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup">2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup</a><time datetime="2025-12-13T11:05:12.000Z" title="Created 2025-12-13 19:05:12">2025-12-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2026 By GamerNoTitle</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">All articles in this blog are licensed under CC BY-NC-SA 4.0 unless stating additionally.<br>
+<a href="https://icp.gov.moe/?keyword=20213338" target="_blank"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src='https://assets.bili33.top/img/GovMoe/icon120.png' width=20px height=20px></img> 萌ICP备 20213338号</a> | <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.bili33.top/gh/biliCDN/bilicdn.github.io@master/images/favicon.png" width="20px" height="20px"> 本站使用 <a href="https://cdn.bili33.top">哔哩CDN</a> 进行加速<br>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.umd.min.js"></script><script src="https://cdn.bili33.top/npm/vanilla-lazyload@17.8.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.bili33.top/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.bili33.top/npm/mermaid@9.1.7/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://assets.bili33.top/css/waline.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.bili33.top',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+      imageUploader: (file) => {
+        let formData = new FormData();
+        let headers = new Headers();
+        let query = new URLSearchParams();
+
+        formData.append('file', file);
+        headers.append('Authorization', 'Bearer imgbed_YdVn2QPSD7RjaCDYIODMnlyY8wAn3FZD')
+        headers.append('User-Agent', 'Paff-Waline/1.0')
+
+        return fetch('https://img.bili33.top/upload', {
+          method: 'POST',
+          headers: headers,
+          body: formData,
+        }).then((resp) => resp.json())
+        .then((data) => 'https://img.bili33.top' + data[0].src)
+      }
+
+    }, {"avatar":"mp","emojiCDN":"https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/","visitor":true,"emoji":["https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibiliHotKey","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibili2233","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibilitv","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Arcaea","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Heybox","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Majotabi"],"locale":{"nick":"昵称","nickError":"昵称不能少于3个字符","mail":"邮箱","mailError":"请填写正确的邮件地址","link":"网址","optional":"可选","placeholder":"📌图片上传大小限制 5MB，请友善发言，并遵守相关法律法规。","sofa":"来发评论吧~","submit":"提交","like":"喜欢","cancelLike":"撤销喜欢","reply":"回复","cancelReply":"撤回","comment":"评论","refresh":"刷新","more":"加载更多...","preview":"预览","emoji":"表情","uploadImage":"上传图片","seconds":"秒前","minutes":"分钟前","hours":"小时前","days":"天前","now":"刚刚","uploading":"Uploading","login":"登录","logout":"登出","admin":"Endministrator","sticky":"📌","word":"字","wordHint":"评论字数应在 $0 到 $1 字之间！\\n当前字数：$2","anonymous":"匿名","level0":"Lv0","level1":"Lv1","level2":"Lv2","level3":"Lv3","level4":"Lv4","level5":"Lv5","gif":"表情包","gifSearchPlaceholder":"搜索表情包","profile":"个人资料","approved":"通过","waiting":"待审核","spam":"垃圾","unsticky":"取消置顶","oldest":"倒序","latest":"正序","hottest":"热度","reactionTitle":"你认为这篇文章怎么样？"},"noCopyright":true,"reaction":false}))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://assets.bili33.top/js/waline.umd.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.bili33.top/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'UA-138072700-2', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

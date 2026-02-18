@@ -1,0 +1,611 @@
+<!DOCTYPE html><html lang="zh-cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>记录一次Sound Voltex Exceed Gear和Sound Voltex Vivid Wave的初始化 | GamerNoTitle</title><meta name="author" content="GamerNoTitle,admin@bili33.top"><meta name="copyright" content="GamerNoTitle"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文是给想玩SDVX的玩家们一个参考，现阶段我所见到的最详细的教程是来自Two-Torial的教程（ https:&#x2F;&#x2F;two-torial.xyz&#x2F;games&#x2F;sdvx6&#x2F;setup&#x2F; ），但是在这个过程中坑点很多，它这个教程没有涉及，于是我就结合我自己踩坑的情况，写这样的一篇文章，来教大家如何设置自己的Sound Voltex Exceed Gear和Sound Voltex Vivid Wav">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一次Sound Voltex Exceed Gear和Sound Voltex Vivid Wave的初始化">
+<meta property="og:url" content="https://bili33.top/posts/SDVX-Setup/index.html">
+<meta property="og:site_name" content="GamerNoTitle">
+<meta property="og:description" content="本文是给想玩SDVX的玩家们一个参考，现阶段我所见到的最详细的教程是来自Two-Torial的教程（ https:&#x2F;&#x2F;two-torial.xyz&#x2F;games&#x2F;sdvx6&#x2F;setup&#x2F; ），但是在这个过程中坑点很多，它这个教程没有涉及，于是我就结合我自己踩坑的情况，写这样的一篇文章，来教大家如何设置自己的Sound Voltex Exceed Gear和Sound Voltex Vivid Wav">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.bili33.top/img/SDVX-Setup/subbg_0115.png">
+<meta property="article:published_time" content="2024-08-30T02:45:05.000Z">
+<meta property="article:modified_time" content="2026-02-18T14:32:18.995Z">
+<meta property="article:author" content="GamerNoTitle">
+<meta property="article:tag" content="GamerNoTitle,Blog,bili33,个人博客,程序员,Python,Github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.bili33.top/img/SDVX-Setup/subbg_0115.png"><link rel="shortcut icon" href="https://assets.bili33.top/img/AboutMe/logo-mini.png"><link rel="canonical" href="https://bili33.top/posts/SDVX-Setup/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1a9dfff1b560a523701cb01384373c75";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-138072700-2"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-138072700-2');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;b259d35cad514e45a226d03906d8fed1&quot;}"></script><link rel="stylesheet" href="https://font.sec.miui.com/font/css?family=MiSans:400,500,700:Chinese_Simplify,Latin&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":180,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"Author: GamerNoTitle","link":"Link: ","source":"Source: GamerNoTitle","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '记录一次Sound Voltex Exceed Gear和Sound Voltex Vivid Wave的初始化',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-02-18 22:32:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"3KdcwFGRWCpapHjZ",ck:"3KdcwFGRWCpapHjZ",autoTrack:true,hashMode:true,screenRecord:true})</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta itemprop="name" content="GamerNoTitle"><meta itemprop="image" content="https://assets.bili33.top/img/AboutMe/logo-mini.png"><meta name="description" itemprop="description" content="欢迎来到GamerNoTitle的博客~"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-height.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/BB.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-emotion.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/Valine-Emotion.css"><script src="https://assets.bili33.top/js/IPblock.js"></script><script src='https://assets.bili33.top/js/console.js'></script><script src="https://cdn.bili33.top/npm/cardlink"></script><script src="//cdn.bili33.top/npm/matter-js@0.19.0"></script><script>(new Date().getDate() === 1 && new Date().getMonth() === 3) && document.write('<script src="https://cdn.bili33.top/gh/Vikutorika/newassets@master/js/smooth-April-Fools.js"><\/script>')</script><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><script src="https://npm.elemecdn.com/echarts@4.9.0/map/js/china.js"></script><script defer src="https://analytics.bili33.top/script.js" data-website-id="eb23a18b-6650-4776-8ded-29107aba832b"></script><script src="/js/solidity.js"></script><link rel="stylesheet" href="/css/solidity.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="http://assets.bili33.top/css/waline-style.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="GamerNoTitle" type="application/atom+xml">
+</head><body><link rel="stylesheet" href="https://cdn.bili33.top/npm/gamernotitle-oss@1.0.10/css/barber-shop.css"/><script src="https://cdn.bili33.top/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="onerror=null;src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://assets.bili33.top/img/SDVX-Setup/subbg_0115.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">GamerNoTitle</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">记录一次Sound Voltex Exceed Gear和Sound Voltex Vivid Wave的初始化</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-08-30T02:45:05.000Z" title="Created 2024-08-30 10:45:05">2024-08-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-18T14:32:18.995Z" title="Updated 2026-02-18 22:32:18">2026-02-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tech/">Tech</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>13min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="记录一次Sound Voltex Exceed Gear和Sound Voltex Vivid Wave的初始化"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note info flat"><p>本文是给想玩SDVX的玩家们一个参考，现阶段我所见到的最详细的教程是来自Two-Torial的教程（ <a href="https://two-torial.xyz/games/sdvx6/setup/">https://two-torial.xyz/games/sdvx6/setup/</a> ），但是在这个过程中坑点很多，它这个教程没有涉及，于是我就结合我自己踩坑的情况，写这样的一篇文章，来教大家如何设置自己的Sound Voltex Exceed Gear和Sound Voltex Vivid Wave</p>
+<p><strong>注：本文不涉及本体的分发，请自行寻找本体下载</strong></p>
+<!-- SDVX6：https://t.me/PaffWarehouse/11 已经设置好的2024080500版本，其他建议到 https://www.emuline.org/topic/3577-setting-up-sound-voltex-exceed-gear-data/ 这个链接寻找，或者访问 https://pixeldrain.com/l/DNf52wUU 下载 -->
+
+<!-- SDVX5：https://t.me/PaffWarehouse/30 或者 https://pixeldrain.com/u/jbRrnsRV -->
+</div>
+
+<div class="note warning flat"><p>吐槽：为啥SDVX的图在P站那么少，想找一张封面都没有，算了我还是用官方文件里面的副屏壁纸吧</p>
+</div>
+
+<h2 id="Sound-Voltex-Exceed-Gear"><a href="#Sound-Voltex-Exceed-Gear" class="headerlink" title="Sound Voltex Exceed Gear"></a>Sound Voltex Exceed Gear</h2><p>当你下载好你的SDVX6后，你的压缩包&#x2F;文件夹内应该有这样的几个文件夹</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/ApplicationFrameHost_WGy30F4BBp.png"></p>
+<p>我们先把它解压出来备用</p>
+<h3 id="安装spice"><a href="#安装spice" class="headerlink" title="安装spice"></a>安装spice</h3><p>访问spice2x的官网，下载一份spice，直接下载最新版本就可以了</p>
+<blockquote>
+<p>spice2x: <a href="https://spice2x.github.io/">https://spice2x.github.io/</a></p>
+</blockquote>
+<p>下载下来的压缩包应该有几个文件夹和几个exe文件，如图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/Bandizip.x64_McXHZhOoGD.png"></p>
+<div class="note info flat"><h4 id="NVIDIA显卡用户"><a href="#NVIDIA显卡用户" class="headerlink" title="NVIDIA显卡用户"></a>NVIDIA显卡用户</h4><p>直接把里面的<code>spice.exe</code>、<code>spice64.exe</code>、<code>spicecfg.exe</code>拿出来放到你的SDVX6目录即可，文件夹<strong>一个都不要碰</strong></p>
+</div>
+
+<div class="note info flat"><h4 id="AMD显卡用户"><a href="#AMD显卡用户" class="headerlink" title="AMD显卡用户"></a>AMD显卡用户</h4><p>你需要把里面的所有文件都复制到SDVX6的目录，并且提示文件重复的时候请选择<strong>覆盖</strong></p>
+</div>
+
+<h3 id="安装asphyxia本地服务器"><a href="#安装asphyxia本地服务器" class="headerlink" title="安装asphyxia本地服务器"></a>安装asphyxia本地服务器</h3><p>访问asphyxia的官网，下载一份asphyxia服务端，直接下载最新版</p>
+<blockquote>
+<p>asphyxia-core: <a href="https://asphyxia-core.github.io/">https://asphyxia-core.github.io/</a></p>
+</blockquote>
+<p>下载下来后应该有如图所示的内容</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/Bandizip.x64_SLT7hLq9K8.png"></p>
+<p>解压到一个顺手的地方，或者直接解压到SDVX6的目录内，asphyxia的文件与SDVX6本体不存在文件冲突，可以直接放在同一个文件夹</p>
+<p>接着我们访问asphyxia的插件目录，把<code>sdvx@asphyxia</code>整个文件夹下载下来后，放到<code>plugins</code>文件夹内</p>
+<blockquote>
+<p>asphyxia插件目录: <a href="https://github.com/asphyxia-core/plugins">https://github.com/asphyxia-core/plugins</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/explorer_y2BOMEfK09.png"></p>
+<p>至此，服务器的安装工作就完成了</p>
+<h3 id="初始化asphyxia本地服务器"><a href="#初始化asphyxia本地服务器" class="headerlink" title="初始化asphyxia本地服务器"></a>初始化asphyxia本地服务器</h3><p>解压完后，我们直接双击打开asphyxia，它会弹出一个控制台窗口，我们不管这个窗口（不要关掉它），直接浏览器访问<code>http://localhost:8083</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/WindowsTerminal_MKEb9XbU5H.png"></p>
+<p>打开后网页应该如下图所示（你的网页内的内容可能跟我的有所不同，因为我的已经完成了初始化）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/msedge_LncWaqAd7A.png"></p>
+<p>我们点击左边<code>Plugins</code>分栏下面的<code>SDVX</code>，然后在左边的<code>Exceed Gear Data Directory</code>里面填入自己游戏的绝对路径</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/msedge_9GVTlqDvgJ.png"></p>
+<blockquote>
+<p>可以通过右键选择复制文件地址来获得文件夹的绝对路径，复制下来可能两端带有双引号，例如<code>&quot;E:\Sound Voltex Exceed Gear&quot;</code>，<strong>记得把双引号删掉</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/Typora_NVodD5aX0A.png"></p>
+</blockquote>
+<p>设置好后我们往下拉，点击右边框体下面蓝色的<code>Apply</code>按钮，进行应用</p>
+<p>然后，我们打开一个控制台，输入ffmpeg确认ffmpeg的安装，如果你跟我一样有弹出，说明已经安装好了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/WindowsTerminal_gbT7KInvgV.png"></p>
+<div class="note info flat"><h4 id="如何安装ffmpeg"><a href="#如何安装ffmpeg" class="headerlink" title="如何安装ffmpeg"></a>如何安装ffmpeg</h4><p>使用你的浏览器访问这个链接：<a href="https://www.gyan.dev/ffmpeg/builds/">https://www.gyan.dev/ffmpeg/builds/</a></p>
+<p>打开后，在下面有两个<code>.7z</code>文件（红框框着的那两个），我们选一个下载，如果你没有特别的需求，一般下载第一个就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/msedge_i6jN4sJVB9.png"></p>
+<p>下载后，将压缩包解压到一个自己顺手的地方，下面以解压到<code>D:\ffmpeg</code>为例</p>
+<p>我们按<kbd>Win</kbd> + <kbd>R</kbd>，输入<code>SystemPropertiesAdvanced</code>，打开高级系统设置</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/msedge_n0Dig2f2Dq.png"></p>
+<p>点击环境变量，选择上面框框内的<code>Path</code>，然后点击编辑</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/Typora_NAuKlzG2iA.png"></p>
+<p>在弹出来的窗口，我们点击新建，然后输入自己的ffmpeg路径+<code>\bin</code>（一定要加<code>\bin</code>，否则输入ffmpeg会打开这个文件夹），然后选择确定，这个时候ffmpeg就安装好了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/SystemPropertiesAdvanced_FWMmWbaGf5.png"></p>
+<p><strong>如果在安装前你的asphyxia开着，请你关掉它重新打开！！！</strong></p>
+</div>
+
+<p>接着我们访问<code>http://localhost:8083/plugin/sdvx@asphyxia/update%20webui%20assets</code>这个链接，进行资源的初始化更新，直接点击Update按钮即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/msedge_odn2rT6sPk.png"></p>
+<h3 id="配置游戏"><a href="#配置游戏" class="headerlink" title="配置游戏"></a>配置游戏</h3><p>打开<code>spicecfg.exe</code>，我们接下来进行游戏的配置</p>
+<div class="note warning flat"><p>请注意：<code>spicecfg.exe</code>里面的配置是跟随机器的，也就是说，如果你的电脑同时拥有Sound Voltex Exceed Gear和Sound Voltex Vivid Wave，这个配置会同时应用到两个游戏，这种情况下，推荐在启动脚本里面用启动项的方式分别配置两个游戏</p>
+</div>
+
+<h4 id="绑定键位"><a href="#绑定键位" class="headerlink" title="绑定键位"></a>绑定键位</h4><p>只需要绑定我下图中我绑定了的键就可以了，<code>Test</code>键是第一次运行游戏需要的，配置完后可以去掉绑定</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spicecfg_KZ2IFKTQVL.png"></p>
+<p>按键的代号对应实物如图所示（图片出自<a href="https://github.com/lizardbeans/sdvx-diy%EF%BC%89">https://github.com/lizardbeans/sdvx-diy）</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/Photos_WtISMXOhoj.png"></p>
+<h4 id="配置Patch（可选）"><a href="#配置Patch（可选）" class="headerlink" title="配置Patch（可选）"></a>配置Patch（可选）</h4><p>点击上方的Patches，然后点击<code>Import from URL</code>，输入<code>https://sp2x.two-torial.xyz/</code>并确定</p>
+<p>勾选<code>Auto apply patches on game start</code>，然后下面根据自己的需求来勾选即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spicecfg_MUrWXSksDY.png"></p>
+<h4 id="配置服务器地址（可选，不配置的话需要加启动项）"><a href="#配置服务器地址（可选，不配置的话需要加启动项）" class="headerlink" title="配置服务器地址（可选，不配置的话需要加启动项）"></a>配置服务器地址（可选，不配置的话需要加启动项）</h4><p>点击上面的Options，然后在下面找到<code>EA Service URL</code>，并输入<code>http://127.0.0.1:8083</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spicecfg_4siWfx3WMn.png"></p>
+<h3 id="开始游戏"><a href="#开始游戏" class="headerlink" title="开始游戏"></a>开始游戏</h3><div class="note info flat"><h4 id="如果你可以把屏幕竖起来"><a href="#如果你可以把屏幕竖起来" class="headerlink" title="如果你可以把屏幕竖起来"></a>如果你可以把屏幕竖起来</h4><p>直接双击<code>spice64.exe</code>就可以打开游戏了</p>
+</div>
+
+<div class="note info flat"><h4 id="如果你无法把屏幕竖起来-你不想把屏幕竖起来"><a href="#如果你无法把屏幕竖起来-你不想把屏幕竖起来" class="headerlink" title="如果你无法把屏幕竖起来&#x2F;你不想把屏幕竖起来"></a>如果你无法把屏幕竖起来&#x2F;你不想把屏幕竖起来</h4><p>那就在spicecfg的Options里面下滑，找到<code>Windowed Mode</code>，给它勾上，然后再双击spice64.exe</p>
+</div>
+
+<div class="note warning flat"><h4 id="你也可以使用傻瓜式启动脚本（保存为bat）"><a href="#你也可以使用傻瓜式启动脚本（保存为bat）" class="headerlink" title="你也可以使用傻瓜式启动脚本（保存为bat）"></a>你也可以使用傻瓜式启动脚本（保存为bat）</h4><ul>
+<li>竖屏用户</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">:: <span class="built_in">Start</span> Local Server</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;asphyxia-core-x64.exe&quot;</span><br><span class="line"></span><br><span class="line">:: <span class="built_in">Start</span> SDVX VI</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;spice64.exe&quot; -sdvxdisablecams -url http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">8083</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>横屏用户</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">:: <span class="built_in">Start</span> Local Server</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;asphyxia-core-x64.exe&quot;</span><br><span class="line"></span><br><span class="line">:: <span class="built_in">Start</span> SDVX VI</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;spice64.exe&quot; -sdvxdisablecams -url http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">8083</span> -w -windowborder <span class="number">0</span> -windowsize <span class="number">720</span>,<span class="number">1080</span></span><br></pre></td></tr></table></figure>
+</div>
+
+<h3 id="初期设定"><a href="#初期设定" class="headerlink" title="初期设定"></a>初期设定</h3><p>打开游戏，现在应该会开始自检，通过后会像下面这样显示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113219555.png"></p>
+<p>稍等一会就能够进去，初次打开游戏，你可能会遇到这样的提示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/1.png"></p>
+<p>不要紧，我们按下你绑定<code>Test</code>功能的按键</p>
+<blockquote>
+<p>什么？你问我哪个是Test？看图啦看图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113044856.png"></p>
+</blockquote>
+<p>会进入这样的一个设置界面</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113320992.png"></p>
+<p>我们确定选择的是<code>I/O Check</code>，然后先按一次<code>Start</code>键（按照我的键盘绑定是<code>Y</code>），在这个页面中，<code>Start</code>键是确认键，后面以<code>确认</code>代替</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113420639.png"></p>
+<p>接着，我们选择<code>CALIBRATION SETTINGS</code>（使用<code>BT-A</code>和<code>BT-B</code>可以调整选择的选项），然后确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113645952.png"></p>
+<p>接着我们直接确认（这个时候选择的应该是<code>CALIBRATION</code>），然后会有提示，我们跟着提示进行操作</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113800905.png"></p>
+<p>左旋钮逆时针扭三圈，直到上面的<code>COUNT=</code>后面的数字变成了<code>OK</code>，然后按下确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113844058.png"></p>
+<p>下一个操作是左旋钮顺时针扭三圈，直到上面的<code>COUNT=</code>后面的数字变成了<code>OK</code>，然后按下确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113903693.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113954888.png"></p>
+<p>接着我们对右旋钮进行同样的操作后，最后的结果应该是像我下面这张图这样</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114056964.png"></p>
+<p>我们选到<code>SAVE AND EXIT</code>来保存校准结果，按下确认键，然后选择<code>EXIT</code>再次按下确认键，接着再选择<code>GAME MODE</code>按下确认返回游戏</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114159025.png"></p>
+<p>然后你就会发现你的SDVX已经可以正常游玩了</p>
+<h3 id="进入游戏"><a href="#进入游戏" class="headerlink" title="进入游戏"></a>进入游戏</h3><p>首先你要确保你的后台有一个<code>Asphyxia Core</code>正在运行，它应该是一个如图示一般的命令行窗口</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114315550.png"></p>
+<p>如果你找不到这个窗口，你也可以通过在浏览器访问<a href="https://localhost:8083/">http://localhost:8083</a>来确认是否打开，如果能够正常访问就是打开了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114415614.png"></p>
+<p>然后我们回到SDVX，按下我们数字小键盘上的<code>+</code>来模拟游玩街机的刷卡行为</p>
+ <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114558605.png" style="zoom:50%;" />
+
+<h3 id="登录新用户"><a href="#登录新用户" class="headerlink" title="登录新用户"></a>登录新用户</h3><p>你需要先注册一下用户，我们先选择<code>新规登录</code>，需要使用滚轮来选择选项</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115014169.png" style="zoom:50%;" />
+
+<p>然后会弹出一个类似用户协议的东西，我们选择<code>YES</code>，然后按下确认</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115053800.png" style="zoom:50%;" />
+
+<p>然后会让你设置一个数字，这个按照自己喜好设置，但是要记住，因为每一次刷卡都要用到这个数字，如果不记得数字了，请看疑难解答</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115135542.png" style="zoom:50%;" />
+
+<p>接下来就是设置名字，使用滚轮来选择字母，然后按下确认来把字母放进下面的框框内，选好了就选择<code>END</code>然后按下确认</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115224698.png" style="zoom:50%;" />
+
+<p>注册完后，关闭全部程序重新打开，接下来就是正常的游玩TIME了，祝你游戏愉快</p>
+<h3 id="疑难解答"><a href="#疑难解答" class="headerlink" title="疑难解答"></a>疑难解答</h3><h4 id="为什么我的SDVX卡住了打不开，并且控制台提示exception-raised-EXCEPTION-ACCESS-VIOLATION？"><a href="#为什么我的SDVX卡住了打不开，并且控制台提示exception-raised-EXCEPTION-ACCESS-VIOLATION？" class="headerlink" title="为什么我的SDVX卡住了打不开，并且控制台提示exception raised: EXCEPTION_ACCESS_VIOLATION？"></a>为什么我的SDVX卡住了打不开，并且控制台提示<code>exception raised: EXCEPTION_ACCESS_VIOLATION</code>？</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115359490.png"></p>
+<p>你的音频设备不受支持，已知SDVX在24位，44100Hz的音频设备上才能够运行，如果出现了这个问题，请调整你的音频设备设置或者更换音频设备</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115453250.png"></p>
+<h4 id="为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？"><a href="#为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？" class="headerlink" title="为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？"></a>为什么我打开游戏的时候，NETWORK提示<code>ERROR</code>并且无法进入游戏？</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115542701.png"></p>
+<p>你的asphyxia没有打开，请根据<a href="#%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F"></a>一节检查你的asphyxia是否正在运行，或者8083端口是否被占用</p>
+<blockquote>
+ <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115710822.png" style="zoom:50%;" />
+
+<p>如果出现了此提示，说明端口被占用了，检查其他占用端口的程序并将它们关闭</p>
+</blockquote>
+<h4 id="我忘了我的密钥串（四位数字）怎么办？"><a href="#我忘了我的密钥串（四位数字）怎么办？" class="headerlink" title="我忘了我的密钥串（四位数字）怎么办？"></a>我忘了我的密钥串（四位数字）怎么办？</h4><p>打开你的浏览器，访问<a href="http://localhost:8083/">http://localhost:8083</a>，然后点击左边的<code>Profiles</code>，然后找到你自己的配置文件，点击垃圾桶图标</p>
+<blockquote>
+<p>请注意：这里所说的自己的配置文件中的<code>Name</code>并不是你自己设置的，是本地服务器随机生成的，一般来说只有你自己一个人游玩的情况下，就只有一条记录，对这条记录进行操作就可以了</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115917115.png" style="zoom:50%;" />
+
+<p>然后点击两下这个删除按钮，一定是两下！！！</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115939724.png" style="zoom:50%;" />
+
+<h4 id="怎么退出Premium-Time模式"><a href="#怎么退出Premium-Time模式" class="headerlink" title="怎么退出Premium Time模式"></a>怎么退出Premium Time模式</h4><p>同时按下<code>BT-A</code>、<code>BT-B</code>、<code>BT-C</code>、<code>BT-D</code>即可</p>
+<h2 id="Sound-Voltex-Vivid-Wave"><a href="#Sound-Voltex-Vivid-Wave" class="headerlink" title="Sound Voltex Vivid Wave"></a>Sound Voltex Vivid Wave</h2><p>游戏下载下来，应该有如图所示的几个文件夹，解压出来备用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/explorer_d7AHXCGwtZ.png"></p>
+<h3 id="安装spice-1"><a href="#安装spice-1" class="headerlink" title="安装spice"></a>安装spice</h3><p>访问spice2x的官网，下载一份spice，直接下载最新版本就可以了</p>
+<blockquote>
+<p>spice2x: <a href="https://spice2x.github.io/">https://spice2x.github.io/</a></p>
+</blockquote>
+<p>下载下来的压缩包应该有几个文件夹和几个exe文件，如图所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/Bandizip.x64_McXHZhOoGD.png"></p>
+<p>直接把里面的<code>spice.exe</code>、<code>spice64.exe</code>、<code>spicecfg.exe</code>拿出来放到你的SDVX目录即可，文件夹<strong>一个都不要碰</strong></p>
+<h3 id="安装asphyxia本地服务器-1"><a href="#安装asphyxia本地服务器-1" class="headerlink" title="安装asphyxia本地服务器"></a>安装asphyxia本地服务器</h3><p>访问asphyxia的官网，下载一份asphyxia服务端，直接下载最新版</p>
+<blockquote>
+<p>asphyxia-core: <a href="https://asphyxia-core.github.io/">https://asphyxia-core.github.io/</a></p>
+</blockquote>
+<p>下载下来后应该有如图所示的内容</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/Bandizip.x64_SLT7hLq9K8.png"></p>
+<p>解压到一个顺手的地方，或者直接解压到SDVX5的目录内，asphyxia的文件与SDVX5本体不存在文件冲突，可以直接放在同一个文件夹</p>
+<p>接着我们访问asphyxia的插件目录，把<code>sdvx@asphyxia</code>整个文件夹下载下来后，放到<code>plugins</code>文件夹内</p>
+<p><strong>注意：这里的链接跟上面不一样，插件在6.1.0更新的时候移除了对Vivid Wave的支持，所以我们需要使用6.0.0版本（下面这个链接）</strong></p>
+<blockquote>
+<p>asphyxia插件目录: <a href="https://github.com/asphyxia-core/plugins/tree/369297131fd12a07291d68b66640c2ac56d9b47a">https://github.com/asphyxia-core/plugins/tree/369297131fd12a07291d68b66640c2ac56d9b47a</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/explorer_y2BOMEfK09.png"></p>
+<p>至此，服务器的安装工作就完成了</p>
+<h3 id="初始化asphyxia本地服务器-1"><a href="#初始化asphyxia本地服务器-1" class="headerlink" title="初始化asphyxia本地服务器"></a>初始化asphyxia本地服务器</h3><p>我们打开浏览器直接访问<code>http://localhost:8083</code>，在左边点到SDVX，然后在右边的卡片内开启你想要的功能，再点击Apply</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/msedge_CGlWuLXC3K.png"></p>
+<h3 id="配置Patch（可选）-1"><a href="#配置Patch（可选）-1" class="headerlink" title="配置Patch（可选）"></a>配置Patch（可选）</h3><p>点击上方的Patches，然后点击<code>Import from URL</code>，输入<code>https://sp2x.two-torial.xyz/</code>并确定</p>
+<p>勾选<code>Auto apply patches on game start</code>，然后下面根据自己的需求来勾选即可，这里的配置项跟Exceed Gear不一样，请自行选择（下图仅供参考）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spicecfg_VkWSePkRlJ.png"></p>
+<h3 id="编写启动脚本"><a href="#编写启动脚本" class="headerlink" title="编写启动脚本"></a>编写启动脚本</h3><div class="note warning flat"><p>请注意：<code>spicecfg.exe</code>里面的配置是跟随机器的，也就是说，如果你的电脑同时拥有Sound Voltex Exceed Gear和Sound Voltex Vivid Wave，这个配置会同时应用到两个游戏，这种情况下，推荐在启动脚本里面用启动项的方式分别配置两个游戏</p>
+</div>
+
+<ul>
+<li>竖屏用户</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line">:: <span class="built_in">Start</span> Local Server</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;asphyxia-core-x64.exe&quot;</span><br><span class="line"></span><br><span class="line">:: <span class="built_in">Start</span> SDVX V</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;spice64.exe&quot; -sdvxdisablecams -url http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">8083</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>横屏用户</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line">:: <span class="built_in">Start</span> Local Server</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;asphyxia-core-x64.exe&quot;</span><br><span class="line"></span><br><span class="line">:: <span class="built_in">Start</span> SDVX V</span><br><span class="line"><span class="built_in">start</span> &quot;&quot; &quot;spice64.exe&quot; -sdvxdisablecams -w -windowborder <span class="number">0</span> -windowsize <span class="number">720</span>,<span class="number">1080</span> -url http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">8083</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="初期设定-1"><a href="#初期设定-1" class="headerlink" title="初期设定"></a>初期设定</h3><p>打开游戏，现在应该会开始自检，通过后会像下面这样显示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113219555.png"></p>
+<p>稍等一会就能够进去，初次打开游戏，你可能会遇到这样的提示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/1.png"></p>
+<p>不要紧，我们按下你绑定<code>Test</code>功能的按键</p>
+<blockquote>
+<p>什么？你问我哪个是Test？看图啦看图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113044856.png"></p>
+</blockquote>
+<p>会进入这样的一个设置界面</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113320992.png"></p>
+<p>我们确定选择的是<code>I/O Check</code>，然后先按一次<code>Start</code>键（按照我的键盘绑定是<code>Y</code>），在这个页面中，<code>Start</code>键是确认键，后面以<code>确认</code>代替</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113420639.png"></p>
+<p>接着，我们选择<code>CALIBRATION SETTINGS</code>（使用<code>BT-A</code>和<code>BT-B</code>可以调整选择的选项），然后确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113645952.png"></p>
+<p>接着我们直接确认（这个时候选择的应该是<code>CALIBRATION</code>），然后会有提示，我们跟着提示进行操作</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113800905.png"></p>
+<p>左旋钮逆时针扭三圈，直到上面的<code>COUNT=</code>后面的数字变成了<code>OK</code>，然后按下确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113844058.png"></p>
+<p>下一个操作是左旋钮顺时针扭三圈，直到上面的<code>COUNT=</code>后面的数字变成了<code>OK</code>，然后按下确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113903693.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829113954888.png"></p>
+<p>接着我们对右旋钮进行同样的操作后，最后的结果应该是像我下面这张图这样</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114056964.png"></p>
+<p>我们选到<code>SAVE AND EXIT</code>来保存校准结果，按下确认键，然后选择<code>EXIT</code>再次按下确认键，接着再选择<code>GAME MODE</code>按下确认返回游戏</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114159025.png"></p>
+<p>然后你就会发现你的SDVX已经可以正常游玩了</p>
+<h3 id="进入游戏-1"><a href="#进入游戏-1" class="headerlink" title="进入游戏"></a>进入游戏</h3><p>首先你要确保你的后台有一个<code>Asphyxia Core</code>正在运行，它应该是一个如图示一般的命令行窗口</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114315550.png"></p>
+<p>如果你找不到这个窗口，你也可以通过在浏览器访问<a href="https://localhost:8083/">https://localhost:8083</a>来确认是否打开，如果能够正常访问就是打开了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829114415614.png"></p>
+<p>然后我们回到SDVX，按下我们数字小键盘上的<code>+</code>来模拟游玩街机的刷卡行为</p>
+<p> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spice64_pNzH4FJxAO.png"></p>
+<h3 id="登录新用户-1"><a href="#登录新用户-1" class="headerlink" title="登录新用户"></a>登录新用户</h3><p>你需要先注册一下用户，我们先选择<code>新规登录</code>，需要使用滚轮来选择选项</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spice64_aT3a8mnd6q.png" style="zoom:50%;" />
+
+<p>然后会弹出一个类似用户协议的东西，我们选择<code>YES</code>，然后按下确认</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spice64_lOLEPf23N5.png" style="zoom:50%;" />
+
+<p>然后会让你设置一个数字，这个按照自己喜好设置，但是要记住，因为每一次刷卡都要用到这个数字，如果不记得数字了，请看疑难解答</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spice64_hNoPmQ5v89.png" style="zoom:50%;" />
+
+<p>接下来就是设置名字，使用滚轮来选择字母，然后按下确认来把字母放进下面的框框内，选好了就选择<code>END</code>然后按下确认</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/spice64_pkumn280oc.png" style="zoom:50%;" />
+
+<p>注册完后，关闭全部程序重新打开，接下来就是正常的游玩TIME了，祝你游戏愉快</p>
+<h3 id="疑难解答-1"><a href="#疑难解答-1" class="headerlink" title="疑难解答"></a>疑难解答</h3><h4 id="为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？-1"><a href="#为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？-1" class="headerlink" title="为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？"></a>为什么我打开游戏的时候，NETWORK提示<code>ERROR</code>并且无法进入游戏？</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115542701.png"></p>
+<p>你的asphyxia没有打开，请根据<a href="#%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F"></a>一节检查你的asphyxia是否正在运行，或者8083端口是否被占用</p>
+<blockquote>
+ <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115710822.png" style="zoom:50%;" />
+
+<p> 如果出现了此提示，说明端口被占用了，检查其他占用端口的程序并将它们关闭</p>
+</blockquote>
+<h4 id="我忘了我的密钥串（四位数字）怎么办？-1"><a href="#我忘了我的密钥串（四位数字）怎么办？-1" class="headerlink" title="我忘了我的密钥串（四位数字）怎么办？"></a>我忘了我的密钥串（四位数字）怎么办？</h4><p>打开你的浏览器，访问<a href="http://localhost:8083/">http://localhost:8083/</a>，然后点击左边的<code>Profiles</code>，然后找到你自己的配置文件，点击垃圾桶图标</p>
+<blockquote>
+<p>请注意：这里所说的自己的配置文件中的<code>Name</code>并不是你自己设置的，是本地服务器随机生成的，一般来说只有你自己一个人游玩的情况下，就只有一条记录，对这条记录进行操作就可以了</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115917115.png" style="zoom:50%;" />
+
+<p>然后点击两下这个删除按钮，一定是两下！！！</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SDVX-Setup/image-20240829115939724.png" style="zoom:50%;" /></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://github.com/GamerNoTitle">GamerNoTitle</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bili33.top/posts/SDVX-Setup/">https://bili33.top/posts/SDVX-Setup/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://assets.bili33.top/img/SDVX-Setup/subbg_0115.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/WeChat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/WeChat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/AliPay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/AliPay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/BaseCTF2024-Writeup/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/BaseCTF2024-Week1/msedge_uIfC9jDQCq.png" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">BaseCTF2024 个人Writeup</div></div></a></div><div class="next-post pull-right"><a href="/posts/CTF-Yangcheng2024-Writeup/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Yangcheng2024-Writeup/poster.jpeg" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">2024年“羊城杯”粤港澳大湾区网络安全大赛个人WriteUp</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="author-info__name">GamerNoTitle</div><div class="author-info__description">TECH OTAKUS SAVE THE WORLD</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/GamerNoTitle"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GamerNoTitle" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/44666814" target="_blank" title="bilibili"><i class="fas fa-tv"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a><a class="social-icon" href="mailto:GamerNoTitle@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><div align="center"><pre style="font-family: monospace; white-space: pre; line-height: 1 !important;">
+.------.--------.---------.
+| .=====================. |\
+| | 7  3  5  5  6  0  8 | | |
+| +=====================+ | |
+|----------------------\\-. |
+|    *   |      ^|^    || |\|
+|   .-----------------.|| | |
+|   |  1  |  2  |  3  ||| | |
+|   |-----+-----+-----||| | |
+|   |  4  |  5  |  6  ||| | |
+|   |-----+-----+-----||| | |
+|   |  7  |  8  |  9  ||| | |
+|   |-----+-----+-----|// | |
+|   |  *  |  0  |  #  |/  | |
+|   +-----------------+   | |
+|       |       |         | |
++-------+-------+---------+ |
+\______\_______\_________+\/
+</pre></div>
+<div align="center"><span style="color: #e9b891;">gamernotitle</span>@<span style="color: #c5966d;">site_web</span> > <span style="color: #4a6d42;">./plant.sh</span><br>
+Boom has been planted.
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sound-Voltex-Exceed-Gear"><span class="toc-number">1.</span> <span class="toc-text">Sound Voltex Exceed Gear</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85spice"><span class="toc-number">1.1.</span> <span class="toc-text">安装spice</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NVIDIA%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.1.</span> <span class="toc-text">NVIDIA显卡用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AMD%E6%98%BE%E5%8D%A1%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.2.</span> <span class="toc-text">AMD显卡用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85asphyxia%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">安装asphyxia本地服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96asphyxia%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">初始化asphyxia本地服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85ffmpeg"><span class="toc-number">1.3.1.</span> <span class="toc-text">如何安装ffmpeg</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%B8%B8%E6%88%8F"><span class="toc-number">1.4.</span> <span class="toc-text">配置游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D"><span class="toc-number">1.4.1.</span> <span class="toc-text">绑定键位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEPatch%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">1.4.2.</span> <span class="toc-text">配置Patch（可选）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%B0%E5%9D%80%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%8C%E4%B8%8D%E9%85%8D%E7%BD%AE%E7%9A%84%E8%AF%9D%E9%9C%80%E8%A6%81%E5%8A%A0%E5%90%AF%E5%8A%A8%E9%A1%B9%EF%BC%89"><span class="toc-number">1.4.3.</span> <span class="toc-text">配置服务器地址（可选，不配置的话需要加启动项）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%B8%B8%E6%88%8F"><span class="toc-number">1.5.</span> <span class="toc-text">开始游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E5%8F%AF%E4%BB%A5%E6%8A%8A%E5%B1%8F%E5%B9%95%E7%AB%96%E8%B5%B7%E6%9D%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">如果你可以把屏幕竖起来</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E6%97%A0%E6%B3%95%E6%8A%8A%E5%B1%8F%E5%B9%95%E7%AB%96%E8%B5%B7%E6%9D%A5-%E4%BD%A0%E4%B8%8D%E6%83%B3%E6%8A%8A%E5%B1%8F%E5%B9%95%E7%AB%96%E8%B5%B7%E6%9D%A5"><span class="toc-number">1.5.2.</span> <span class="toc-text">如果你无法把屏幕竖起来&#x2F;你不想把屏幕竖起来</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%82%BB%E7%93%9C%E5%BC%8F%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%EF%BC%88%E4%BF%9D%E5%AD%98%E4%B8%BAbat%EF%BC%89"><span class="toc-number">1.5.3.</span> <span class="toc-text">你也可以使用傻瓜式启动脚本（保存为bat）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%9C%9F%E8%AE%BE%E5%AE%9A"><span class="toc-number">1.6.</span> <span class="toc-text">初期设定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F"><span class="toc-number">1.7.</span> <span class="toc-text">进入游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E6%96%B0%E7%94%A8%E6%88%B7"><span class="toc-number">1.8.</span> <span class="toc-text">登录新用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%96%91%E9%9A%BE%E8%A7%A3%E7%AD%94"><span class="toc-number">1.9.</span> <span class="toc-text">疑难解答</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84SDVX%E5%8D%A1%E4%BD%8F%E4%BA%86%E6%89%93%E4%B8%8D%E5%BC%80%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8F%90%E7%A4%BAexception-raised-EXCEPTION-ACCESS-VIOLATION%EF%BC%9F"><span class="toc-number">1.9.1.</span> <span class="toc-text">为什么我的SDVX卡住了打不开，并且控制台提示exception raised: EXCEPTION_ACCESS_VIOLATION？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8CNETWORK%E6%8F%90%E7%A4%BAERROR%E5%B9%B6%E4%B8%94%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%EF%BC%9F"><span class="toc-number">1.9.2.</span> <span class="toc-text">为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%91%E5%BF%98%E4%BA%86%E6%88%91%E7%9A%84%E5%AF%86%E9%92%A5%E4%B8%B2%EF%BC%88%E5%9B%9B%E4%BD%8D%E6%95%B0%E5%AD%97%EF%BC%89%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-number">1.9.3.</span> <span class="toc-text">我忘了我的密钥串（四位数字）怎么办？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E9%80%80%E5%87%BAPremium-Time%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.9.4.</span> <span class="toc-text">怎么退出Premium Time模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sound-Voltex-Vivid-Wave"><span class="toc-number">2.</span> <span class="toc-text">Sound Voltex Vivid Wave</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85spice-1"><span class="toc-number">2.1.</span> <span class="toc-text">安装spice</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85asphyxia%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8-1"><span class="toc-number">2.2.</span> <span class="toc-text">安装asphyxia本地服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96asphyxia%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8-1"><span class="toc-number">2.3.</span> <span class="toc-text">初始化asphyxia本地服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEPatch%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89-1"><span class="toc-number">2.4.</span> <span class="toc-text">配置Patch（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">2.5.</span> <span class="toc-text">编写启动脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%9C%9F%E8%AE%BE%E5%AE%9A-1"><span class="toc-number">2.6.</span> <span class="toc-text">初期设定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F-1"><span class="toc-number">2.7.</span> <span class="toc-text">进入游戏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E6%96%B0%E7%94%A8%E6%88%B7-1"><span class="toc-number">2.8.</span> <span class="toc-text">登录新用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%96%91%E9%9A%BE%E8%A7%A3%E7%AD%94-1"><span class="toc-number">2.9.</span> <span class="toc-text">疑难解答</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8CNETWORK%E6%8F%90%E7%A4%BAERROR%E5%B9%B6%E4%B8%94%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F%EF%BC%9F-1"><span class="toc-number">2.9.1.</span> <span class="toc-text">为什么我打开游戏的时候，NETWORK提示ERROR并且无法进入游戏？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%91%E5%BF%98%E4%BA%86%E6%88%91%E7%9A%84%E5%AF%86%E9%92%A5%E4%B8%B2%EF%BC%88%E5%9B%9B%E4%BD%8D%E6%95%B0%E5%AD%97%EF%BC%89%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F-1"><span class="toc-number">2.9.2.</span> <span class="toc-text">我忘了我的密钥串（四位数字）怎么办？</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Migrate-from-Valine-to-Waline/msedge_1kiyjac8P9.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="从 Valine 迁移到 Waline 全记录"/></a><div class="content"><a class="title" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录">从 Valine 迁移到 Waline 全记录</a><time datetime="2026-02-15T19:00:46.000Z" title="Created 2026-02-16 03:00:46">2026-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Reverse-Engineering-Cracking-MailMaster/at-748365_1920.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="记一次对某邮箱软件账户数量上限破解"/></a><div class="content"><a class="title" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解">记一次对某邮箱软件账户数量上限破解</a><time datetime="2026-01-19T12:34:03.000Z" title="Created 2026-01-19 20:34:03">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025-Year-End-Summary/" title="2025 年终总结"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/2025-Year-End-Summary/image-20251231025211777.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 年终总结"/></a><div class="content"><a class="title" href="/posts/2025-Year-End-Summary/" title="2025 年终总结">2025 年终总结</a><time datetime="2025-12-30T17:10:19.000Z" title="Created 2025-12-31 01:10:19">2025-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"/></a><div class="content"><a class="title" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破">使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破</a><time datetime="2025-12-19T12:59:03.000Z" title="Created 2025-12-19 20:59:03">2025-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-PCB2025-Preliminary-Round-Writeup/cover.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"/></a><div class="content"><a class="title" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup">2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup</a><time datetime="2025-12-13T11:05:12.000Z" title="Created 2025-12-13 19:05:12">2025-12-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2026 By GamerNoTitle</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">All articles in this blog are licensed under CC BY-NC-SA 4.0 unless stating additionally.<br>
+<a href="https://icp.gov.moe/?keyword=20213338" target="_blank"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src='https://assets.bili33.top/img/GovMoe/icon120.png' width=20px height=20px></img> 萌ICP备 20213338号</a> | <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.bili33.top/gh/biliCDN/bilicdn.github.io@master/images/favicon.png" width="20px" height="20px"> 本站使用 <a href="https://cdn.bili33.top">哔哩CDN</a> 进行加速<br>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.umd.min.js"></script><script src="https://cdn.bili33.top/npm/vanilla-lazyload@17.8.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.bili33.top/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.bili33.top/npm/mermaid@9.1.7/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://assets.bili33.top/css/waline.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.bili33.top',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+      imageUploader: (file) => {
+        let formData = new FormData();
+        let headers = new Headers();
+        let query = new URLSearchParams();
+
+        formData.append('file', file);
+        headers.append('Authorization', 'Bearer imgbed_YdVn2QPSD7RjaCDYIODMnlyY8wAn3FZD')
+        headers.append('User-Agent', 'Paff-Waline/1.0')
+
+        return fetch('https://img.bili33.top/upload', {
+          method: 'POST',
+          headers: headers,
+          body: formData,
+        }).then((resp) => resp.json())
+        .then((data) => 'https://img.bili33.top' + data[0].src)
+      }
+
+    }, {"avatar":"mp","emojiCDN":"https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/","visitor":true,"emoji":["https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibiliHotKey","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibili2233","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibilitv","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Arcaea","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Heybox","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Majotabi"],"locale":{"nick":"昵称","nickError":"昵称不能少于3个字符","mail":"邮箱","mailError":"请填写正确的邮件地址","link":"网址","optional":"可选","placeholder":"📌图片上传大小限制 5MB，请友善发言，并遵守相关法律法规。","sofa":"来发评论吧~","submit":"提交","like":"喜欢","cancelLike":"撤销喜欢","reply":"回复","cancelReply":"撤回","comment":"评论","refresh":"刷新","more":"加载更多...","preview":"预览","emoji":"表情","uploadImage":"上传图片","seconds":"秒前","minutes":"分钟前","hours":"小时前","days":"天前","now":"刚刚","uploading":"Uploading","login":"登录","logout":"登出","admin":"Endministrator","sticky":"📌","word":"字","wordHint":"评论字数应在 $0 到 $1 字之间！\\n当前字数：$2","anonymous":"匿名","level0":"Lv0","level1":"Lv1","level2":"Lv2","level3":"Lv3","level4":"Lv4","level5":"Lv5","gif":"表情包","gifSearchPlaceholder":"搜索表情包","profile":"个人资料","approved":"通过","waiting":"待审核","spam":"垃圾","unsticky":"取消置顶","oldest":"倒序","latest":"正序","hottest":"热度","reactionTitle":"你认为这篇文章怎么样？"},"noCopyright":true,"reaction":false}))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://assets.bili33.top/js/waline.umd.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.bili33.top/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'UA-138072700-2', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

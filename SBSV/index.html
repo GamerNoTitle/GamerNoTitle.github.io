@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>剑星存档验证及 ID 修改器</title>
+    <script src="https://unpkg.com/sober@1.1.1/dist/sober.min.js"></script>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({ id: "3KdcwFGRWCpapHjZ", ck: "3KdcwFGRWCpapHjZ" })</script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            /**禁用字体缩放**/
+            -webkit-text-size-adjust: none;
+        }
+
+        /**隐藏未加载的组件**/
+        :not(:defined) {
+            display: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        s-card {
+            padding: 16px;
+        }
+
+        s-table {
+            margin: auto;
+        }
+
+        s-page {
+            --s-color-primary: #7746ac;
+            --s-color-on-primary: #ffffff;
+            --s-color-primary-container: #efdbff;
+            --s-color-on-primary-container: #2b0052;
+            --s-color-secondary: #655a6f;
+            --s-color-on-secondary: #ffffff;
+            --s-color-secondary-container: #ecddf6;
+            --s-color-on-secondary-container: #21182a;
+            --s-color-tertiary: #805158;
+            --s-color-on-tertiary: #ffffff;
+            --s-color-tertiary-container: #ffd9dd;
+            --s-color-on-tertiary-container: #321017;
+            --s-color-error: #ba1a1a;
+            --s-color-on-error: #ffffff;
+            --s-color-error-container: #ffdad6;
+            --s-color-on-error-container: #410002;
+            --s-color-background: #fffbff;
+            --s-color-on-background: #1d1b1e;
+            --s-color-outline: #7b757f;
+            --s-color-outline-variant: #ccc4cf;
+            --s-color-surface: #fffbff;
+            --s-color-on-surface: #1d1b1e;
+            --s-color-surface-variant: #e9e0eb;
+            --s-color-on-surface-variant: #4a454e;
+            --s-color-inverse-surface: #322f33;
+            --s-color-inverse-on-surface: #f5eff4;
+            --s-color-inverse-primary: #dbb8ff;
+            --s-color-surface-container: #f2ecf1;
+            --s-color-surface-container-lowest: #e7e1e5;
+            --s-color-surface-container-low: #ede6eb;
+            --s-color-surface-container-high: #f8f2f6;
+            --s-color-surface-container-highest: #ffffff;
+            --s-color-dark-primary: #dbb8ff;
+            --s-color-dark-on-primary: #460c7b;
+            --s-color-dark-primary-container: #5e2c93;
+            --s-color-dark-on-primary-container: #efdbff;
+            --s-color-dark-secondary: #d0c1da;
+            --s-color-dark-on-secondary: #362d3f;
+            --s-color-dark-secondary-container: #4d4357;
+            --s-color-dark-on-secondary-container: #ecddf6;
+            --s-color-dark-tertiary: #f3b7bf;
+            --s-color-dark-on-tertiary: #4b252b;
+            --s-color-dark-tertiary-container: #653a41;
+            --s-color-dark-on-tertiary-container: #ffd9dd;
+            --s-color-dark-error: #ffb4ab;
+            --s-color-dark-on-error: #690005;
+            --s-color-dark-error-container: #93000a;
+            --s-color-dark-on-error-container: #ffb4ab;
+            --s-color-dark-background: #1d1b1e;
+            --s-color-dark-on-background: #e7e1e5;
+            --s-color-dark-outline: #958e98;
+            --s-color-dark-outline-variant: #4a454e;
+            --s-color-dark-surface: #1d1b1e;
+            --s-color-dark-on-surface: #e7e1e5;
+            --s-color-dark-surface-variant: #4a454e;
+            --s-color-dark-on-surface-variant: #ccc4cf;
+            --s-color-dark-inverse-surface: #e7e1e5;
+            --s-color-dark-inverse-on-surface: #322f33;
+            --s-color-dark-inverse-primary: #7746ac;
+            --s-color-dark-surface-container: #211f22;
+            --s-color-dark-surface-container-lowest: #0f0d11;
+            --s-color-dark-surface-container-low: #1d1b1e;
+            --s-color-dark-surface-container-high: #2c292d;
+            --s-color-dark-surface-container-highest: #373438;
+        }
+
+        .on-phone {
+            /*手机端的卡片视图*/
+            margin-left: 1% !important;
+            width: 100% !important;
+            max-width: 98% !important;
+        }
+
+        :host(:not([size=full])) ::slotted(:is(:not([slot]), [slot=text])) {
+            max-width: 800px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <s-page theme="auto">
+        <s-scroll-view style="flex-grow: 1; padding: 16px;">
+            <main style="height: 100%">
+                <s-dialog>
+                    <div slot="headline" id="dialog-title"> 提示 </div>
+                    <div slot="text" id="dialog-descr">
+                    </div>
+                    <s-button slot="action" type="text">取消</s-button>
+                    <s-button slot="action" type="text">确定</s-button>
+                </s-dialog>
+
+                <div align="center" id="main-container" style="margin-top: 32px">
+                    <s-card style="width: 100%; max-width: 1280px; padding: 16px;" type="outlined">
+                        <img slot="image" src="head.jpg" style="max-height: 600px;">
+                        <div slot="headline" style="margin-bottom: 16px; margin-top: 16px;">剑星存档文件验证修改器</div>
+                        <div slot="subhead">由 <a href="https://github.com/GamerNoTitle"
+                                style="text-decoration: underline; color: var(--s-color-primary)">@GamerNoTitle</a>
+                            制作，在使用存档工具之前，请先把下载的存档放到这里校验，不合规的存档可能导致游戏无法正常运行。</div>
+                        <div slot="text" style="margin-top: 16px;">
+                            <div class="upload-section" id="uploadSection">
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="fileInput" accept=".sav,application/octet-stream" />
+                                </div>
+                            </div>
+                            <div class="result-section" id="resultSection" style="display: none; margin-top: 16px;">
+                                <s-text-field id="steamIdInput" label="SteamID" style="margin-right: 16px; width: auto;"
+                                    countered="true" maxlength="17" oninput="onSteamIdChange()">
+                                    <div slot="text">
+                                        SteamID 必须为 17 位纯数字，否则无法进行修改保存；当前已输入：
+                                    </div>
+                                </s-text-field>
+                                <s-button type="success" id="saveButton" class="full-width-button">保存修改后的文件</s-button>
+                            </div>
+
+                            <div id="loadingIndicator" style="display: none; text-align: center; margin: 15px 0;">
+                                <s-circular-progress type="circular" indeterminate="true"></s-circular-progress>
+                                <p>处理中...</p>
+                            </div>
+                        </div>
+                        <div align="center" style="margin-top: 16px;" id="footer">
+                            Copyright (c)
+                            <script>document.write(`${new Date().getFullYear() == 2025 ? new Date().getFullYear() : '2025-' + new Date().getFullYear()}`)</script>
+                            <a href="https://bili33.top"
+                                style="text-decoration: underline; color: var(--s-color-primary)">GamerNoTitle</a>. All
+                            rights reserved.
+                        </div>
+                    </s-card>
+                </div>
+            </main>
+        </s-scroll-view>
+
+    </s-page>
+
+    <script>// script.js
+        document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
+            const fileInput = document.getElementById('fileInput');
+            const saveButton = document.getElementById('saveButton');
+            const resultSection = document.getElementById('resultSection');
+            const steamIdInput = document.getElementById('steamIdInput'); // This is an s-text-field
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            // --- Byte Pattern Definitions (moved from backend) ---
+            const GSAV_HEADER = new Uint8Array([0x47, 0x56, 0x41, 0x53]); // "GSAV"
+            const STEAM_ID_PREFIX_PATTERN = new Uint8Array([
+                0x45, 0x53, 0x42, 0x4f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x54, 0x79,
+                0x70, 0x65, 0x3a, 0x3a, 0x53, 0x74, 0x65, 0x61, 0x6d, 0x00, 0x10, 0x00, 0x00, 0x00, 0x4f, 0x6e,
+                0x6c, 0x69, 0x6e, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x44, 0x00, 0x0c, 0x00,
+                0x00, 0x00, 0x53, 0x74, 0x72, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x79, 0x00, 0x16, 0x00,
+                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x12, 0x00, 0x00, 0x00,
+            ]);
+            const STEAM_ID_SUFFIX_PATTERN = new Uint8Array([
+                0x00, 0x05, 0x00, 0x00, 0x00, 0x4e, 0x6f, 0x6e, 0x65, 0x00, 0x05, 0x00, 0x00, 0x00, 0x4e, 0x6f,
+                0x6e, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00,
+            ]);
+
+            // State variables
+            let originalFileContent = null; // Uint8Array
+            let originalFileName = 'savefile.sav';
+            let validationData = null; // To store { steamID, prefixEndIndex, suffixStartIndex }
+
+            // --- Event Listeners ---
+            fileInput.addEventListener('change', handleFileSelectAndValidate); // Combined selection and validation
+            saveButton.addEventListener('click', handleSaveModifiedFile);
+
+            // --- Helper Functions ---
+            function showLoading(isLoading) {
+                loadingIndicator.style.display = isLoading ? 'block' : 'none';
+                saveButton.disabled = isLoading;
+                fileInput.disabled = isLoading;
+                // Sober component might be nested or need direct property access
+                const soberInputElement = steamIdInput.shadowRoot ? steamIdInput.shadowRoot.querySelector('input') : steamIdInput;
+                if (soberInputElement) soberInputElement.disabled = isLoading;
+            }
+
+            function displayMessage(message, type = 'error') {
+                const dialog = document.querySelector('s-dialog');
+                const dialogTitle = document.getElementById('dialog-title');
+                const dialogDescr = document.getElementById('dialog-descr');
+                dialogTitle.textContent = type === 'error' ? '错误' : '提示';
+                dialogDescr.textContent = message;
+                dialog.setAttribute('showed', 'true');
+            }
+
+            function findSubarray(haystack, needle, offset = 0) {
+                if (needle.length === 0) return offset;
+                if (haystack.length === 0) return -1;
+                for (let i = offset; i <= haystack.length - needle.length; i++) {
+                    let found = true;
+                    for (let j = 0; j < needle.length; j++) {
+                        if (haystack[i + j] !== needle[j]) {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) return i;
+                }
+                return -1;
+            }
+
+            function validateAndExtractSteamId(fileBytes) {
+                if (fileBytes.length < GSAV_HEADER.length) {
+                    return { error: "文件大小过小，很可能不是「剑星」的存档" };
+                }
+                for (let i = 0; i < GSAV_HEADER.length; i++) {
+                    if (fileBytes[i] !== GSAV_HEADER[i]) {
+                        return { error: "文件头不正确，这可能不是「剑星」的存档" };
+                    }
+                }
+                const prefixIndex = findSubarray(fileBytes, STEAM_ID_PREFIX_PATTERN, GSAV_HEADER.length);
+                if (prefixIndex === -1) {
+                    return { error: "未找到 SteamID 前缀模式，存档可能损坏" };
+                }
+                const prefixEndIndex = prefixIndex + STEAM_ID_PREFIX_PATTERN.length;
+                const suffixIndex = findSubarray(fileBytes, STEAM_ID_SUFFIX_PATTERN, prefixEndIndex);
+                if (suffixIndex === -1) {
+                    return { error: "在前缀后未找到 SteamID 后缀模式，存档可能损坏" };
+                }
+                const suffixStartIndex = suffixIndex;
+                const steamIdBytes = fileBytes.slice(prefixEndIndex, suffixStartIndex);
+                try {
+                    const steamIdStr = new TextDecoder("utf-8", { ignoreBOM: true }).decode(steamIdBytes)
+                        .replace(/\0/g, '').trim();
+                    if (!steamIdStr) {
+                        return {
+                            steamID: '',
+                            prefixEndIndex: prefixEndIndex,
+                            suffixStartIndex: suffixStartIndex
+                        }
+                    }
+                    return {
+                        steamID: steamIdStr,
+                        prefixEndIndex: prefixEndIndex,
+                        suffixStartIndex: suffixStartIndex
+                    };
+                } catch (e) {
+                    return { error: "无法解码 SteamID，存档可能损坏" };
+                }
+            }
+
+            async function handleFileSelectAndValidate(event) {
+                const file = event.target.files[0];
+                resultSection.style.display = 'none';
+                originalFileContent = null;
+                validationData = null;
+                steamIdInput.value = '';
+                if (!file) {
+                    displayMessage("未选择文件。", "info");
+                    return;
+                }
+
+                originalFileName = file.name;
+                showLoading(true);
+
+                try {
+                    const arrayBuffer = await file.arrayBuffer();
+                    originalFileContent = new Uint8Array(arrayBuffer);
+
+                    // Perform validation directly
+                    const result = validateAndExtractSteamId(originalFileContent);
+
+                    if (result.error) {
+                        displayMessage(result.error, "error");
+                        validationData = null;
+                    } else {
+                        validationData = result;
+                        steamIdInput.value = result.steamID; // Set value for s-text-field
+                        resultSection.style.display = 'block';
+                        displayMessage("文件校验成功！SteamID 已提取。", "success");
+                        const uploadSection = document.getElementById('uploadSection');
+                        uploadSection.classList.add('hidden');;
+                    }
+                } catch (e) {
+                    displayMessage("读取或处理文件时出错。", "error");
+                    console.error("File processing error:", e);
+                    originalFileContent = null;
+                    validationData = null;
+                } finally {
+                    showLoading(false);
+                    event.target.value = null;
+                }
+            }
+
+            function handleSaveModifiedFile() {
+                if (!originalFileContent) {
+                    displayMessage("原始文件内容丢失。请重新选择文件。", "error");
+                    return;
+                }
+                if (!validationData || validationData.prefixEndIndex === undefined || validationData.suffixStartIndex === undefined) {
+                    displayMessage("缺少必要的修改数据（字节索引）。请重新校验文件。", "error");
+                    return;
+                }
+
+                const newSteamID = steamIdInput.value.trim(); // Get value from s-text-field
+
+                if (!/^\d+$/.test(newSteamID)) {
+                    displayMessage("新的 SteamID 必须只包含数字。", "error");
+                    return;
+                }
+                if (newSteamID.length !== 17) {
+                    displayMessage("新的 SteamID 必须是 17 位数字。", "error");
+                    return;
+                }
+
+                showLoading(true);
+
+                try {
+                    const { prefixEndIndex, suffixStartIndex } = validationData;
+                    const part1 = originalFileContent.slice(0, prefixEndIndex);
+                    const newSteamIDBytes = new TextEncoder().encode(newSteamID);
+                    const part3 = originalFileContent.slice(suffixStartIndex);
+
+                    const newFileArray = new Uint8Array(part1.length + newSteamIDBytes.length + part3.length);
+                    newFileArray.set(part1, 0);
+                    newFileArray.set(newSteamIDBytes, part1.length);
+                    newFileArray.set(part3, part1.length + newSteamIDBytes.length);
+
+                    const blob = new Blob([newFileArray], { type: 'application/octet-stream' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+
+                    const nameParts = originalFileName.split('.');
+                    const extension = nameParts.length > 1 ? '.' + nameParts.pop() : '.sav';
+                    const baseName = nameParts.join('.') || 'savefile_unknown';
+                    link.download = `${baseName}_modified${extension}`;
+
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+
+                    displayMessage("文件已成功修改并开始下载！", "success");
+                } catch (e) {
+                    displayMessage("保存修改后的文件时出错。", "error");
+                    console.error("Error during file modification or download:", e);
+                } finally {
+                    showLoading(false);
+                }
+            }
+
+        });
+        function onSteamIdChange() {
+            const steamIdValue = steamIdInput.value.trim();
+            if (/^\d{17}$/.test(steamIdValue)) {
+                saveButton.disabled = false;
+                steamIdInput.removeAttribute('error');
+            } else {
+                saveButton.disabled = true;
+                steamIdInput.setAttribute('error', 'true');
+            }
+        }
+
+    </script>
+</body>
+
+</html>

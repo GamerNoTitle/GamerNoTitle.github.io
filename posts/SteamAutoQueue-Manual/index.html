@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang="zh-cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>SteamAutoQueue —— Steam自动探索3次队列，帮你拿到促销期间的卡牌！ | GamerNoTitle</title><meta name="author" content="GamerNoTitle,admin@bili33.top"><meta name="copyright" content="GamerNoTitle"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="其实这个我从夏促前就开始写了，只不过刚好那一周撞上各种考试，所以就保证了本地Windows版本的正常运行，Linux的就没动，等到周末再干的时候夏促已经开始了…… 为啥我要做这个？主要是学生党又不是天天开电脑，像TemperMonkey的那种自动探索队列的脚本或者是Steam++里面带的那个，都要打开电脑，再去打开浏览器或者是Steam，所以我就做了一个这个不需要打开任何东西的。 因为完成太晚了，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SteamAutoQueue —— Steam自动探索3次队列，帮你拿到促销期间的卡牌！">
+<meta property="og:url" content="https://bili33.top/posts/SteamAutoQueue-Manual/index.html">
+<meta property="og:site_name" content="GamerNoTitle">
+<meta property="og:description" content="其实这个我从夏促前就开始写了，只不过刚好那一周撞上各种考试，所以就保证了本地Windows版本的正常运行，Linux的就没动，等到周末再干的时候夏促已经开始了…… 为啥我要做这个？主要是学生党又不是天天开电脑，像TemperMonkey的那种自动探索队列的脚本或者是Steam++里面带的那个，都要打开电脑，再去打开浏览器或者是Steam，所以我就做了一个这个不需要打开任何东西的。 因为完成太晚了，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220627-225929.png">
+<meta property="article:published_time" content="2022-07-02T11:47:41.000Z">
+<meta property="article:modified_time" content="2026-02-18T14:32:18.995Z">
+<meta property="article:author" content="GamerNoTitle">
+<meta property="article:tag" content="Tech">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Script">
+<meta property="article:tag" content="Steam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220627-225929.png"><link rel="shortcut icon" href="https://assets.bili33.top/img/AboutMe/logo-mini.png"><link rel="canonical" href="https://bili33.top/posts/SteamAutoQueue-Manual/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1a9dfff1b560a523701cb01384373c75";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-138072700-2"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-138072700-2');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;b259d35cad514e45a226d03906d8fed1&quot;}"></script><link rel="stylesheet" href="https://font.sec.miui.com/font/css?family=MiSans:400,500,700:Chinese_Simplify,Latin&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":180,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"Author: GamerNoTitle","link":"Link: ","source":"Source: GamerNoTitle","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SteamAutoQueue —— Steam自动探索3次队列，帮你拿到促销期间的卡牌！',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-02-18 22:32:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"3KdcwFGRWCpapHjZ",ck:"3KdcwFGRWCpapHjZ",autoTrack:true,hashMode:true,screenRecord:true})</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta itemprop="name" content="GamerNoTitle"><meta itemprop="image" content="https://assets.bili33.top/img/AboutMe/logo-mini.png"><meta name="description" itemprop="description" content="欢迎来到GamerNoTitle的博客~"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-height.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/BB.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-emotion.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/Valine-Emotion.css"><script src="https://assets.bili33.top/js/IPblock.js"></script><script src='https://assets.bili33.top/js/console.js'></script><script src="https://cdn.bili33.top/npm/cardlink"></script><script src="//cdn.bili33.top/npm/matter-js@0.19.0"></script><script>(new Date().getDate() === 1 && new Date().getMonth() === 3) && document.write('<script src="https://cdn.bili33.top/gh/Vikutorika/newassets@master/js/smooth-April-Fools.js"><\/script>')</script><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><script src="https://npm.elemecdn.com/echarts@4.9.0/map/js/china.js"></script><script defer src="https://analytics.bili33.top/script.js" data-website-id="eb23a18b-6650-4776-8ded-29107aba832b"></script><script src="/js/solidity.js"></script><link rel="stylesheet" href="/css/solidity.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="http://assets.bili33.top/css/waline-style.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="GamerNoTitle" type="application/atom+xml">
+</head><body><link rel="stylesheet" href="https://cdn.bili33.top/npm/gamernotitle-oss@1.0.10/css/barber-shop.css"/><script src="https://cdn.bili33.top/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="onerror=null;src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://assets.bili33.top/img/SteamAutoQueue/msedge-20220627-225929.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">GamerNoTitle</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SteamAutoQueue —— Steam自动探索3次队列，帮你拿到促销期间的卡牌！</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-07-02T11:47:41.000Z" title="Created 2022-07-02 19:47:41">2022-07-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-18T14:32:18.995Z" title="Updated 2026-02-18 22:32:18">2026-02-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tech/">Tech</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">3.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>18min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SteamAutoQueue —— Steam自动探索3次队列，帮你拿到促销期间的卡牌！"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>其实这个我从夏促前就开始写了，只不过刚好那一周撞上各种考试，所以就保证了本地Windows版本的正常运行，Linux的就没动，等到周末再干的时候夏促已经开始了……</strong></p>
+<p>为啥我要做这个？主要是学生党又不是天天开电脑，像TemperMonkey的那种自动探索队列的脚本或者是Steam++里面带的那个，都要打开电脑，再去打开浏览器或者是Steam，所以我就做了一个这个不需要打开任何东西的。</p>
+<p>因为完成太晚了，所以等到冬促的时候我再去推广吧，要是有哪位大哥愿意帮我推广的尽管发就行了，发完了<a href="https://space.bilibili.com/44666814">站内艾特一下我</a>~</p>
+<blockquote>
+<p>先点个STAR✨，我们马上开始教学！</p>
+</blockquote>
+<h2 id="简体中文"><a href="#简体中文" class="headerlink" title="简体中文"></a>简体中文</h2><ul>
+<li><a href="#%E5%8F%98%E9%87%8F%E8%8E%B7%E5%8F%96">变量获取</a></li>
+<li><a href="#%E5%9C%A8Github%20Action%E8%BF%90%E8%A1%8C">在Github Action运行</a></li>
+</ul>
+<h3 id="变量获取"><a href="#变量获取" class="headerlink" title="变量获取"></a>变量获取</h3><p>先打开Steam商店，正常登陆，然后按下F12打开开发者工具，在选项卡里面找到网络（Network），刷新一下，在左侧找到<code>store.steampowered.com</code>，点击一下，然后在右侧下拉找到<code>Cookie</code>，把里面的东西复制出来</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue-Manual/msedge-20221223-084012.png"></p>
+<p>如果你选择用Action运行，，那么把Cookie复制下来后直接进入[Action环节](#在Github Action运行)</p>
+<p>如果你选择服务器运行，那么你需要运行一下<code>ConvertCookie.py</code>，输入你的cookie字符串，然后打开<code>cookie.txt</code>就可以看到用于填在<code>config.json</code>的cookie了，复制出来，填在配置文件的<code>cookie</code>配置里面，如果你使用Action运行</p>
+<p>如果你的电脑没有Python环境，或者你没有clone本仓库，你也可以打开这个网站<a href="https://sotool.net/replace.html">字符串在线替换 - so工具 (sotool.net)</a>，然后在这里完成替换操作，替换的要求就是把双引号<code>&quot;</code>替换为单引号<code>&#39;</code>（注意要半角符号不是全角符号）</p>
+<h3 id="在Github-Action运行"><a href="#在Github-Action运行" class="headerlink" title="在Github Action运行"></a>在Github Action运行</h3><p>首先先打开仓库页面，Fork一份 -&gt; <a href="https://github.com/ElainaMoe/SteamAutoQueue">ElainaMoe&#x2F;SteamAutoQueue: 利用Github Action来Steam自动探索队列，不是油猴脚本，不需要打开浏览器或者Steam就可以运行，促销期间必备！</a></p>
+<p>然后点击Settings -&gt;  Secrets -&gt; Actions，进入变量添加页面</p>
+<p>添加如图所示的变量，<a href="#%E5%8F%98%E9%87%8F%E8%8E%B7%E5%8F%96">变量获取请查看这里</a>，你只需要添加名为<code>COOKIE</code>的变量即可，内容是你的COOKIE</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220702-171847.png"></p>
+<p>当然你也可以把Cookie用仓库里自带的<code>SetCookie.py</code>脚本放到你的Redis数据库里（填写<code>config.json</code>的<code>Steam</code>相关字段后，只需要把<code>Steam</code>键下的内容贴进脚本里设置就行了），这样你就不需要一个一个加，但是不是所有人都有数据库，所以说没有数据库的话就一个一个来吧。</p>
+<p>添加完后点击顶上导航栏的Action按钮，然后点击中间的绿色按钮开启Action</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220702-172116.png"></p>
+<p>然后按照如图所示的方式打开两个Action脚本</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220702-172237.png"></p>
+<p>打开后可以运行一次看看结果，一般来说没有打叉就是没啥问题了</p>
+<p>运行结果应该像下面这个这样（注：我这里Cookie的设置方式不太一样，我放在了Redis里面）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">2022-07-02 09:15:54:INFO:</span><br><span class="line">     __ _                           _         _            ____                       </span><br><span class="line">    / _\ |_ ___  __ _ _ __ ___     /_\  _   _| |_ ___     /___ \_   _  ___ _   _  ___ </span><br><span class="line">    \ \| __/ _ \/ _` | &#x27;_ ` _ \   //_\\| | | | __/ _ \   //  / / | | |/ _ \ | | |/ _ \</span><br><span class="line">    _\ \ ||  __/ (_| | | | | | | /  _  \ |_| | || (_) | / \_/ /| |_| |  __/ |_| |  __/</span><br><span class="line">    \__/\__\___|\__,_|_| |_| |_| \_/ \_/\__,_|\__\___/  \___,_\ \__,_|\___|\__,_|\___|</span><br><span class="line">                                                            -- Made by GamerNoTitle</span><br><span class="line">2022-07-02 09:15:55:INFO:[SteamAutoQueue] Cookie get from Redis</span><br><span class="line">2022-07-02 09:15:55:INFO:[SteamAutoQueue] Initalizing instance...</span><br><span class="line">2022-07-02 09:15:56:INFO:[SteamAutoQueue] Instance initalized.</span><br><span class="line">2022-07-02 09:15:56:INFO:[SteamAutoQueue] Trying to access steam store.</span><br><span class="line">2022-07-02 09:15:57:INFO:[SteamAutoQueue] Successfully access steam store. Adding cookie...</span><br><span class="line">2022-07-02 09:15:57:INFO:[SteamAutoQueue] Successfully add cookie.</span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] You have been logged in as </span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] Try to start the queue.</span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] Start the queue failed, maybe you have already started a queue.</span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] We will try to spawn a new one.</span><br><span class="line">2022-07-02 09:16:06:INFO:[SteamAutoQueue] Starting Queue No.1</span><br><span class="line">2022-07-02 09:16:06:INFO:[SteamAutoQueue] Exploring 终暮黎明 with link https://store.steampowered.com/app/1823890/_/</span><br><span class="line">2022-07-02 09:16:08:INFO:[SteamAutoQueue] Exploring 未命名穿越记录 with link https://store.steampowered.com/app/1548680/_/</span><br><span class="line">2022-07-02 09:16:10:INFO:[SteamAutoQueue] Exploring Noctem with link https://store.steampowered.com/app/1701740/Noctem/</span><br><span class="line">2022-07-02 09:16:11:INFO:[SteamAutoQueue] Exploring Dagon: by H. P. Lovecraft with link https://store.steampowered.com/app/1481400/Dagon_by_H_P_Lovecraft/</span><br><span class="line">2022-07-02 09:16:13:INFO:[SteamAutoQueue] Exploring Trash Horror Collection with link https://store.steampowered.com/app/2017370/Trash_Horror_Collection/</span><br><span class="line">2022-07-02 09:16:16:INFO:[SteamAutoQueue] Exploring Critters for Sale with link https://store.steampowered.com/app/1078420/Critters_for_Sale/</span><br><span class="line">2022-07-02 09:16:17:INFO:[SteamAutoQueue] Exploring Will Die Alone with link https://store.steampowered.com/app/1879820/Will_Die_Alone/</span><br><span class="line">2022-07-02 09:16:19:INFO:[SteamAutoQueue] Exploring Faded Stories: Greenberg with link https://store.steampowered.com/app/1837820/Faded_Stories_Greenberg/</span><br><span class="line">2022-07-02 09:16:20:INFO:[SteamAutoQueue] Exploring Cyclone with link https://store.steampowered.com/app/1803590/Cyclone/</span><br><span class="line">2022-07-02 09:16:23:INFO:[SteamAutoQueue] Exploring QUICKERFLAK_RUTHLESSMOD with link https://store.steampowered.com/app/2010110/QUICKERFLAK_RUTHLESSMOD/</span><br><span class="line">2022-07-02 09:16:25:INFO:[SteamAutoQueue] Exploring 智能工厂大亨：序章 with link https://store.steampowered.com/app/1810980/_/</span><br><span class="line">2022-07-02 09:16:26:INFO:[SteamAutoQueue] Found age check when accessing https://store.steampowered.com/agecheck/app/919290/, skipping.</span><br><span class="line">2022-07-02 09:16:27:INFO:[SteamAutoQueue] Queue is empty, trying to spawn a new one.</span><br><span class="line">2022-07-02 09:16:32:INFO:[SteamAutoQueue] Spawned. Now we will continue the work.</span><br><span class="line">2022-07-02 09:16:32:INFO:[SteamAutoQueue] Starting Queue No.2</span><br><span class="line">2022-07-02 09:16:32:INFO:[SteamAutoQueue] Exploring 元宇宙-原始世界 with link https://store.steampowered.com/app/1757830/_/</span><br><span class="line">2022-07-02 09:16:34:INFO:[SteamAutoQueue] Exploring 残世界的鸢尾花 with link https://store.steampowered.com/app/1669330/_/</span><br><span class="line">2022-07-02 09:16:37:INFO:[SteamAutoQueue] Exploring 重力朋克 with link https://store.steampowered.com/app/1831520/_/</span><br><span class="line">2022-07-02 09:16:38:INFO:[SteamAutoQueue] Exploring 最后的夜晚 Babel with link https://store.steampowered.com/app/1436980/_Babel/</span><br><span class="line">2022-07-02 09:16:40:INFO:[SteamAutoQueue] Exploring 畢業生模擬器 with link https://store.steampowered.com/app/1806070/_/</span><br><span class="line">2022-07-02 09:16:41:INFO:[SteamAutoQueue] Found age check when accessing https://store.steampowered.com/agecheck/app/1762700/, skipping.</span><br><span class="line">2022-07-02 09:16:43:INFO:[SteamAutoQueue] Exploring Zcrew(Z字特遣队) with link https://store.steampowered.com/app/1386650/ZcrewZ/</span><br><span class="line">2022-07-02 09:16:45:INFO:[SteamAutoQueue] Exploring Firelight Fantasy: Vengeance with link https://store.steampowered.com/app/1668780/Firelight_Fantasy_Vengeance/</span><br><span class="line">2022-07-02 09:16:47:INFO:[SteamAutoQueue] Exploring Orakyubu with link https://store.steampowered.com/app/1654900/Orakyubu/</span><br><span class="line">2022-07-02 09:16:54:INFO:[SteamAutoQueue] Exploring Crazy Kung Fu with link https://store.steampowered.com/app/1340300/Crazy_Kung_Fu/</span><br><span class="line">2022-07-02 09:16:55:INFO:[SteamAutoQueue] Exploring Gunborg: Dark Matters with link https://store.steampowered.com/app/1529160/Gunborg_Dark_Matters/</span><br><span class="line">2022-07-02 09:16:57:INFO:[SteamAutoQueue] Exploring Cyrah&#x27;s Ascent with link https://store.steampowered.com/app/1992850/Cyrahs_Ascent/</span><br><span class="line">2022-07-02 09:16:58:INFO:[SteamAutoQueue] Queue is empty, trying to spawn a new one.</span><br><span class="line">2022-07-02 09:17:03:INFO:[SteamAutoQueue] Spawned. Now we will continue the work.</span><br><span class="line">2022-07-02 09:17:03:INFO:[SteamAutoQueue] Starting Queue No.3</span><br><span class="line">2022-07-02 09:17:03:INFO:[SteamAutoQueue] Exploring 恋与你 Love with You with link https://store.steampowered.com/app/1814380/_Love_with_You/</span><br><span class="line">2022-07-02 09:17:08:INFO:[SteamAutoQueue] Exploring 堪舆剑冢 with link https://store.steampowered.com/app/1640150/_/</span><br><span class="line">2022-07-02 09:17:10:INFO:[SteamAutoQueue] Exploring Villwars with link https://store.steampowered.com/app/2013990/Villwars/</span><br><span class="line">2022-07-02 09:17:11:INFO:[SteamAutoQueue] Exploring Siege of Treboulain with link https://store.steampowered.com/app/1849760/Siege_of_Treboulain/</span><br><span class="line">2022-07-02 09:17:13:INFO:[SteamAutoQueue] Exploring Contract Killer with link https://store.steampowered.com/app/1588250/Contract_Killer/</span><br><span class="line">2022-07-02 09:17:15:INFO:[SteamAutoQueue] Exploring Tales From Hoia Baciu Forest with link https://store.steampowered.com/app/2002560/Tales_From_Hoia_Baciu_Forest/</span><br><span class="line">2022-07-02 09:17:16:INFO:[SteamAutoQueue] Exploring Endlanders : First Encounter with link https://store.steampowered.com/app/2010450/Endlanders__First_Encounter/</span><br><span class="line">2022-07-02 09:17:18:INFO:[SteamAutoQueue] Exploring Flight Of Nova with link https://store.steampowered.com/app/1069190/Flight_Of_Nova/</span><br><span class="line">2022-07-02 09:17:19:INFO:[SteamAutoQueue] Exploring Gary Grigsby&#x27;s War in the East 2 with link https://store.steampowered.com/app/1775550/Gary_Grigsbys_War_in_the_East_2/</span><br><span class="line">2022-07-02 09:17:21:INFO:[SteamAutoQueue] Exploring DOOM TOMB with link https://store.steampowered.com/app/1893050/DOOM_TOMB/</span><br><span class="line">2022-07-02 09:17:22:INFO:[SteamAutoQueue] Exploring Nyaaaanvy with link https://store.steampowered.com/app/1771990/Nyaaaanvy/</span><br><span class="line">2022-07-02 09:17:24:INFO:[SteamAutoQueue] Exploring Batho[tel] with link https://store.steampowered.com/app/1981590/Bathotel/</span><br><span class="line">2022-07-02 09:17:25:INFO:[SteamAutoQueue] SteamAutoQueue&#x27;s work has done!</span><br></pre></td></tr></table></figure>
+
+<h3 id="无法运行-发现Bug"><a href="#无法运行-发现Bug" class="headerlink" title="无法运行&#x2F;发现Bug"></a>无法运行&#x2F;发现Bug</h3><p>请带着你的运行日志到<a href="https://github.com/ElainaMoe/SteamAutoQueue/issues">Issues · ElainaMoe&#x2F;SteamAutoQueue (github.com)</a>报个BUG吧</p>
+<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><ul>
+<li><a href="#Getting%20variables">Getting variables</a></li>
+<li><a href="#Run%20on%20Github%20Action">Run on Github Action</a></li>
+</ul>
+<p><strong>Actually I started to do this before Summer-Sale. However that week is filled with examinations. So I just guarantee the Windows local version can be run successfully and left Linux behind. When it comes to the weekend, it was the time that Summer-Sale has began……</strong></p>
+<p>Why I made this? For the reason that as a student, I will not open my computer everyday. The script that run on TemperMoney or the one in Steam++ need a browser or Steam client to run. So I make this one that no anything need to open.</p>
+<p>But I finish this too late, so when it comes to the Winter-Sale that I will promote it by myself. If  you’re willing to promote my script, just do it. No any permission needed. After you promote it, just left you link in the comment below. Thank you!</p>
+<blockquote>
+<p>Give me a STAR ✨ and we will start now.</p>
+</blockquote>
+<h3 id="Getting-variables"><a href="#Getting-variables" class="headerlink" title="Getting variables"></a>Getting variables</h3><p>You need to go to Steam website and Press <kbd>F12</kbd>, find network and refresh the page once. Then you can find <code>store.steampowered.com</code> on the left side. Click on it and scroll down on the right side, and you will find cookie string. </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue-Manual/msedge-20221223-084012.png"></p>
+<p>If you run this script on Action, copy this then go to [Run on Github Action](#Run on Github Action) section</p>
+<p>Copy that and run <code>ConvertCookie.py</code>, paste your cookie in it and you will find the string that need to be fill in the <code>config.json</code> is in the <code>cookie.txt</code>, copy that and fill it in the <code>cookie</code> key of the config file.</p>
+<p>If you dont have a Python environment or you havent clone the source code, you can also go to <a href="https://onlinestringtools.com/replace-string">Find and Replace a String - Online String Tools</a> to finish it.</p>
+<h3 id="Run-on-Github-Action"><a href="#Run-on-Github-Action" class="headerlink" title="Run on Github Action"></a>Run on Github Action</h3><p>First open the repo and fork it -&gt; <a href="https://github.com/ElainaMoe/SteamAutoQueue">ElainaMoe&#x2F;SteamAutoQueue: Using Github Action to explore Steam queue every day. You will need it when it comes to the Summer&#x2F;Winter Sale.</a></p>
+<p>Then click on Settings -&gt;  Secrets -&gt; Actions to enter the page to add variables</p>
+<p>Add the variables shown on this picture, [you can know how to get then from here](#Getting variables)</p>
+<p><strong>YOU ONLY NEED TO ADD THE VARIABLE NAMED “COOKIE” AND FILL YOUR COOKIE IN IT, THE FOLLOWING PICTURE IS OUTDATED!</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220702-171847.png"></p>
+<p>After you finishing it, click the Action button from nav-bar and click the green button on the center to turn Action on.</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220702-172116.png"></p>
+<p>Then enable the two scripts like this in the picture.</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220702-172237.png"></p>
+<p>After you opened them, you can run them by yourself. If it doesn’t display something wrong, then you have finished.</p>
+<p>The result should like this (I placed the variables in my Redis)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">2022-07-02 09:15:54:INFO:</span><br><span class="line">     __ _                           _         _            ____                       </span><br><span class="line">    / _\ |_ ___  __ _ _ __ ___     /_\  _   _| |_ ___     /___ \_   _  ___ _   _  ___ </span><br><span class="line">    \ \| __/ _ \/ _` | &#x27;_ ` _ \   //_\\| | | | __/ _ \   //  / / | | |/ _ \ | | |/ _ \</span><br><span class="line">    _\ \ ||  __/ (_| | | | | | | /  _  \ |_| | || (_) | / \_/ /| |_| |  __/ |_| |  __/</span><br><span class="line">    \__/\__\___|\__,_|_| |_| |_| \_/ \_/\__,_|\__\___/  \___,_\ \__,_|\___|\__,_|\___|</span><br><span class="line">                                                            -- Made by GamerNoTitle</span><br><span class="line">2022-07-02 09:15:55:INFO:[SteamAutoQueue] Cookie get from Redis</span><br><span class="line">2022-07-02 09:15:55:INFO:[SteamAutoQueue] Initalizing instance...</span><br><span class="line">2022-07-02 09:15:56:INFO:[SteamAutoQueue] Instance initalized.</span><br><span class="line">2022-07-02 09:15:56:INFO:[SteamAutoQueue] Trying to access steam store.</span><br><span class="line">2022-07-02 09:15:57:INFO:[SteamAutoQueue] Successfully access steam store. Adding cookie...</span><br><span class="line">2022-07-02 09:15:57:INFO:[SteamAutoQueue] Successfully add cookie.</span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] You have been logged in as </span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] Try to start the queue.</span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] Start the queue failed, maybe you have already started a queue.</span><br><span class="line">2022-07-02 09:15:59:INFO:[SteamAutoQueue] We will try to spawn a new one.</span><br><span class="line">2022-07-02 09:16:06:INFO:[SteamAutoQueue] Starting Queue No.1</span><br><span class="line">2022-07-02 09:16:06:INFO:[SteamAutoQueue] Exploring 终暮黎明 with link https://store.steampowered.com/app/1823890/_/</span><br><span class="line">2022-07-02 09:16:08:INFO:[SteamAutoQueue] Exploring 未命名穿越记录 with link https://store.steampowered.com/app/1548680/_/</span><br><span class="line">2022-07-02 09:16:10:INFO:[SteamAutoQueue] Exploring Noctem with link https://store.steampowered.com/app/1701740/Noctem/</span><br><span class="line">2022-07-02 09:16:11:INFO:[SteamAutoQueue] Exploring Dagon: by H. P. Lovecraft with link https://store.steampowered.com/app/1481400/Dagon_by_H_P_Lovecraft/</span><br><span class="line">2022-07-02 09:16:13:INFO:[SteamAutoQueue] Exploring Trash Horror Collection with link https://store.steampowered.com/app/2017370/Trash_Horror_Collection/</span><br><span class="line">2022-07-02 09:16:16:INFO:[SteamAutoQueue] Exploring Critters for Sale with link https://store.steampowered.com/app/1078420/Critters_for_Sale/</span><br><span class="line">2022-07-02 09:16:17:INFO:[SteamAutoQueue] Exploring Will Die Alone with link https://store.steampowered.com/app/1879820/Will_Die_Alone/</span><br><span class="line">2022-07-02 09:16:19:INFO:[SteamAutoQueue] Exploring Faded Stories: Greenberg with link https://store.steampowered.com/app/1837820/Faded_Stories_Greenberg/</span><br><span class="line">2022-07-02 09:16:20:INFO:[SteamAutoQueue] Exploring Cyclone with link https://store.steampowered.com/app/1803590/Cyclone/</span><br><span class="line">2022-07-02 09:16:23:INFO:[SteamAutoQueue] Exploring QUICKERFLAK_RUTHLESSMOD with link https://store.steampowered.com/app/2010110/QUICKERFLAK_RUTHLESSMOD/</span><br><span class="line">2022-07-02 09:16:25:INFO:[SteamAutoQueue] Exploring 智能工厂大亨：序章 with link https://store.steampowered.com/app/1810980/_/</span><br><span class="line">2022-07-02 09:16:26:INFO:[SteamAutoQueue] Found age check when accessing https://store.steampowered.com/agecheck/app/919290/, skipping.</span><br><span class="line">2022-07-02 09:16:27:INFO:[SteamAutoQueue] Queue is empty, trying to spawn a new one.</span><br><span class="line">2022-07-02 09:16:32:INFO:[SteamAutoQueue] Spawned. Now we will continue the work.</span><br><span class="line">2022-07-02 09:16:32:INFO:[SteamAutoQueue] Starting Queue No.2</span><br><span class="line">2022-07-02 09:16:32:INFO:[SteamAutoQueue] Exploring 元宇宙-原始世界 with link https://store.steampowered.com/app/1757830/_/</span><br><span class="line">2022-07-02 09:16:34:INFO:[SteamAutoQueue] Exploring 残世界的鸢尾花 with link https://store.steampowered.com/app/1669330/_/</span><br><span class="line">2022-07-02 09:16:37:INFO:[SteamAutoQueue] Exploring 重力朋克 with link https://store.steampowered.com/app/1831520/_/</span><br><span class="line">2022-07-02 09:16:38:INFO:[SteamAutoQueue] Exploring 最后的夜晚 Babel with link https://store.steampowered.com/app/1436980/_Babel/</span><br><span class="line">2022-07-02 09:16:40:INFO:[SteamAutoQueue] Exploring 畢業生模擬器 with link https://store.steampowered.com/app/1806070/_/</span><br><span class="line">2022-07-02 09:16:41:INFO:[SteamAutoQueue] Found age check when accessing https://store.steampowered.com/agecheck/app/1762700/, skipping.</span><br><span class="line">2022-07-02 09:16:43:INFO:[SteamAutoQueue] Exploring Zcrew(Z字特遣队) with link https://store.steampowered.com/app/1386650/ZcrewZ/</span><br><span class="line">2022-07-02 09:16:45:INFO:[SteamAutoQueue] Exploring Firelight Fantasy: Vengeance with link https://store.steampowered.com/app/1668780/Firelight_Fantasy_Vengeance/</span><br><span class="line">2022-07-02 09:16:47:INFO:[SteamAutoQueue] Exploring Orakyubu with link https://store.steampowered.com/app/1654900/Orakyubu/</span><br><span class="line">2022-07-02 09:16:54:INFO:[SteamAutoQueue] Exploring Crazy Kung Fu with link https://store.steampowered.com/app/1340300/Crazy_Kung_Fu/</span><br><span class="line">2022-07-02 09:16:55:INFO:[SteamAutoQueue] Exploring Gunborg: Dark Matters with link https://store.steampowered.com/app/1529160/Gunborg_Dark_Matters/</span><br><span class="line">2022-07-02 09:16:57:INFO:[SteamAutoQueue] Exploring Cyrah&#x27;s Ascent with link https://store.steampowered.com/app/1992850/Cyrahs_Ascent/</span><br><span class="line">2022-07-02 09:16:58:INFO:[SteamAutoQueue] Queue is empty, trying to spawn a new one.</span><br><span class="line">2022-07-02 09:17:03:INFO:[SteamAutoQueue] Spawned. Now we will continue the work.</span><br><span class="line">2022-07-02 09:17:03:INFO:[SteamAutoQueue] Starting Queue No.3</span><br><span class="line">2022-07-02 09:17:03:INFO:[SteamAutoQueue] Exploring 恋与你 Love with You with link https://store.steampowered.com/app/1814380/_Love_with_You/</span><br><span class="line">2022-07-02 09:17:08:INFO:[SteamAutoQueue] Exploring 堪舆剑冢 with link https://store.steampowered.com/app/1640150/_/</span><br><span class="line">2022-07-02 09:17:10:INFO:[SteamAutoQueue] Exploring Villwars with link https://store.steampowered.com/app/2013990/Villwars/</span><br><span class="line">2022-07-02 09:17:11:INFO:[SteamAutoQueue] Exploring Siege of Treboulain with link https://store.steampowered.com/app/1849760/Siege_of_Treboulain/</span><br><span class="line">2022-07-02 09:17:13:INFO:[SteamAutoQueue] Exploring Contract Killer with link https://store.steampowered.com/app/1588250/Contract_Killer/</span><br><span class="line">2022-07-02 09:17:15:INFO:[SteamAutoQueue] Exploring Tales From Hoia Baciu Forest with link https://store.steampowered.com/app/2002560/Tales_From_Hoia_Baciu_Forest/</span><br><span class="line">2022-07-02 09:17:16:INFO:[SteamAutoQueue] Exploring Endlanders : First Encounter with link https://store.steampowered.com/app/2010450/Endlanders__First_Encounter/</span><br><span class="line">2022-07-02 09:17:18:INFO:[SteamAutoQueue] Exploring Flight Of Nova with link https://store.steampowered.com/app/1069190/Flight_Of_Nova/</span><br><span class="line">2022-07-02 09:17:19:INFO:[SteamAutoQueue] Exploring Gary Grigsby&#x27;s War in the East 2 with link https://store.steampowered.com/app/1775550/Gary_Grigsbys_War_in_the_East_2/</span><br><span class="line">2022-07-02 09:17:21:INFO:[SteamAutoQueue] Exploring DOOM TOMB with link https://store.steampowered.com/app/1893050/DOOM_TOMB/</span><br><span class="line">2022-07-02 09:17:22:INFO:[SteamAutoQueue] Exploring Nyaaaanvy with link https://store.steampowered.com/app/1771990/Nyaaaanvy/</span><br><span class="line">2022-07-02 09:17:24:INFO:[SteamAutoQueue] Exploring Batho[tel] with link https://store.steampowered.com/app/1981590/Bathotel/</span><br><span class="line">2022-07-02 09:17:25:INFO:[SteamAutoQueue] SteamAutoQueue&#x27;s work has done!</span><br></pre></td></tr></table></figure>
+
+<h3 id="Unable-to-run-Find-a-bug"><a href="#Unable-to-run-Find-a-bug" class="headerlink" title="Unable to run &#x2F; Find a bug"></a>Unable to run &#x2F; Find a bug</h3><p>Please go to <a href="https://github.com/ElainaMoe/SteamAutoQueue/issues">Issues · ElainaMoe&#x2F;SteamAutoQueue (github.com)</a> and submit a issue. Thanks!</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://github.com/GamerNoTitle">GamerNoTitle</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bili33.top/posts/SteamAutoQueue-Manual/">https://bili33.top/posts/SteamAutoQueue-Manual/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Tech/">Tech</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Script/">Script</a><a class="post-meta__tags" href="/tags/Steam/">Steam</a></div><div class="post_share"><div class="social-share" data-image="https://assets.bili33.top/img/SteamAutoQueue/msedge-20220627-225929.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/WeChat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/WeChat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/AliPay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/AliPay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/CSGO-Anti-LowViolence/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CSGO-Anti-LowViolence/TheGoodYouth.jpg" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">CSGO国服反和谐教程</div></div></a></div><div class="next-post pull-right"><a href="/posts/CTF-in-College-7/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Top-img/NEKO-Hackers-Edited.jpg" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">CTF学习笔记（大学篇）07 —— 手动注入msf到指定的程序</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/MHYY-AutoCheckin-Manual-Gen2/" title="MHYY-AutoCheckin - 米哈云游（云原神）自动签到脚本食用指南（第二代）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/MHYY-AutoCheckin-Manual-Gen2/114423788_p1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-29</div><div class="title">MHYY-AutoCheckin - 米哈云游（云原神）自动签到脚本食用指南（第二代）</div></div></a></div><div><a href="/posts/MHYY-AutoCheckin-Manual/" title="MHYY-AutoCheckin - 米哈云游（云原神）自动签到脚本食用指南"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/GenshinImpact/90149781_p0_small.png?download=true" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-19</div><div class="title">MHYY-AutoCheckin - 米哈云游（云原神）自动签到脚本食用指南</div></div></a></div><div><a href="/posts/NeteaseCloudGameFree/" title="白嫖？给我也整一个！白嫖网易云游戏平台时长"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/NeteaseCloudGameFree/bili33@ADMIN-PC丨2020.12.06丨11：32：55.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-06</div><div class="title">白嫖？给我也整一个！白嫖网易云游戏平台时长</div></div></a></div><div><a href="/posts/SRCloud-AutoCheckin-Manual/" title="SRCloud-AutoCheckin-Manual - 云·星穹铁道自动签到脚本食用指南"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/SRCloud-AutoCheckin-Manual/cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-06</div><div class="title">SRCloud-AutoCheckin-Manual - 云·星穹铁道自动签到脚本食用指南</div></div></a></div><div><a href="/posts/API-FLASK/" title="用Python和Flask打造属于自己的API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://socialify.git.ci/Ninym/api-flask/image?description=1&descriptionEditable=API%20made%20with%20python%20%26%20flask&language=1&name=1&owner=1&theme=Light" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-16</div><div class="title">用Python和Flask打造属于自己的API</div></div></a></div><div><a href="/posts/Hitokoto-Spider/" title="Hitokoto-Spider 一言库爬虫开发日记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Hitokoto-spider/hitokoto.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-11</div><div class="title">Hitokoto-Spider 一言库爬虫开发日记</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="author-info__name">GamerNoTitle</div><div class="author-info__description">TECH OTAKUS SAVE THE WORLD</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/GamerNoTitle"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GamerNoTitle" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/44666814" target="_blank" title="bilibili"><i class="fas fa-tv"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a><a class="social-icon" href="mailto:GamerNoTitle@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><div align="center"><pre style="font-family: monospace; white-space: pre; line-height: 1 !important;">
+.------.--------.---------.
+| .=====================. |\
+| | 7  3  5  5  6  0  8 | | |
+| +=====================+ | |
+|----------------------\\-. |
+|    *   |      ^|^    || |\|
+|   .-----------------.|| | |
+|   |  1  |  2  |  3  ||| | |
+|   |-----+-----+-----||| | |
+|   |  4  |  5  |  6  ||| | |
+|   |-----+-----+-----||| | |
+|   |  7  |  8  |  9  ||| | |
+|   |-----+-----+-----|// | |
+|   |  *  |  0  |  #  |/  | |
+|   +-----------------+   | |
+|       |       |         | |
++-------+-------+---------+ |
+\______\_______\_________+\/
+</pre></div>
+<div align="center"><span style="color: #e9b891;">gamernotitle</span>@<span style="color: #c5966d;">site_web</span> > <span style="color: #4a6d42;">./plant.sh</span><br>
+Boom has been planted.
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">简体中文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%8E%B7%E5%8F%96"><span class="toc-number">1.1.</span> <span class="toc-text">变量获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Github-Action%E8%BF%90%E8%A1%8C"><span class="toc-number">1.2.</span> <span class="toc-text">在Github Action运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C-%E5%8F%91%E7%8E%B0Bug"><span class="toc-number">1.3.</span> <span class="toc-text">无法运行&#x2F;发现Bug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#English"><span class="toc-number">2.</span> <span class="toc-text">English</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Getting-variables"><span class="toc-number">2.1.</span> <span class="toc-text">Getting variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-on-Github-Action"><span class="toc-number">2.2.</span> <span class="toc-text">Run on Github Action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unable-to-run-Find-a-bug"><span class="toc-number">2.3.</span> <span class="toc-text">Unable to run &#x2F; Find a bug</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Migrate-from-Valine-to-Waline/msedge_1kiyjac8P9.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="从 Valine 迁移到 Waline 全记录"/></a><div class="content"><a class="title" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录">从 Valine 迁移到 Waline 全记录</a><time datetime="2026-02-15T19:00:46.000Z" title="Created 2026-02-16 03:00:46">2026-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Reverse-Engineering-Cracking-MailMaster/at-748365_1920.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="记一次对某邮箱软件账户数量上限破解"/></a><div class="content"><a class="title" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解">记一次对某邮箱软件账户数量上限破解</a><time datetime="2026-01-19T12:34:03.000Z" title="Created 2026-01-19 20:34:03">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025-Year-End-Summary/" title="2025 年终总结"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/2025-Year-End-Summary/image-20251231025211777.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 年终总结"/></a><div class="content"><a class="title" href="/posts/2025-Year-End-Summary/" title="2025 年终总结">2025 年终总结</a><time datetime="2025-12-30T17:10:19.000Z" title="Created 2025-12-31 01:10:19">2025-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"/></a><div class="content"><a class="title" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破">使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破</a><time datetime="2025-12-19T12:59:03.000Z" title="Created 2025-12-19 20:59:03">2025-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-PCB2025-Preliminary-Round-Writeup/cover.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"/></a><div class="content"><a class="title" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup">2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup</a><time datetime="2025-12-13T11:05:12.000Z" title="Created 2025-12-13 19:05:12">2025-12-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2026 By GamerNoTitle</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">All articles in this blog are licensed under CC BY-NC-SA 4.0 unless stating additionally.<br>
+<a href="https://icp.gov.moe/?keyword=20213338" target="_blank"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src='https://assets.bili33.top/img/GovMoe/icon120.png' width=20px height=20px></img> 萌ICP备 20213338号</a> | <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.bili33.top/gh/biliCDN/bilicdn.github.io@master/images/favicon.png" width="20px" height="20px"> 本站使用 <a href="https://cdn.bili33.top">哔哩CDN</a> 进行加速<br>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.umd.min.js"></script><script src="https://cdn.bili33.top/npm/vanilla-lazyload@17.8.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.bili33.top/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.bili33.top/npm/mermaid@9.1.7/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://assets.bili33.top/css/waline.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.bili33.top',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+      imageUploader: (file) => {
+        let formData = new FormData();
+        let headers = new Headers();
+        let query = new URLSearchParams();
+
+        formData.append('file', file);
+        headers.append('Authorization', 'Bearer imgbed_YdVn2QPSD7RjaCDYIODMnlyY8wAn3FZD')
+        headers.append('User-Agent', 'Paff-Waline/1.0')
+
+        return fetch('https://img.bili33.top/upload', {
+          method: 'POST',
+          headers: headers,
+          body: formData,
+        }).then((resp) => resp.json())
+        .then((data) => 'https://img.bili33.top' + data[0].src)
+      }
+
+    }, {"avatar":"mp","emojiCDN":"https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/","visitor":true,"emoji":["https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibiliHotKey","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibili2233","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibilitv","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Arcaea","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Heybox","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Majotabi"],"locale":{"nick":"昵称","nickError":"昵称不能少于3个字符","mail":"邮箱","mailError":"请填写正确的邮件地址","link":"网址","optional":"可选","placeholder":"📌图片上传大小限制 5MB，请友善发言，并遵守相关法律法规。","sofa":"来发评论吧~","submit":"提交","like":"喜欢","cancelLike":"撤销喜欢","reply":"回复","cancelReply":"撤回","comment":"评论","refresh":"刷新","more":"加载更多...","preview":"预览","emoji":"表情","uploadImage":"上传图片","seconds":"秒前","minutes":"分钟前","hours":"小时前","days":"天前","now":"刚刚","uploading":"Uploading","login":"登录","logout":"登出","admin":"Endministrator","sticky":"📌","word":"字","wordHint":"评论字数应在 $0 到 $1 字之间！\\n当前字数：$2","anonymous":"匿名","level0":"Lv0","level1":"Lv1","level2":"Lv2","level3":"Lv3","level4":"Lv4","level5":"Lv5","gif":"表情包","gifSearchPlaceholder":"搜索表情包","profile":"个人资料","approved":"通过","waiting":"待审核","spam":"垃圾","unsticky":"取消置顶","oldest":"倒序","latest":"正序","hottest":"热度","reactionTitle":"你认为这篇文章怎么样？"},"noCopyright":true,"reaction":false}))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://assets.bili33.top/js/waline.umd.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.bili33.top/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'UA-138072700-2', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

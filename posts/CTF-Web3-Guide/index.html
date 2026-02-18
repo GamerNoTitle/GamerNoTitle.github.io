@@ -1,0 +1,1042 @@
+<!DOCTYPE html><html lang="zh-cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>【更新中】Web3 CTF 从入门到入土 | GamerNoTitle</title><meta name="author" content="GamerNoTitle,admin@bili33.top"><meta name="copyright" content="GamerNoTitle"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="从我复读考上大学以后继续打 CTF，我就发现了跟我以前打 CTF 相比，现在的 CTF 的 Misc 中加入了更多的新题，而其中就有 Web3 这一分支。而我在网上冲浪的时候发现 Web3 的教程还是太少了（毕竟这东西太新了），于是我决定写一篇 Web3 的各方面的文章，包含所有我会遇到的东西，不仅是我自己能看，其他 Web3 小萌新也可以进行学习，于是就有了本文 因为我个人是写文章是习惯性地尽可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【更新中】Web3 CTF 从入门到入土">
+<meta property="og:url" content="https://bili33.top/posts/CTF-Web3-Guide/index.html">
+<meta property="og:site_name" content="GamerNoTitle">
+<meta property="og:description" content="从我复读考上大学以后继续打 CTF，我就发现了跟我以前打 CTF 相比，现在的 CTF 的 Misc 中加入了更多的新题，而其中就有 Web3 这一分支。而我在网上冲浪的时候发现 Web3 的教程还是太少了（毕竟这东西太新了），于是我决定写一篇 Web3 的各方面的文章，包含所有我会遇到的东西，不仅是我自己能看，其他 Web3 小萌新也可以进行学习，于是就有了本文 因为我个人是写文章是习惯性地尽可">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.bili33.top/img/CTF-Web3-Guide/cover.png">
+<meta property="article:published_time" content="2025-05-26T16:42:59.000Z">
+<meta property="article:modified_time" content="2026-02-18T14:32:18.988Z">
+<meta property="article:author" content="GamerNoTitle">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web3">
+<meta property="article:tag" content="ETH">
+<meta property="article:tag" content="ethereum">
+<meta property="article:tag" content="sepolia">
+<meta property="article:tag" content="MetaMask">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.bili33.top/img/CTF-Web3-Guide/cover.png"><link rel="shortcut icon" href="https://assets.bili33.top/img/AboutMe/logo-mini.png"><link rel="canonical" href="https://bili33.top/posts/CTF-Web3-Guide/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1a9dfff1b560a523701cb01384373c75";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-138072700-2"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-138072700-2');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;b259d35cad514e45a226d03906d8fed1&quot;}"></script><link rel="stylesheet" href="https://font.sec.miui.com/font/css?family=MiSans:400,500,700:Chinese_Simplify,Latin&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":180,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"Author: GamerNoTitle","link":"Link: ","source":"Source: GamerNoTitle","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【更新中】Web3 CTF 从入门到入土',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-02-18 22:32:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"3KdcwFGRWCpapHjZ",ck:"3KdcwFGRWCpapHjZ",autoTrack:true,hashMode:true,screenRecord:true})</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta itemprop="name" content="GamerNoTitle"><meta itemprop="image" content="https://assets.bili33.top/img/AboutMe/logo-mini.png"><meta name="description" itemprop="description" content="欢迎来到GamerNoTitle的博客~"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-height.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/BB.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-emotion.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/Valine-Emotion.css"><script src="https://assets.bili33.top/js/IPblock.js"></script><script src='https://assets.bili33.top/js/console.js'></script><script src="https://cdn.bili33.top/npm/cardlink"></script><script src="//cdn.bili33.top/npm/matter-js@0.19.0"></script><script>(new Date().getDate() === 1 && new Date().getMonth() === 3) && document.write('<script src="https://cdn.bili33.top/gh/Vikutorika/newassets@master/js/smooth-April-Fools.js"><\/script>')</script><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><script src="https://npm.elemecdn.com/echarts@4.9.0/map/js/china.js"></script><script defer src="https://analytics.bili33.top/script.js" data-website-id="eb23a18b-6650-4776-8ded-29107aba832b"></script><script src="/js/solidity.js"></script><link rel="stylesheet" href="/css/solidity.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="http://assets.bili33.top/css/waline-style.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="GamerNoTitle" type="application/atom+xml">
+</head><body><link rel="stylesheet" href="https://cdn.bili33.top/npm/gamernotitle-oss@1.0.10/css/barber-shop.css"/><script src="https://cdn.bili33.top/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="onerror=null;src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://assets.bili33.top/img/CTF-Web3-Guide/cover.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">GamerNoTitle</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【更新中】Web3 CTF 从入门到入土</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-05-26T16:42:59.000Z" title="Created 2025-05-27 00:42:59">2025-05-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-18T14:32:18.988Z" title="Updated 2026-02-18 22:32:18">2026-02-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">10.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>37min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【更新中】Web3 CTF 从入门到入土"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note success flat"><p>从我复读考上大学以后继续打 CTF，我就发现了跟我以前打 CTF 相比，现在的 CTF 的 Misc 中加入了更多的新题，而其中就有 Web3 这一分支。而我在网上冲浪的时候发现 Web3 的教程还是太少了（毕竟这东西太新了），于是我决定写一篇 Web3 的各方面的文章，包含所有我会遇到的东西，不仅是我自己能看，其他 Web3 小萌新也可以进行学习，于是就有了本文</p>
+<p>因为我个人是写文章是习惯性地尽可能详细的（特别是技术文），所以如果觉得本文啰嗦的话，可以跳着看，目录在右边的公告栏下方</p>
+<p>我会根据我自己学习的进度来更新本文章，这是长线作战，我会尽量坚持下来的</p>
+<p>本文将会使用钱包 <code>0xF126dCA69E9c9E5f128bb718b98f3544F9A8b413</code> 作为测试用户</p>
+<p>My wallet address: <code>0x8888813Cb0Dc768CDd0D9b3e62674E715a13d611</code></p>
+</div>
+
+<div class="note warning flat"><p>因为本站使用的代码高亮 highlight.js 对 Solidity 的支持是战五渣级别的，为了良好的阅读体验，对于 Solidity 代码，我会使用下面这个工具进行高亮后，再以 html 代码的形式复制到本页面中，已经通过写 js 和 css 的方式解决了没有行号和复制按钮的问题，除了看起来跟其他代码框有那么一点点的区别外，大致不影响（<del>因此带来了没有一键复制和没有行号显示的问题</del>），不便之处，尽请谅解（滑跪）</p>
+<ul>
+<li>Syntax Highlighter: <a href="https://syntaxhighlighter.app/zh-Hans/solidity">https://syntaxhighlighter.app/zh-Hans/solidity</a></li>
+</ul>
+</div>
+
+<h1 id="前置准备与知识点"><a href="#前置准备与知识点" class="headerlink" title="前置准备与知识点"></a>前置准备与知识点</h1><div class="note warning flat"><p>入门这一节我会讲述需要准备什么东西，怎么准备，如果你已经准备好了的话可以跳过这一节</p>
+</div>
+
+<h2 id="准备一个钱包"><a href="#准备一个钱包" class="headerlink" title="准备一个钱包"></a>准备一个钱包</h2><p>作为一名即将步入 Web3 领域的 CTFer，你需要准备一个钱包。鉴于 MetaMask 这个钱包的知名以及使用之广泛，我建议你安装一个 MetaMask</p>
+<h3 id="在电脑上安装"><a href="#在电脑上安装" class="headerlink" title="在电脑上安装"></a>在电脑上安装</h3><p>在电脑上，MetaMask 是一个浏览器插件，所以你可以使用任意 Chromium 内核的浏览器进行安装（或者是 Firefox），这里罗列几个地址</p>
+<ul>
+<li>Edge: <a href="https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm?hl=zh-CN">https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm?hl=zh-CN</a></li>
+<li>Chrome: <a href="https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn</a></li>
+<li>Firefox: <a href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/</a></li>
+<li>Opera: <a href="https://addons.opera.com/en-gb/extensions/details/metamask-10/">https://addons.opera.com/en-gb/extensions/details/metamask-10/</a></li>
+</ul>
+<h3 id="在手机上安装"><a href="#在手机上安装" class="headerlink" title="在手机上安装"></a>在手机上安装</h3><p>如果是使用 Android 手机，可以直接通过 Google Play 进行安装，当然你也可以使用 Github</p>
+<blockquote>
+<p><a href="https://github.com/MetaMask/metamask-mobile/releases">https://github.com/MetaMask/metamask-mobile/releases</a></p>
+</blockquote>
+<p>苹果手机的话你肯定绕不开 App Store</p>
+<blockquote>
+<p><a href="https://apps.apple.com/us/app/metamask-crypto-wallet/id1438144202">https://apps.apple.com/us/app/metamask-crypto-wallet/id1438144202</a></p>
+</blockquote>
+<p>安装完成后初始化一个钱包就行了，当然了，以太坊主网有点难连接上，可以考虑开个梯子</p>
+<div class="note warning flat"><p>安全提示：请不要把你的助记词&#x2F;私钥发给任何人；请只授权你信任的 DAPP&#x2F;网站与你的钱包进行连接！</p>
+<p>不管你对 Web3 有多了解，如果你看到这里了，我都建议你再去看一次小狐狸的安全指南：<a href="https://learn.metamask.io/zh-CN/lessons/security-in-web3">https://learn.metamask.io/zh-CN/lessons/security-in-web3</a></p>
+</div>
+
+<h2 id="准备-Remix-IDE"><a href="#准备-Remix-IDE" class="headerlink" title="准备 Remix IDE"></a>准备 Remix IDE</h2><p>Remix IDE 是一个开源的、基于浏览器的集成开发环境（IDE），主要用于开发、编译、测试和部署以太坊（Ethereum）区块链上的智能合约。它由以太坊基金会支持，旨在为开发者提供一个简单易用的工具来编写 Solidity 语言（以太坊智能合约的主要编程语言）代码。—— Grok</p>
+<p>主要注意地址是否正确就行了，不正确的地址可能会造成你钱货两空（额……货是什么？我不道啊）</p>
+<ul>
+<li>在线IDE：<a href="https://remix.ethereum.org/">https://remix.ethereum.org/</a></li>
+<li>本地IDE（离线版）：<a href="https://github.com/remix-project-org/remix-desktop-insiders">https://github.com/remix-project-org/remix-desktop-insiders</a></li>
+</ul>
+<h2 id="使用钱包去接水"><a href="#使用钱包去接水" class="headerlink" title="使用钱包去接水"></a>使用钱包去接水</h2><p>在每个区块链上，通常都存在多个网络，其中最重要的是主网（Mainnet）和测试网（Testnet）。</p>
+<p><strong>主网网络（Mainnet）</strong>：主网网络是真正的生产环境，其中的交易使用真实的代币进行结算。这是真正的价值交换发生的地方，因此需要小心谨慎。</p>
+<p><strong>测试网络（Testnet）</strong>：在主网上进行开发和测试可能会非常昂贵，因为每个操作都需要使用真实代币支付Gas费用。为了解决这个问题，每个区块链都提供了测试网络，这些网络上的代币没有实际价值，而且通常可以通过水龙头免费获得。开发者可以在测试网络上构建和测试智能合约，以确保它们在主网上能够正确运行。</p>
+<p>我们在测试的过程中，当然不可能去使用真钱，所以我们要去拿测试币（俗称：接水）</p>
+<p>我这边使用的是由 Google 提供的 Ethereum Sepolia Faucet，这里有好几种测试币可以选择，我选择在 Sepolia 上进行测试，所以我选择 <code>Ethereum Sepolia</code>，每次可以接到 <code>0.05 ETH</code>（每个 Google 账号每 24 小时可以接这个数量）</p>
+<p>实际上，<code>0.05 ETH</code> 已经能干很多事情了</p>
+<blockquote>
+<p><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">https://cloud.google.com/application/web3/faucet/ethereum/sepolia</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_8UXSx6lrE7.png"></p>
+<p>把自己的钱包地址填进去就可以了，地址在钱包里面顶上复制一下就好了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_ItPuB71gcx.png"></p>
+<h2 id="（可选）部署一个最简单的开发节点"><a href="#（可选）部署一个最简单的开发节点" class="headerlink" title="（可选）部署一个最简单的开发节点"></a>（可选）部署一个最简单的开发节点</h2><p>你可以使用 hardhat 来部署一个最简单的开发节点，首先你的确保你安装了 nodejs</p>
+<p>然后使用 <code>npx hardhat init</code> 来初始化你的节点，使用 <code>npx hardhat node</code> 来开启节点的服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">$ npx hardhat init</span><br><span class="line">888    888                      888 888               888</span><br><span class="line">888    888                      888 888               888</span><br><span class="line">888    888                      888 888               888</span><br><span class="line">8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888</span><br><span class="line">888    888     <span class="string">&quot;88b 888P&quot;</span>  d88<span class="string">&quot; 888 888 &quot;</span>88b     <span class="string">&quot;88b 888</span></span><br><span class="line"><span class="string">888    888 .d888888 888    888  888 888  888 .d888888 888</span></span><br><span class="line"><span class="string">888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.</span></span><br><span class="line"><span class="string">888    888 &quot;</span>Y888888 888     <span class="string">&quot;Y88888 888  888 &quot;</span>Y888888  <span class="string">&quot;Y888</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Welcome to Hardhat v2.24.0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">√ What do you want to do? · Create a TypeScript project</span></span><br><span class="line"><span class="string">√ Hardhat project root: · F:\CTF\Web3\Node</span></span><br><span class="line"><span class="string">√ Do you want to add a .gitignore? (Y/n) · y</span></span><br><span class="line"><span class="string">√ Help us improve Hardhat with anonymous crash reports &amp; basic usage data? (Y/n) · y</span></span><br><span class="line"><span class="string">√ Do you want to install this sample project&#x27;s dependencies with npm (hardhat @nomicfoundation/hardhat-toolbox)? (Y/n) · y</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">npm install --save-dev &quot;</span>hardhat@^2.24.0<span class="string">&quot; &quot;</span>@nomicfoundation/hardhat-toolbox@^5.0.0<span class="string">&quot;</span></span><br><span class="line"><span class="string">npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.</span></span><br><span class="line"><span class="string">npm warn deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported</span></span><br><span class="line"><span class="string">npm warn deprecated glob@5.0.15: Glob versions prior to v9 are no longer supported</span></span><br><span class="line"><span class="string">npm warn deprecated glob@7.1.7: Glob versions prior to v9 are no longer supported</span></span><br><span class="line"><span class="string">npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require(&#x27;node:util&#x27;).isDeepStrictEqual instead.</span></span><br><span class="line"><span class="string">npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported</span></span><br><span class="line"><span class="string">npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">added 576 packages in 22s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">103 packages are looking for funding</span></span><br><span class="line"><span class="string">  run `npm fund` for details</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Project created</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">See the README.md file for some example tasks you can run</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Give Hardhat a star on Github if you&#x27;re enjoying it!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     https://github.com/NomicFoundation/hardhat</span></span><br><span class="line"><span class="string">     </span></span><br><span class="line"><span class="string">$ npx hardhat node</span></span><br><span class="line"><span class="string">Started HTTP and WebSocket JSON-RPC server at http://127.0.0.1:8545/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Accounts</span></span><br><span class="line"><span class="string">========</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">WARNING: These accounts, and their private keys, are publicly known.</span></span><br><span class="line"><span class="string">Any funds sent to them on Mainnet or any other live network WILL BE LOST.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #0: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #1: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #2: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #3: 0x90F79bf6EB2c4f870365E785982E1f101E93b906 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #4: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #5: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x8b3a350cf5c34c9194ca85829a2df0ec3153be0318b5e2d3348e872092edffba</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #6: 0x976EA74026E726554dB657fA54763abd0C3a0aa9 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x92db14e403b83dfe3df233f83dfa3a0d7096f21ca9b0d6d6b8d88b2b4ec1564e</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #7: 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x4bbbf85ce3377467afe5d46f804f221813b2bb87f24d81f60f1fcdbf7cbf4356</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #8: 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xdbda1821b80551c9d65939329250298aa3472ba22feea921c0cf5d620ea67b97</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #9: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #10: 0xBcd4042DE499D14e55001CcbB24a551F3b954096 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xf214f2b2cd398c806f84e317254e0f0b801d0643303237d97a22a48e01628897</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #11: 0x71bE63f3384f5fb98995898A86B02Fb2426c5788 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x701b615bbdfb9de65240bc28bd21bbc0d996645a3dd57e7b12bc2bdf6f192c82</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #12: 0xFABB0ac9d68B0B445fB7357272Ff202C5651694a (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xa267530f49f8280200edf313ee7af6b827f2a8bce2897751d06a843f644967b1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #13: 0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x47c99abed3324a2707c28affff1267e45918ec8c3f20b8aa892e8b065d2942dd</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #14: 0xdF3e18d64BC6A983f673Ab319CCaE4f1a57C7097 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xc526ee95bf44d8fc405a158bb884d9d1238d99f0612e9f33d006bb0789009aaa</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #15: 0xcd3B766CCDd6AE721141F452C550Ca635964ce71 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x8166f546bab6da521a8369cab06c5d2b9e46670292d85c875ee9ec20e84ffb61</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #16: 0x2546BcD3c84621e976D8185a91A922aE77ECEc30 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xea6c44ac03bff858b476bba40716402b03e41b8e97e276d1baec7c37d42484a0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #17: 0xbDA5747bFD65F08deb54cb465eB87D40e51B197E (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0x689af8efa8c651a91ad287602527f3af2fe9f6501a7ac4b061667b5a93e037fd</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #18: 0xdD2FD4581271e230360230F9337D5c0430Bf44C0 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xde9be858da4a475276426320d5e9262ecfc3ba460bfac56360bfa6c4c28b4ee0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Account #19: 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 (10000 ETH)</span></span><br><span class="line"><span class="string">Private Key: 0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">WARNING: These accounts, and their private keys, are publicly known.</span></span><br><span class="line"><span class="string">Any funds sent to them on Mainnet or any other live network WILL BE LOST.</span></span><br></pre></td></tr></table></figure>
+
+<p>hardhat 会给我们提供测试的钱包，但是需要注意的是，不要在主网上往这些钱包转账！这些账户的私钥是公开的，所以可能会导致你的钱被盗走</p>
+<p>开启后自己在小狐狸钱包里面加入自己的本地网络就可以了</p>
+<h2 id="使用-Remix-IDE-部署合约"><a href="#使用-Remix-IDE-部署合约" class="headerlink" title="使用 Remix IDE 部署合约"></a>使用 Remix IDE 部署合约</h2><p>在 Remix IDE 中，我们先新建一个文件，文件名你喜欢就好</p>
+<p>我们添加以下代码（一个简单的加法）</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#7F848E;font-style:italic">// SPDX-License-Identifier: MIT</span></div><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> >=0.7.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> TestAdd</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint256</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint256</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint256</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>完成后按下 <kbd>Ctrl</kbd> + <kbd>S</kbd> 会自动编译，或者你也可以点击左侧的 <code>Solidity 编译器</code>，然后点击那个蓝色的编译按钮也可以</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_RnQ98BdaLW.png"></p>
+<p>完成编译后我们要进行部署，我们点到左边的 <code>部署 &amp; 发交易</code> 选项卡，在这里点击上面的环境，选择 <code>WalletConnect</code> 连接自己的钱包，注意网段别选错了，万一选到了以太坊那是真给钱了</p>
+<p>这里会让你授权部署合约，再次确认你的网络和账户是正确的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_HqUOq7Us9q.png"></p>
+<p>连接好后点击下面的部署就可以部署合约了，等到它部署完成就可以调用了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/NVIDIA_Overlay_46dxV0akBH.png"></p>
+<p>在部署的时候，下面的 Terminal 里面会有信息的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_UDmVUTVC4C.png"></p>
+<p>这里会给你显示合约详细信息的查看连接，例如我这里就是这两个</p>
+<ul>
+<li>View on Blockscout: <a href="https://eth-sepolia.blockscout.com/tx/0xee0efde8c7fb84304a3c785becc3c6e4559b8cc9bc37f5eb920bedfdc81e1891">https://eth-sepolia.blockscout.com/tx/0xee0efde8c7fb84304a3c785becc3c6e4559b8cc9bc37f5eb920bedfdc81e1891</a></li>
+<li>View on Etherscan: <a href="https://sepolia.etherscan.io/tx/0xee0efde8c7fb84304a3c785becc3c6e4559b8cc9bc37f5eb920bedfdc81e1891">https://sepolia.etherscan.io/tx/0xee0efde8c7fb84304a3c785becc3c6e4559b8cc9bc37f5eb920bedfdc81e1891</a></li>
+</ul>
+<p>这里显示这个合约的状态，部署完成后在已部署的合约中是有你的合约的，你就可以直接调用了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_8R8VzMPvxE.png"></p>
+<p>如果你做到了这一步，恭喜你，你已经完成你的第一次合约部署了！</p>
+<h2 id="与-Remix-IDE-共享本地文件"><a href="#与-Remix-IDE-共享本地文件" class="headerlink" title="与 Remix IDE 共享本地文件"></a>与 Remix IDE 共享本地文件</h2><p>我们在 Remix IDE 中编写的文件是保存在这个 IDE 里面的，但是我们很多时候还是希望保存在自己电脑上（作为文件），或者把自己电脑上的文件共享到这个 IDE 里面，这时候我们需要用到 remixd，先确保你安装了 nodejs 和 npm，然后我们来安装一下 remixd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @remix-project/remixd</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，使用下面的命令来共享文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ remixd -s .\contracts\ -u https://remix.ethereum.org/</span><br><span class="line">[INFO] you are using the latest version 0.6.48</span><br><span class="line">[WARN] You may now only use IDE at https://remix.ethereum.org/ to connect to that instance</span><br><span class="line">[WARN] Any application that runs on your computer can potentially <span class="built_in">read</span> from and write to all files <span class="keyword">in</span> the directory.</span><br><span class="line">[WARN] Symbolic links are not forwarded to Remix IDE</span><br><span class="line"></span><br><span class="line">[INFO] Tue May 27 2025 13:01:14 GMT+0800 (香港标准时间) remixd is listening on 127.0.0.1:65520</span><br><span class="line">[INFO] Tue May 27 2025 13:01:14 GMT+0800 (香港标准时间) slither is listening on 127.0.0.1:65523</span><br></pre></td></tr></table></figure>
+
+<p>你应该将这里的 <code>.\contracts\</code> 更换为你自己的文件夹路径，命令的用法为 <code>remixd -s &lt;path-to-the-shared-folder&gt; -u &lt;remix-ide-instance-URL&gt;</code></p>
+<p>我们还需要在 Remix IDE 里面安装 REMIXD 插件，在左下角有个插头图标，点击后我们在搜索框搜索 <code>REMIXD</code> 就可以找到了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_Cl2pj0tlbk.png"></p>
+<p>启用后回到文件管理，就可以看到工作空间多了个 localhost，这里面就是你的文件了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_K6KcPIDMwZ.png"></p>
+<h2 id="理解以太坊"><a href="#理解以太坊" class="headerlink" title="理解以太坊"></a>理解以太坊</h2><p>现在，是时候了解一下到底什么是以太坊，什么是 Web3 了</p>
+<p>这个问题讲起来比较麻烦，你可能需要阅读下面的这些连接</p>
+<ul>
+<li>什么是 Web3？(MetaMask): <a href="https://learn.metamask.io/zh-CN/lessons/what-is-web3">https://learn.metamask.io/zh-CN/lessons/what-is-web3</a></li>
+<li>了解以太坊 (ethereum): <a href="https://ethereum.org/zh/learn/">https://ethereum.org/zh/learn/</a></li>
+<li>以太坊（ETH）到底是什么？（通俗的解释）: <a href="https://zhuanlan.zhihu.com/p/390884462">https://zhuanlan.zhihu.com/p/390884462</a><br>注：此账户其他的文章建议不看，AI 水分很大，但是就上面这个来说确实很形象了</li>
+</ul>
+<p>其中小狐狸的教程比较简单易懂，也比较浅显，而以太坊官方的教程更加的详细</p>
+<p>但如果你想寻求一下类比的东西，那么你可以看看下面这一段 Grok 3 的概括</p>
+<blockquote>
+<h3 id="以太坊是什么？"><a href="#以太坊是什么？" class="headerlink" title="以太坊是什么？"></a><strong>以太坊是什么？</strong></h3><p>以太坊（Ethereum）就是一个去中心化的“超级计算机”平台，简单来说，它是一个基于区块链技术的网络，任何人都可以在上面运行程序、创建应用，甚至发行自己的数字货币。它不像比特币只是用来转账和存储价值，以太坊更像一个可以编程的“世界计算机”，支持各种复杂的功能。</p>
+<p>想象一下：以太坊就像一个巨大的共享电脑，全世界的人都可以用它来写代码、跑程序，这些程序还能自动执行，不需要中间人，也不怕有人作弊。这就是它的核心魅力。</p>
+<h3 id="以太坊里的专有名词解释"><a href="#以太坊里的专有名词解释" class="headerlink" title="以太坊里的专有名词解释"></a><strong>以太坊里的专有名词解释</strong></h3><p>下面咱们把一些常见的专业名词拆解一下，用人话讲明白：</p>
+<ol>
+<li><strong>区块链（Blockchain）</strong><br>这是以太坊的基础技术。想象一个超级安全的账本，所有的交易和操作记录都写在上面，每一页（区块）都连在一起（链）。这个账本是公开的，谁都可以看，而且一旦写进去就改不了，保证了数据的安全和透明。</li>
+<li><strong>以太币（Ether, 简称ETH）</strong><br>这是以太坊网络里的“货币”，用来支付运行程序或交易的费用。就像你用电脑要交电费一样，在以太坊上跑程序或转账得花ETH。</li>
+<li><strong>智能合约（Smart Contract）</strong><br>这是以太坊的核心功能之一。智能合约就是一段自动执行的代码，写在区块链上。比如，你和朋友约定“如果明天下雨，我就给你100块”，这个条件写成代码后，到了明天如果真下雨，系统会自动转账，不需要你手动操作，也不用担心对方赖账。</li>
+<li><strong>去中心化应用（DApp）</strong><br>这是运行在以太坊上的应用程序，和咱们手机上的App差不多，但区别在于它不是由某个公司控制，而是跑在区块链上，数据公开，规则透明。比如去中心化的金融应用（DeFi）、游戏、投票系统等。</li>
+<li><strong>Gas（燃气费用）</strong><br>在以太坊上运行任何操作（比如转账或执行智能合约）都需要支付手续费，这个费用叫Gas。Gas是用ETH支付的，类似于你开车要加油，Gas费高低取决于网络的“拥堵程度”和操作的复杂性。</li>
+<li><strong>节点（Node）</strong><br>节点就是参与以太坊网络的电脑。任何人都可以运行一个节点来帮助维护网络，记录交易数据。节点越多，网络越安全、越去中心化。</li>
+<li><strong>挖矿（Mining）</strong> 和 <strong>PoW&#x2F;PoS</strong><ul>
+<li>挖矿：早期以太坊通过“挖矿”来验证交易和生成新区块， miners（矿工）用电脑算力解决问题，成功后就能获得ETH奖励。这叫工作量证明（PoW，Proof of Work），就是比特币用的那套。</li>
+<li>现在以太坊已经升级到“合并”（The Merge），改用了权益证明（PoS，Proof of Stake）。不再靠算力，而是靠持有和质押ETH来参与验证交易，更加节能。</li>
+</ul>
+</li>
+<li><strong>以太坊虚拟机（EVM）</strong><br>这是以太坊的核心引擎，负责执行智能合约代码。就像你的电脑运行软件一样，EVM是所有DApp和智能合约的“运行环境”。</li>
+<li><strong>Layer 2（二层解决方案）</strong><br>以太坊主网（Layer 1）有时候会很慢，Gas费也很贵。所以就有了Layer 2技术，比如Optimism、Arbitrum，它们是建在以太坊上的“辅助网络”，可以处理更多交易，降低成本，然后再把结果汇总到主网。</li>
+</ol>
+<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a><strong>总结一下</strong></h3><p>以太坊是一个支持智能合约和去中心化应用的区块链平台，它的“货币”是ETH，它的“燃料”是Gas。用户可以在上面开发各种应用（DApp），所有操作都由智能合约自动执行，数据存储在公开透明的区块链上。网络通过节点运行，经过PoS机制验证交易，同时还有Layer 2来优化速度和成本。</p>
+<p>简单来说，以太坊就是一个开放的数字世界，你可以在里面创造、交易、合作，而且不需要相信任何人，因为规则和代码说了算。</p>
+</blockquote>
+<h2 id="学习-Solidity"><a href="#学习-Solidity" class="headerlink" title="学习 Solidity"></a>学习 Solidity</h2><blockquote>
+<p>我是跟着右边这个链接学习的，再加上我的一些解释&#x2F;见解，共同组成了这一部分：<a href="https://decert.me/tutorial/solidity/intro/">https://decert.me/tutorial/solidity/intro/</a></p>
+</blockquote>
+<div class="note info flat"><p>在这一节中，我假设作为读者的你有这部分的编程基础，学过至少一门编程语言（例如 C、Python、Javascript 等）</p>
+</div>
+
+<h3 id="最基础的合约文件"><a href="#最基础的合约文件" class="headerlink" title="最基础的合约文件"></a>最基础的合约文件</h3><p>最简单的合约文件由两个部分组成：编译器版本声明、合约，拿上面的加法合约举例</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#7F848E;font-style:italic">// SPDX-License-Identifier: MIT</span></div><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> >=0.7.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> TestAdd</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint256</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint256</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint256</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<ul>
+<li><code>pragma solidity &gt;=0.7.0;</code> 表示编译器版本应该大于等于 <code>0.7.0</code>，这个写法是与 npm 的写法兼容的，这里也可以写作 <code>^0.7.0</code></li>
+<li><code>contract TestAdd</code> 定义了一个合约，这个合约的名字叫做 <code>TestAdd</code><ul>
+<li><code>function add (uint256 _a, uint256 _b) public pure returns (uint256)</code> 定义了一个在 <code>TestAdd</code> 合约里面的函数，函数名为 <code>add</code><ul>
+<li><code>(uint256 _a, uint256 _b)</code> 与 C 类似，这里表明了这个函数需要接受两个参数 <code>_a</code> 和 <code>_b</code>，他们都是 <code>uint256</code> 类型</li>
+<li><code>public</code> 是一个可见性修饰符，表示它能够被任何人调用（关于可见性修饰符，后面会有详细的解释）</li>
+<li><code>pure</code> 是一个状态可变性修饰符，表示这个函数既不会读取合约的状态变量，也不会修改合约的状态变量（关于可变性修饰符，后面会有详细的解释）</li>
+<li><code>returns (uint256)</code> 表示这个函数的返回值是一个 <code>uint256</code> 类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>于是这个名为 <code>TestAdd</code> 的合约最后拥有了一个给任何用户调用并输入 <code>_a</code> 和 <code>_b</code>，不改变合约内部变量，返回 <code>uint256</code> 数字的一个加法函数，这也是这个合约的所有内容</p>
+<blockquote>
+<p>看完这里，你可以先去尝试一下这个挑战：<a href="https://decert.me/quests/d99f56d8-3b98-47e5-893d-e6f63810a151">https://decert.me/quests/d99f56d8-3b98-47e5-893d-e6f63810a151</a></p>
+</blockquote>
+<h3 id="理解合约"><a href="#理解合约" class="headerlink" title="理解合约"></a>理解合约</h3><p>合约可以看作是 <code>class</code>（一个对象），举个例子，在学习 Python 的过程中，你肯定遇到过这样的一个例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        ...</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">bark</span>(<span class="params">self, sound=<span class="string">&quot;know-wow&quot;</span></span>):</span><br><span class="line">        <span class="keyword">return</span> sound</span><br></pre></td></tr></table></figure>
+
+<p>在这里的 Python 代码中，我们定义了一个名为 <code>Dog</code> 的对象，并且定义了它的一个函数叫做 <code>bark</code>（吠叫），当我们使用它的时候，肯定是这样用的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dog = Dog()</span><br><span class="line"><span class="built_in">print</span>(dog.bark(sound=<span class="string">&quot;know-wow&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>这会输出 <code>know-wow</code>，而我们在 Solidity 中，是这样写的</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> Dog</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> Bark</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">string</span><span style="color:#C678DD"> calldata</span><span style="color:#ABB2BF;font-style:italic"> _sound</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">string</span><span style="color:#C678DD"> calldata</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#ABB2BF"> _sound;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>当我们部署合约并调用时，传入 <code>know-wow</code>，它也会返回 <code>know-wow</code>（图示左下角）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_YSoRxVeR2G.png"></p>
+<h3 id="变量与函数的可见性"><a href="#变量与函数的可见性" class="headerlink" title="变量与函数的可见性"></a>变量与函数的可见性</h3><p>在上面，我们都没有真正定义一个变量，接下来，我们先看这个合约（一个经典的计数器合约）</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> >=0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> Counter</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">    uint</span><span style="color:#C678DD"> public</span><span style="color:#ABB2BF"> counter;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD"> constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">  counter </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF"> &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> increase</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">        counter </span><span style="color:#56B6C2">+=</span><span style="color:#D19A66"> 1</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> decrease</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">        counter </span><span style="color:#56B6C2">-=</span><span style="color:#D19A66"> 1</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> get</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">view</span><span style="color:#C678DD"> public</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#ABB2BF"> counter;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>在这里，我们可以发现在合约 <code>Counter</code> 中，我们新建了一个 <code>uint</code> 类型的 <code>public</code> 变量 <code>counter</code>，并在 <code>constructor()</code> 函数中让 <code>counter</code> 的值设置为 0</p>
+<ul>
+<li><code>uint public counter</code><ul>
+<li><code>uint</code> 表示这个变量 <code>counter</code> 为 <code>uint256</code> 类型</li>
+<li><code>public</code> 表示 <code>counter</code> 可以被公开访问</li>
+</ul>
+</li>
+</ul>
+<p>类似于 C，Solidity 还有其他的可见性修饰符（大部分都可以用在变量&#x2F;函数上，特殊说明除外）</p>
+<h4 id="外部修饰符：external"><a href="#外部修饰符：external" class="headerlink" title="外部修饰符：external"></a>外部修饰符：<code>external</code></h4><p><strong>不能用在变量上，只能用在函数上</strong>，声明为 <code>external</code> 的函数只能在外部进行调用，此时称这些函数为外部函数</p>
+<p>当我们在一个合约的函数中添加了 <code>external</code> 修饰符，那么在这个合约中就不能对这个函数进行直接调用</p>
+<p>我们在这里创建一个计算器</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> Calculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B"> uint</span><span style="color:#ABB2BF"> Storage;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD"> constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">  Storage </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF"> &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD"> function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">  return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF"> &#125;</span></div><div class="line"><span style="color:#ABB2BF"> </span></div><div class="line"><span style="color:#C678DD"> function</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">  return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF"> &#125;</span></div><div class="line"><span style="color:#ABB2BF"> </span></div><div class="line"><span style="color:#C678DD"> function</span><span style="color:#61AFEF"> times</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">  return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">*</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF"> &#125;</span></div><div class="line"><span style="color:#ABB2BF"> </span></div><div class="line"><span style="color:#C678DD"> function</span><span style="color:#61AFEF"> initialize</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">external</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">  Storage </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF"> &#125;</span></div><div class="line"><span style="color:#ABB2BF"> </span></div><div class="line"><span style="color:#C678DD"> function</span><span style="color:#61AFEF"> test_func</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#61AFEF">  initialize</span><span style="color:#ABB2BF">(); </span><span style="color:#7F848E;font-style:italic">// 这是错误的，因为 initialize 函数具有 external 修饰符，不能在合约内部进行调用</span></div><div class="line"><span style="color:#ABB2BF"> &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>在这里，我们给函数 <code>initialize</code> 添加了 <code>external</code> 修饰符，在 <code>test_func</code> 中，我们对 <code>initialize</code> 进行了调用，我们的编译器会告诉我们这里有问题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_CfPf6MIJaQ.png"></p>
+<blockquote>
+<p>DeclarationError: Undeclared identifier. “initialize” is not (or not yet) visible at this point.</p>
+</blockquote>
+<p>这里就是告诉我们 <code>initialize</code> 在合约内部是不可见的，如果我们实在要对 <code>initialize</code> 在合约内部进行调用，我们应该采用 <code>this.initialize()</code></p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> Calculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">    ...</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> test_func</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">        this</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">initialize</span><span style="color:#ABB2BF">(); </span><span style="color:#7F848E;font-style:italic">// 改成 this.initialize 就可以了</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>采用 <code>this.initialize()</code> 后，会发起一个从外部调用到合约自身的一次调用，<strong>但是，这会消耗更多的 Gas（给的钱更多了）</strong></p>
+<h4 id="公共修饰符：public"><a href="#公共修饰符：public" class="headerlink" title="公共修饰符：public"></a>公共修饰符：<code>public</code></h4><p>通过 <code>public</code> 修饰的变量或者函数，它们既可以在合约内部进行访问，也可以在合约外部进行方式（以接口形式，在其他合约或者链下都可以对其进行调用）</p>
+<p>对于 <code>public</code> 修饰的变量，会自动创建一个同名的访问器（可以理解为 <code>__getter__</code>），用来获取这个变量的值</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> ContractA</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">    uint256</span><span style="color:#C678DD"> public</span><span style="color:#ABB2BF"> varA;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">        varA </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> AddVarA</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">        varA </span><span style="color:#56B6C2">+=</span><span style="color:#D19A66"> 1</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> ContractMain</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#ABB2BF">    ContractA </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> instance; </span><span style="color:#7F848E;font-style:italic">// 初始化一个 ContractA 合约</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    constructor</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">address</span><span style="color:#ABB2BF;font-style:italic"> _address</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#ABB2BF">        instance </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> ContractA</span><span style="color:#ABB2BF">(_address); </span><span style="color:#7F848E;font-style:italic">// 通过传入 ContractA 合约所在的地址来初始化实例</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> trigger</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint256</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#ABB2BF">        instance.</span><span style="color:#61AFEF">AddVarA</span><span style="color:#ABB2BF">(); </span><span style="color:#7F848E;font-style:italic">// 调用实例的 AddVarA 函数，进行 varA 的自增</span></div><div class="line">
+</div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">        return</span><span style="color:#ABB2BF"> instance.</span><span style="color:#61AFEF">varA</span><span style="color:#ABB2BF">(); </span><span style="color:#7F848E;font-style:italic">// 调用实例的 varA 函数（这是一个自动生成的访问器函数），得到 varA 的值</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div></code></pre>
+
+<p>通过 REMIX IDE 我们也能够体会到这一个过程，我们先对 <code>ContractA</code> 进行部署后，再对 <code>ContractMain</code> 进行部署</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_6jMweFSRjY.png"></p>
+<h4 id="子合约-派生合约修饰符：internal"><a href="#子合约-派生合约修饰符：internal" class="headerlink" title="子合约&#x2F;派生合约修饰符：internal"></a>子合约&#x2F;派生合约修饰符：<code>internal</code></h4><p>使用 <code>internal</code> 修饰的函数&#x2F;变量只能在当前合约调用或者其派生合约&#x2F;子合约中使用，首先先简单说明一下派生合约，以下面这段代码为例</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> AddCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">	uint</span><span style="color:#ABB2BF"> Storage;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> save</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _num</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _num;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> AddAndMinusCalculator</span><span style="color:#C678DD"> is</span><span style="color:#E5C07B"> AddCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125; </span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div></code></pre>
+
+
+<p>在这里，我们有一个 <code>AddCalculator</code> 的合约，它只有加法和一个存储功能，在 <code>AddAndMinusCalculator</code> 中，我们使用了关键词 <code>is</code> 来继承 <code>AddCalculator</code> 的属性和函数，并给它添加了减法，也就是说，只看 <code>AddAndMinusCalculator</code> 的情况下，它等同于</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> AddAndMinusCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">	uint</span><span style="color:#ABB2BF"> Storage;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> save</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _num</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _num;</span></div><div class="line"><span style="color:#ABB2BF">		</span></div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125; </span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div></code></pre>
+
+
+<p>你可以把这个看作是 Python 那样的类继承，上面这个与下面这段 Python 代码是类似的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AddCalculator</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.Storage = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, a, b</span>):</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">save</span>(<span class="params">self, num</span>):</span><br><span class="line">        self.Storage = num</span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AddAndMinusCalculator</span>(<span class="title class_ inherited__">AddCalculator</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minus</span>(<span class="params">self, a, b</span>):</span><br><span class="line">        <span class="keyword">return</span> a - b</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    calculator = AddAndMinusCalculator()</span><br></pre></td></tr></table></figure>
+
+<p>我们对 <code>AddAndMinusCalculator</code> 进行合约部署，可以看到它确实也继承了 <code>AddCalculator</code> 的函数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_0VpuakT18n.png"></p>
+<p>现在回到我们的问题，标有 <code>internal</code> 的函数只能在其内部或者其派生合约内部进行调用</p>
+<p>还是拿上面的计算器举例子</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> AddCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">	uint</span><span style="color:#ABB2BF"> Storage;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">	// 现在给 add 函数加入了 internal 修饰</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">internal</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> save</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _num</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _num;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // 内部函数可以调用内部函数</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> calculateAndSave</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _x</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _y</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">        uint</span><span style="color:#ABB2BF"> result </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(_x, _y); </span><span style="color:#7F848E;font-style:italic">// AddCalculator 内部调用 add</span></div><div class="line"><span style="color:#61AFEF">        save</span><span style="color:#ABB2BF">(result);</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> AddAndMinusCalculator</span><span style="color:#C678DD"> is</span><span style="color:#E5C07B"> AddCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // 派生合约可以调用基合约的 internal 函数</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> addAndThenMinus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _c</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#E5C07B">        uint</span><span style="color:#ABB2BF"> sum </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(_a, _b); </span><span style="color:#7F848E;font-style:italic">// AddAndMinusCalculator 内部调用继承来的 add</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(sum, _c);</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // 派生合约也可以直接提供一个 public 函数来调用这个 internal 函数</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> externalAdd</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(_a, _b); </span><span style="color:#7F848E;font-style:italic">// 通过 externalAdd 间接对外暴露 add 功能</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> OutsideCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">	AddCalculator instance;</span></div><div class="line"><span style="color:#ABB2BF">	AddAndMinusCalculator instance1;</span></div><div class="line"><span style="color:#ABB2BF">	</span></div><div class="line"><span style="color:#C678DD">	constructor</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">address</span><span style="color:#ABB2BF;font-style:italic"> _add_calculator_address</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">address</span><span style="color:#ABB2BF;font-style:italic"> _add_and_minus_calculator_address</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#ABB2BF">		instance </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> AddCalculator</span><span style="color:#ABB2BF">(_add_calculator_address);</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">	</span></div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> instance.</span><span style="color:#61AFEF">add</span><span style="color:#ABB2BF">(_a, _b);	</span><span style="color:#7F848E;font-style:italic">// 这里是非法的，因为 instance.add 是一个 internal 函数，不能在外部合约被调用，这里会编译出错</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // TypeError: Member "add" not found or not visible after argument-dependent lookup in contract AddCalculator.</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">	</span></div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> externalAdd</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> instance1.</span><span style="color:#61AFEF">externalAdd</span><span style="color:#ABB2BF">(_a, _b);	</span><span style="color:#7F848E;font-style:italic">// 这是合法的，因为 instance1.externalAdd 是一个使用 public 修饰的函数，将原来的 add 函数暴露在外了</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<h4 id="私有修饰符：private"><a href="#私有修饰符：private" class="headerlink" title="私有修饰符：private"></a>私有修饰符：<code>private</code></h4><p>在这四种修饰符中，<code>private</code> 是最为严格的，它只允许自己使用，并且不允许派生合约使用，再来看下面这个例子</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> AddCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">	uint</span><span style="color:#ABB2BF"> Storage;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">internal</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // save 函数加入了 private 修饰符</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> save</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _num</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">private</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _num;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // calculateAndSave 函数加入了 private 修饰符</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> calculateAndSave</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _x</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _y</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">private</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">        uint</span><span style="color:#ABB2BF"> result </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(_x, _y);</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#61AFEF">        save</span><span style="color:#ABB2BF">(result);   </span><span style="color:#7F848E;font-style:italic">// private 修饰允许合约内部调用</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> AddAndMinusCalculator</span><span style="color:#C678DD"> is</span><span style="color:#E5C07B"> AddCalculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> addAndThenMinus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _c</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#E5C07B">        uint</span><span style="color:#ABB2BF"> sum </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(_a, _b);</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(sum, _c);</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // private 修饰不允许派生合约调用</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> addAndSave</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#61AFEF">        calculateAndSave</span><span style="color:#ABB2BF">(_a, _b);</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>在这里我们对 <code>save</code> 和 <code>calculateAndSave</code> 加入了 <code>private</code> 修饰符，于是在计算并保存的函数里我们对 <code>save</code> 进行调用是合法的，但是在下面那个派生合约里面对 <code>calculateAndSave</code> 调用就是不合法的，直接上手就是编译不通过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DeclarationError: Undeclared identifier.</span><br><span class="line">--&gt; privateTest.sol:38:9:</span><br><span class="line">	|</span><br><span class="line">38 	| calculateAndSave(_a, _b);</span><br><span class="line">	| ^^^^^^^^^^^^^^^^</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义变量与常量"><a href="#定义变量与常量" class="headerlink" title="定义变量与常量"></a>定义变量与常量</h3><p>Solidity 不像 Python 那样，它更类似于 C，是一门静态语言，所以对于变量，必须使用前定义，定义时声明类型，在上面的例子中，你或许见过了 <code>uint</code>&#x2F;<code>uint256</code></p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF"> num </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div></code></pre>
+
+<p>这里的 <code>uint</code> 与 <code>uint256</code> 是等价的，它是一个无符号的 256 位整数，这前面的 <code>u</code> 可以看作 <code>unsigned</code></p>
+<p>对于一个 N 位的无符号整数，它可以表示的<strong>最小值是 0</strong>，<strong>最大值是 2^N - 1</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>位数 (N)</th>
+<th>存储大小 (字节)</th>
+<th>最小值</th>
+<th>最大值 (2^N - 1)</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>uint8</td>
+<td>8</td>
+<td>1</td>
+<td>0</td>
+<td>2^8 - 1 (即 255)</td>
+<td></td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>16</td>
+<td>2</td>
+<td>0</td>
+<td>2^16 - 1 (即 65,535)</td>
+<td></td>
+</tr>
+<tr>
+<td>uint24</td>
+<td>24</td>
+<td>3</td>
+<td>0</td>
+<td>2^24 - 1 (即 16,777,215)</td>
+<td></td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>32</td>
+<td>4</td>
+<td>0</td>
+<td>2^32 - 1 (即 4,294,967,295)</td>
+<td>C 的 <code>int</code>、Windows&#x2F;Linux32 下 C 的 <code>long</code></td>
+</tr>
+<tr>
+<td>uint40</td>
+<td>40</td>
+<td>5</td>
+<td>0</td>
+<td>2^40 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint48</td>
+<td>48</td>
+<td>6</td>
+<td>0</td>
+<td>2^48 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint56</td>
+<td>56</td>
+<td>7</td>
+<td>0</td>
+<td>2^56 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>64</td>
+<td>8</td>
+<td>0</td>
+<td>2^64 - 1</td>
+<td>Linux64 下的 <code>long</code></td>
+</tr>
+<tr>
+<td>uint72</td>
+<td>72</td>
+<td>9</td>
+<td>0</td>
+<td>2^72 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint80</td>
+<td>80</td>
+<td>10</td>
+<td>0</td>
+<td>2^80 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint88</td>
+<td>88</td>
+<td>11</td>
+<td>0</td>
+<td>2^88 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint96</td>
+<td>96</td>
+<td>12</td>
+<td>0</td>
+<td>2^96 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint104</td>
+<td>104</td>
+<td>13</td>
+<td>0</td>
+<td>2^104 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint112</td>
+<td>112</td>
+<td>14</td>
+<td>0</td>
+<td>2^112 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint120</td>
+<td>120</td>
+<td>15</td>
+<td>0</td>
+<td>2^120 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint128</td>
+<td>128</td>
+<td>16</td>
+<td>0</td>
+<td>2^128 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint136</td>
+<td>136</td>
+<td>17</td>
+<td>0</td>
+<td>2^136 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint144</td>
+<td>144</td>
+<td>18</td>
+<td>0</td>
+<td>2^144 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint152</td>
+<td>152</td>
+<td>19</td>
+<td>0</td>
+<td>2^152 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint160</td>
+<td>160</td>
+<td>20</td>
+<td>0</td>
+<td>2^160 - 1</td>
+<td>足够存储一个以太坊地址作为数字 (20 字节 &#x3D; 160 位)</td>
+</tr>
+<tr>
+<td>uint168</td>
+<td>168</td>
+<td>21</td>
+<td>0</td>
+<td>2^168 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint176</td>
+<td>176</td>
+<td>22</td>
+<td>0</td>
+<td>2^176 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint184</td>
+<td>184</td>
+<td>23</td>
+<td>0</td>
+<td>2^184 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint192</td>
+<td>192</td>
+<td>24</td>
+<td>0</td>
+<td>2^192 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint200</td>
+<td>200</td>
+<td>25</td>
+<td>0</td>
+<td>2^200 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint208</td>
+<td>208</td>
+<td>26</td>
+<td>0</td>
+<td>2^208 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint216</td>
+<td>216</td>
+<td>27</td>
+<td>0</td>
+<td>2^216 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint224</td>
+<td>224</td>
+<td>28</td>
+<td>0</td>
+<td>2^224 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint232</td>
+<td>232</td>
+<td>29</td>
+<td>0</td>
+<td>2^232 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint240</td>
+<td>240</td>
+<td>30</td>
+<td>0</td>
+<td>2^240 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint248</td>
+<td>248</td>
+<td>31</td>
+<td>0</td>
+<td>2^248 - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>uint256</td>
+<td>256</td>
+<td>32</td>
+<td>0</td>
+<td>2^256 - 1 (~1.1579 x 10^77)</td>
+<td>EVM 原生字大小，通常是最高效的类型。</td>
+</tr>
+<tr>
+<td>uint</td>
+<td>256</td>
+<td>32</td>
+<td>0</td>
+<td>2^256 - 1 (~1.1579 x 10^77)</td>
+<td>uint256 的别名。在不指定位数时默认使用。</td>
+</tr>
+</tbody></table>
+<p>这里 <code>uint</code> 后面的数字，其实就是 bit 数（计算机常识：1 Byte &#x3D; 8 bit）</p>
+<p>与 C 类似，定义一个变量的格式为 <code>&lt;type&gt; &lt;visibility&gt; &lt;name&gt;</code>，例如 <code>uint public num</code> 就是一个公开的 uint 类型的名为 num 的变量，需要注意的是，当没有对可见性添加指定，默认为 <code>internal</code></p>
+<p>合约中变量会在区块链中分配一个存储单元，这个变量是“变”的，也成为状态变量</p>
+<p>当然了，有“变”量，就有“不可变”量，在 Solidity 中，“不可变”量有我们常说的 <code>常量</code> 和 <code>不可变量</code>（对它的名字就叫做 <code>不可变量</code>，这就是为啥前面我用引号把那三个字括起来）</p>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>与 C 类似但稍有不同的是，我们使用 <code>constant</code> 关键词来声明一个变量为常量（常量不占用合约存储空间）</p>
+<div class="note warning flat"><p><code>constant</code> 关键词只用于修饰 <code>strings</code> 和任意值类型（关于值类型，下面会说到）</p>
+</div>
+
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#E5C07B">uint</span><span style="color:#C678DD"> constant</span><span style="color:#ABB2BF"> pi </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 3.1415926</span><span style="color:#ABB2BF">;</span></div></code></pre>
+
+<p>在这里，我声明了一个名为 <code>pi</code> 的常量并把它的值设置为 <code>3.1415926</code>，常量一旦声明就不可以进行变更</p>
+<p>并且需要注意的是：<strong>常量只能在定义的时候就进行赋值，并且等号右边的式子在编译时必须有一个确切的结果</strong></p>
+<p>下面我们看一个违反上面这句话的例子</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 5</span><span style="color:#ABB2BF">; </span><span style="color:#7F848E;font-style:italic">// _a 是一个运行时变量</span></div><div class="line"><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF"> _b </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 10</span><span style="color:#ABB2BF">; </span><span style="color:#7F848E;font-style:italic">// _b 是一个运行时变量</span></div><div class="line">
+</div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#E5C07B">uint</span><span style="color:#C678DD"> constant</span><span style="color:#ABB2BF"> sum </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;    </span><span style="color:#7F848E;font-style:italic">// 编译出错，因为在编译过程中，`_a + _b` 的结果不确定，常量在编译时赋值</span></div></code></pre>
+
+
+<p>这里可以看到，我们定义了变量 <code>_a</code> 和 <code>_b</code>，但是这两个变量是在运行代码的时候才进行赋值的，在编译过程中，它们的值仍然是未知的，所以在第四行中的 <code>sum = _a + _b</code> 会编译出错，因为右值不确定</p>
+<h4 id="不可变量"><a href="#不可变量" class="headerlink" title="不可变量"></a>不可变量</h4><p>不可变量同样是一类不可改变的变量，只不过与常量不同的是，常量的赋值是在编译时赋值的，而不可变量是在运行时赋值的（不可变量不占用合约存储空间）</p>
+<p>我们可以用关键词 <code>immutable</code> 来进行不可变量的声明，一般不可变量可以用来定义地址</p>
+<p>下面的代码展示了通过不可变量存储佣金的数量和接受者的地址的过程</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> immutable_test</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#E5C07B">	address</span><span style="color:#C678DD"> immutable</span><span style="color:#ABB2BF"> receiver;	</span><span style="color:#7F848E;font-style:italic">// 定义接受者地址</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#E5C07B">	uint</span><span style="color:#C678DD"> immutable</span><span style="color:#ABB2BF"> commission;	</span><span style="color:#7F848E;font-style:italic">// 定义佣金</span></div><div class="line"><span style="color:#ABB2BF">	</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	constructor</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">address</span><span style="color:#ABB2BF;font-style:italic"> _receiver</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _commission</span><span style="color:#ABB2BF">) &#123;	</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">        // 运行时进行赋值，这里赋值的“时间”与常量是不同的</span></div><div class="line"><span style="color:#ABB2BF">		receiver </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _receiver;</span></div><div class="line"><span style="color:#ABB2BF">		commission </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _commission;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><p>在上面的各种示例代码中，我们或多或少都定义了函数</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> Calculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">	uint</span><span style="color:#ABB2BF"> Storage;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">	constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line">
+</div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> save</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _num</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#ABB2BF">		Storage </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _num;</span></div><div class="line"><span style="color:#ABB2BF">		</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> minus</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">-</span><span style="color:#ABB2BF"> _b;</span></div><div class="line"><span style="color:#ABB2BF">	&#125; </span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>与 Javascript 类似，我们使用关键词 <code>function</code> 开头来在合约里面定义一个函数，函数的定义中涉及到的各个关键词按照以下顺序排列</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">function</span><span style="color:#61AFEF"> 函数名</span><span style="color:#ABB2BF">(&#x3C;</span><span style="color:#E06C75;font-style:italic">参数类型</span><span style="color:#ABB2BF">> &#x3C;</span><span style="color:#E06C75;font-style:italic">参数名</span><span style="color:#ABB2BF">>) &#x3C;</span><span style="color:#61AFEF">可见性</span><span style="color:#ABB2BF">> &#x3C;</span><span style="color:#61AFEF">状态可变性</span><span style="color:#ABB2BF">> [</span><span style="color:#C678DD">returns</span><span style="color:#ABB2BF">(&#x3C;</span><span style="color:#E06C75;font-style:italic">返回类型</span><span style="color:#ABB2BF">>)] &#123; &#125;</span></div></code></pre>
+
+<h4 id="函数传参"><a href="#函数传参" class="headerlink" title="函数传参"></a>函数传参</h4><p>与 C&#x2F;C++ 类似，在定义函数参数的时候，必须声明它的类型</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">)</span></div></code></pre>
+
+<p>在这里我们声明了名为 <code>add</code> 的函数，并且接受两个 <code>uint</code> 类型参数 <code>_a</code> 和 <code>_b</code></p>
+<h4 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h4><p>在定义函数的时候，如果函数具有返回值，那么我们必须声明函数的返回值类型（当然了，如果没有返回值这部分是可以省略的）</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">	return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;	</span><span style="color:#7F848E;font-style:italic">// 定义了 uint 类型返回，在这里使用 return 来返回函数值</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>在这里，我们给 <code>add</code> 函数添加了返回值 <code>uint</code> 类型的声明，这样我们就可以在函数中使用 <code>return</code> 来返回值了</p>
+<p>不过，我们也可以不使用 return 的显式返回，我们在 <code>returns</code> 的括号里面，可以指定变量，例如</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#E06C75;font-style:italic"> result</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#ABB2BF">	result </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;  </span><span style="color:#7F848E;font-style:italic">// 通过给 result 赋值来完成返回</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>这样通过指定变量 <code>result</code> 并给  <code>result</code> 赋值，也可以完成返回</p>
+<p>在 Solidity 中，我们是可以返回多个返回值的（类似于 Python）</p>
+<p>例如，在 Python 中，我们手动构造一个递增队列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">generate</span>(<span class="params">start: <span class="built_in">int</span></span>) -&gt; <span class="built_in">tuple</span>:</span><br><span class="line">    <span class="keyword">return</span> (start, start + <span class="number">1</span>, start + <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样我们通过如下的方式调用的时候，可以得到一个元组，并且我们是可以通过解包的方式拆出来的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    a, b, c = generate(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(a, b, c)</span><br><span class="line">    <span class="comment"># 输出：1 2 3</span></span><br></pre></td></tr></table></figure>
+
+<p>而在 Solidity 中，我们可以在 <code>returns</code> 里面指定多个变量类型，来完成多个值的返回</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">function</span><span style="color:#61AFEF"> generate</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _start</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">	// 在 returns 的括号中指定了三个 uint 类型返回</span></div><div class="line"><span style="color:#C678DD">	returns</span><span style="color:#ABB2BF"> (</span><span style="color:#ABB2BF;font-style:italic">_start</span><span style="color:#ABB2BF">, </span><span style="color:#ABB2BF;font-style:italic">_start</span><span style="color:#ABB2BF"> + </span><span style="color:#E06C75;font-style:italic">1</span><span style="color:#ABB2BF">, </span><span style="color:#ABB2BF;font-style:italic">_start</span><span style="color:#ABB2BF"> + </span><span style="color:#E06C75;font-style:italic">2</span><span style="color:#ABB2BF">);</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>这样，我们在调用的时候就可以得到多个值，而调用的方法也很简单，与 Python 是非常类似的</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF"> a, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF"> b, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF"> c </span><span style="color:#56B6C2">=</span><span style="color:#61AFEF"> generate</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">);</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">// a = 1, b = 2, c = 3</span></div></code></pre>
+
+<h4 id="状态可变性"><a href="#状态可变性" class="headerlink" title="状态可变性"></a>状态可变性</h4><p>你或许发现了，在上面的函数中，我添加了一个关键词 <code>pure</code>，这个就涉及到了函数的状态可变性，状态可变性不是必须写的</p>
+<h5 id="视图函数：view"><a href="#视图函数：view" class="headerlink" title="视图函数：view"></a>视图函数：<code>view</code></h5><p>视图函数表示这个函数不修改合约中的变量，这个函数是不需要消耗 gas 的（因为不涉及对状态的改变，只是在单个节点上运行特定的不涉及状态改变的功能）</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> database</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">	uint</span><span style="color:#ABB2BF"> count </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">	</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;	</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">		// add 函数涉及到了合约内部变量的修改，所以是要消耗 gas 的</span></div><div class="line"><span style="color:#ABB2BF">		count </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> count </span><span style="color:#56B6C2">+</span><span style="color:#D19A66"> 1</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">	</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> get</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> view</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;	</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">		// get 函数只是在读取 count 的值并返回，这里没有修改合约内部的变量，是不需要消耗 gas 的</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">		// 同时，这是一个视图函数，表示它会读取合约内部的变量状态</span></div><div class="line"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> count;</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>这里 <code>view</code> 关键词说明了它是个视图函数，它可以读取合约内部的变量的状态，但是不能修改合约内部变量的状态</p>
+<p>需要注意的是，不仅是修改合约内部的变量状态被称为<strong>修改了状态</strong>，触发事件，发送代币等都会视为修改状态</p>
+<h5 id="纯函数：pure"><a href="#纯函数：pure" class="headerlink" title="纯函数：pure"></a>纯函数：<code>pure</code></h5><p><del>纯函数说明它是纯的</del>，它甚至不能够访问合约内部的变量状态，举个例子</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> database</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">	uint</span><span style="color:#ABB2BF"> count </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> get</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;	</span><span style="color:#7F848E;font-style:italic">// 这里把 view 修改成了 pure，是不合法的</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> count;	</span><span style="color:#7F848E;font-style:italic">// 这里读取了合约内部的变量，但是函数是纯函数，所以读取是非法的</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>这样就不行了，因为 <code>pure</code> 函数不能够读取合约内部的变量，在这个例子里面，<code>count</code> 是合约内部的一个变量，在 <code>pure</code> 函数里面对其进行读取是非法的</p>
+<p>而我们上面总是用到的计算器例子</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> calculator</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#C678DD">	function</span><span style="color:#61AFEF"> add</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _a</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _b</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> pure</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">		return</span><span style="color:#ABB2BF"> _a </span><span style="color:#56B6C2">+</span><span style="color:#ABB2BF"> _b;	</span><span style="color:#7F848E;font-style:italic">// 这里只对传入的值进行计算</span></div><div class="line"><span style="color:#ABB2BF">	&#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>这个就是合法的，因为它并没有涉及到合约变量的读取，它做的只是对传入的数值进行计算后，把结果返回出去</p>
+<p>你可以这样理解：纯函数就是一个计算器，它只能够对传入的值进行特定的计算</p>
+<h5 id="不可支付函数：nonpayable"><a href="#不可支付函数：nonpayable" class="headerlink" title="不可支付函数：nonpayable"></a>不可支付函数：<code>nonpayable</code></h5><p>当一个函数没有显式声明任何状态可变性修饰符（如 <code>view</code>、<code>pure</code> 或 <code>payable</code>）时，它的默认行为是 <code>nonpayable</code>。这种函数可以读取合约的状态变量，也可以修改合约的状态变量。它是最常见的函数类型，用于实现业务逻辑。</p>
+<p>唯一需要注意的是：这种函数不能接收以太币。如果外部调用者尝试向一个 <code>nonpayable</code> 函数发送以太币（在交易中包含 <code>value</code>），交易会立即失败并回滚。</p>
+<p><strong><code>nonpayable</code> 函数调用需要消耗 gas</strong>，并且不添加 <code>nonpayable</code> 关键词来进行修饰，只需要对状态可变性的位置置空就行了</p>
+<p>下面我们用一个例子来看看这种函数</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> database</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#E5C07B">    uint</span><span style="color:#C678DD"> public</span><span style="color:#ABB2BF"> data;</span></div><div class="line">
+</div><div class="line"><span style="color:#C678DD">    constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">        data </span><span style="color:#56B6C2">=</span><span style="color:#D19A66"> 0</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> update</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _newData</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#ABB2BF">        data </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _newData; </span><span style="color:#7F848E;font-style:italic">// 在这里我们对合约内部变量进行了修改，这一步是需要消耗 gas 的</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#7F848E;font-style:italic">    // 即使函数没有实际修改状态，但是它是个 nonpayable 函数，外部调用也需要 Gas</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> greet</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">string</span><span style="color:#C678DD"> memory</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#98C379"> "Hello from database!"</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-Web3-Guide/msedge_ItlUhOX7pI.png"></p>
+<p>可以发现，我们没有添加任何状态可变性修饰符的时候，它的类型为 <code>nonpayable</code>，并且当我点击了函数触发按钮后，它弹出了支付请求</p>
+<p><strong>所以，当我们的函数满足 <code>view</code> 或者 <code>pure</code> 的情况时，或者说这两个可变性能够满足我们的需求时，还是好好地添加对应的可变性修饰符来减少开支吧！</strong></p>
+<h5 id="可支付函数：payable"><a href="#可支付函数：payable" class="headerlink" title="可支付函数：payable"></a>可支付函数：<code>payable</code></h5><p>可支付函数与不可支付函数的唯一区别在于它是唯一一个可以接受以太币的函数类型，也就是说可以进行转账</p>
+<p>当然了，转账自然就涉及到了状态的改变，所以这类函数是需要支付 gas 的</p>
+<p>在这里，我们给出一个最简单的例子（由 Gemini 2.5 编写）</p>
+<pre class="one-dark-pro" style="background-color:#282c34;color:#abb2bf" tabindex="0"><code><div class="line"><span style="color:#7F848E;font-style:italic">// SPDX-License-Identifier: MIT</span></div><div class="line"><span style="color:#C678DD">pragma</span><span style="color:#E06C75"> solidity</span><span style="color:#D19A66"> ^0.8.0</span><span style="color:#ABB2BF">;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">/**</span></div><div class="line"><span style="color:#7F848E;font-style:italic"> * </span><span style="color:#C678DD;font-style:italic">@title</span><span style="color:#7F848E;font-style:italic"> MySimpleEthTransfer</span></div><div class="line"><span style="color:#7F848E;font-style:italic"> * </span><span style="color:#C678DD;font-style:italic">@dev</span><span style="color:#7F848E;font-style:italic"> 这是一个演示如何接收和发送以太币的简单合约。</span></div><div class="line"><span style="color:#7F848E;font-style:italic"> */</span></div><div class="line"><span style="color:#C678DD">contract</span><span style="color:#E5C07B"> MySimpleEthTransfer</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#7F848E;font-style:italic">    // 状态变量：合约的部署者地址</span></div><div class="line"><span style="color:#E5C07B">    address</span><span style="color:#C678DD"> public</span><span style="color:#ABB2BF"> owner;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // 构造函数：合约部署时执行一次，设置部署者为所有者</span></div><div class="line"><span style="color:#C678DD">    constructor</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#ABB2BF">        owner </span><span style="color:#56B6C2">=</span><span style="color:#E5C07B"> msg.sender</span><span style="color:#ABB2BF">;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    // 修饰符：限制函数只能由所有者调用</span></div><div class="line"><span style="color:#C678DD">    modifier</span><span style="color:#61AFEF"> onlyOwner</span><span style="color:#ABB2BF">() &#123;</span></div><div class="line"><span style="color:#C678DD">        require</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">msg.sender</span><span style="color:#ABB2BF"> == owner, </span><span style="color:#98C379">"Only owner can call this function."</span><span style="color:#ABB2BF">);</span></div><div class="line"><span style="color:#D19A66">        _</span><span style="color:#ABB2BF">; </span><span style="color:#7F848E;font-style:italic">// _ 是一个特殊符号，代表被修饰的函数体</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    /**</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     * </span><span style="color:#C678DD;font-style:italic">@dev</span><span style="color:#7F848E;font-style:italic"> 允许任何人向本合约存入以太币。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     *      这是一个 payable 函数，意味着它能接收以太币。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     *      所有收到的以太币都会增加合约的余额。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     */</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> deposit</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> payable</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // 实际应用中，你可能想在这里记录存款人及其金额</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // 例如：mapping(address => uint) public balances;</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // balances[msg.sender] += msg.value;</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        //</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // 为了最简单的演示，我们让它仅仅接收以太币，不做额外逻辑</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    /**</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     * </span><span style="color:#C678DD;font-style:italic">@dev</span><span style="color:#7F848E;font-style:italic"> 允许合约所有者向指定地址转账以太币。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     * </span><span style="color:#C678DD;font-style:italic">@param</span><span style="color:#E06C75;font-style:italic"> _recipient</span><span style="color:#7F848E;font-style:italic"> 要接收以太币的地址。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     * </span><span style="color:#C678DD;font-style:italic">@param</span><span style="color:#E06C75;font-style:italic"> _amount</span><span style="color:#7F848E;font-style:italic"> 要转账的以太币数量 (以 Wei 为单位)。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     *      注意：此函数本身不需要是 payable，因为它是在发送以太币，而不是接收。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     */</span></div><div class="line line-highlight" style="background-color:#49515fff;"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> sendEth</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">address</span><span style="color:#E06C75;font-style:italic"> payable</span><span style="color:#ABB2BF;font-style:italic"> _recipient</span><span style="color:#ABB2BF">, </span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF;font-style:italic"> _amount</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">public</span><span style="color:#61AFEF"> onlyOwner</span><span style="color:#ABB2BF"> &#123;</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // 确保合约有足够的以太币来发送</span></div><div class="line"><span style="color:#C678DD">        require</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">address</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">this</span><span style="color:#ABB2BF">).balance ></span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> _amount, </span><span style="color:#98C379">"Insufficient contract balance to send."</span><span style="color:#ABB2BF">);</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">        // 使用 .transfer() 方法发送以太币。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // 这是推荐的发送以太币的方式之一，因为它会在失败时自动回滚，</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // 并且有固定的 2300 gas limit，可以防止重入攻击。</span></div><div class="line"><span style="color:#ABB2BF">        _recipient.</span><span style="color:#61AFEF">transfer</span><span style="color:#ABB2BF">(_amount);</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line">
+</div><div class="line"><span style="color:#7F848E;font-style:italic">    /**</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     * </span><span style="color:#C678DD;font-style:italic">@dev</span><span style="color:#7F848E;font-style:italic"> 返回当前合约持有的以太币余额。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     *      这是一个 view 函数，因为它只读取状态，不修改状态，因此不消耗 Gas。</span></div><div class="line"><span style="color:#7F848E;font-style:italic">     */</span></div><div class="line"><span style="color:#C678DD">    function</span><span style="color:#61AFEF"> getContractBalance</span><span style="color:#ABB2BF">() </span><span style="color:#C678DD">public</span><span style="color:#C678DD"> view</span><span style="color:#C678DD"> returns</span><span style="color:#ABB2BF"> (</span><span style="color:#E5C07B">uint</span><span style="color:#ABB2BF">) &#123;</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // address(this) 代表当前合约的地址</span></div><div class="line"><span style="color:#7F848E;font-style:italic">        // .balance 是 Solidity 内置的属性，用于获取地址的以太币余额</span></div><div class="line"><span style="color:#C678DD">        return</span><span style="color:#E5C07B"> address</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">this</span><span style="color:#ABB2BF">).balance;</span></div><div class="line"><span style="color:#ABB2BF">    &#125;</span></div><div class="line"><span style="color:#ABB2BF">&#125;</span></div></code></pre>
+
+<p>在这个合约中，我们可以对目标用户进行转账，也可以存入 ETH，对于这部分的具体内容，会在后面展示</p>
+<h5 id="可变性总结"><a href="#可变性总结" class="headerlink" title="可变性总结"></a>可变性总结</h5><p>由此，我们可以得到下面四种可变性修饰符和它们对应函数的特性</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>可读状态变量</th>
+<th>可写状态变量</th>
+<th>可接收以太币</th>
+<th>外部调用Gas消耗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pure</code></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌ (通常)</td>
+</tr>
+<tr>
+<td><code>view</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌ (通常)</td>
+</tr>
+<tr>
+<td><strong>无修饰符</strong> (<code>non-payable</code>)</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>payable</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://github.com/GamerNoTitle">GamerNoTitle</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bili33.top/posts/CTF-Web3-Guide/">https://bili33.top/posts/CTF-Web3-Guide/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/Web3/">Web3</a><a class="post-meta__tags" href="/tags/ETH/">ETH</a><a class="post-meta__tags" href="/tags/ethereum/">ethereum</a><a class="post-meta__tags" href="/tags/sepolia/">sepolia</a><a class="post-meta__tags" href="/tags/MetaMask/">MetaMask</a></div><div class="post_share"><div class="social-share" data-image="https://assets.bili33.top/img/CTF-Web3-Guide/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/WeChat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/WeChat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/AliPay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/AliPay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/DASCTF-2025-First-Half-Writeup/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/DASCTF-2025-First-Half-Writeup/cover.png" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">【Volcania】DASCTF 2025 上半年线上赛 Writeup</div></div></a></div><div class="next-post pull-right"><a href="/posts/A-Log-that-Repair-Process-of-UWP-Apps-Failing-to-Open-Due-to-Modified-Permissions-of-the-WindowsApps-Folder/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/A-Log-that-Repair-Process-of-UWP-Apps-Failing-to-Open-Due-to-Modified-Permissions-of-the-WindowsApps-Folder/illust_93130508_20250527_004036.png" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">记一次因修改了 WindowsApps 文件夹权限导致的 UWP 应用无法通过运行打开的修复过程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/ADCTF2024-Writeup/" title="ADCTF2024 个人Writeup"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/ADCTF2024-Writeup/msedge_5Mr1PCe98I.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-07</div><div class="title">ADCTF2024 个人Writeup</div></div></a></div><div><a href="/posts/BaseCTF2024-Writeup/" title="BaseCTF2024 个人Writeup"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/BaseCTF2024-Week1/msedge_uIfC9jDQCq.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-30</div><div class="title">BaseCTF2024 个人Writeup</div></div></a></div><div><a href="/posts/CTF-20220529/" title="2022年全国大学生信息安全竞赛创新实践能力赛初赛 —— 部分WriteUp"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Top-img/NEKO-Hackers-Edited.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-29</div><div class="title">2022年全国大学生信息安全竞赛创新实践能力赛初赛 —— 部分WriteUp</div></div></a></div><div><a href="/posts/CTF-20220619/" title="2022年全国大学生信息安全竞赛创新实践能力赛 —— 复赛WriteUp"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-20220619/Cover.jpg?download=true" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-19</div><div class="title">2022年全国大学生信息安全竞赛创新实践能力赛 —— 复赛WriteUp</div></div></a></div><div><a href="/posts/CTF-20220826-wangdingcup-qinglong/" title="2022网鼎杯青龙组——个人WriteUP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Top-img/NEKO-Hackers-Edited.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">2022网鼎杯青龙组——个人WriteUP</div></div></a></div><div><a href="/posts/CTF-CCSSSC2025-National-Finals/" title="第十八届软件系统安全赛 CCSSSC 2025 全国总决赛复盘（旅行日记）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-CCSSSC2025-National-Finals/1748174171442.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-25</div><div class="title">第十八届软件系统安全赛 CCSSSC 2025 全国总决赛复盘（旅行日记）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="author-info__name">GamerNoTitle</div><div class="author-info__description">TECH OTAKUS SAVE THE WORLD</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/GamerNoTitle"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GamerNoTitle" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/44666814" target="_blank" title="bilibili"><i class="fas fa-tv"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a><a class="social-icon" href="mailto:GamerNoTitle@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><div align="center"><pre style="font-family: monospace; white-space: pre; line-height: 1 !important;">
+.------.--------.---------.
+| .=====================. |\
+| | 7  3  5  5  6  0  8 | | |
+| +=====================+ | |
+|----------------------\\-. |
+|    *   |      ^|^    || |\|
+|   .-----------------.|| | |
+|   |  1  |  2  |  3  ||| | |
+|   |-----+-----+-----||| | |
+|   |  4  |  5  |  6  ||| | |
+|   |-----+-----+-----||| | |
+|   |  7  |  8  |  9  ||| | |
+|   |-----+-----+-----|// | |
+|   |  *  |  0  |  #  |/  | |
+|   +-----------------+   | |
+|       |       |         | |
++-------+-------+---------+ |
+\______\_______\_________+\/
+</pre></div>
+<div align="center"><span style="color: #e9b891;">gamernotitle</span>@<span style="color: #c5966d;">site_web</span> > <span style="color: #4a6d42;">./plant.sh</span><br>
+Boom has been planted.
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87%E4%B8%8E%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">前置准备与知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E4%B8%80%E4%B8%AA%E9%92%B1%E5%8C%85"><span class="toc-number">1.1.</span> <span class="toc-text">准备一个钱包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%94%B5%E8%84%91%E4%B8%8A%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.1.</span> <span class="toc-text">在电脑上安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.2.</span> <span class="toc-text">在手机上安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87-Remix-IDE"><span class="toc-number">1.2.</span> <span class="toc-text">准备 Remix IDE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%92%B1%E5%8C%85%E5%8E%BB%E6%8E%A5%E6%B0%B4"><span class="toc-number">1.3.</span> <span class="toc-text">使用钱包去接水</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%BC%80%E5%8F%91%E8%8A%82%E7%82%B9"><span class="toc-number">1.4.</span> <span class="toc-text">（可选）部署一个最简单的开发节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Remix-IDE-%E9%83%A8%E7%BD%B2%E5%90%88%E7%BA%A6"><span class="toc-number">1.5.</span> <span class="toc-text">使用 Remix IDE 部署合约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E-Remix-IDE-%E5%85%B1%E4%BA%AB%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6"><span class="toc-number">1.6.</span> <span class="toc-text">与 Remix IDE 共享本地文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E4%BB%A5%E5%A4%AA%E5%9D%8A"><span class="toc-number">1.7.</span> <span class="toc-text">理解以太坊</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.7.1.</span> <span class="toc-text">以太坊是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E9%87%8C%E7%9A%84%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-number">1.7.2.</span> <span class="toc-text">以太坊里的专有名词解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B"><span class="toc-number">1.7.3.</span> <span class="toc-text">总结一下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0-Solidity"><span class="toc-number">1.8.</span> <span class="toc-text">学习 Solidity</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%9F%BA%E7%A1%80%E7%9A%84%E5%90%88%E7%BA%A6%E6%96%87%E4%BB%B6"><span class="toc-number">1.8.1.</span> <span class="toc-text">最基础的合约文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E5%90%88%E7%BA%A6"><span class="toc-number">1.8.2.</span> <span class="toc-text">理解合约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-number">1.8.3.</span> <span class="toc-text">变量与函数的可见性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E4%BF%AE%E9%A5%B0%E7%AC%A6%EF%BC%9Aexternal"><span class="toc-number">1.8.3.1.</span> <span class="toc-text">外部修饰符：external</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E4%BF%AE%E9%A5%B0%E7%AC%A6%EF%BC%9Apublic"><span class="toc-number">1.8.3.2.</span> <span class="toc-text">公共修饰符：public</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E5%90%88%E7%BA%A6-%E6%B4%BE%E7%94%9F%E5%90%88%E7%BA%A6%E4%BF%AE%E9%A5%B0%E7%AC%A6%EF%BC%9Ainternal"><span class="toc-number">1.8.3.3.</span> <span class="toc-text">子合约&#x2F;派生合约修饰符：internal</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E4%BF%AE%E9%A5%B0%E7%AC%A6%EF%BC%9Aprivate"><span class="toc-number">1.8.3.4.</span> <span class="toc-text">私有修饰符：private</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F"><span class="toc-number">1.8.4.</span> <span class="toc-text">定义变量与常量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-number">1.8.4.1.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E9%87%8F"><span class="toc-number">1.8.4.2.</span> <span class="toc-text">不可变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-number">1.8.5.</span> <span class="toc-text">定义函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82"><span class="toc-number">1.8.5.1.</span> <span class="toc-text">函数传参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">1.8.5.2.</span> <span class="toc-text">函数返回值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%8F%AF%E5%8F%98%E6%80%A7"><span class="toc-number">1.8.5.3.</span> <span class="toc-text">状态可变性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%87%BD%E6%95%B0%EF%BC%9Aview"><span class="toc-number">1.8.5.3.1.</span> <span class="toc-text">视图函数：view</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0%EF%BC%9Apure"><span class="toc-number">1.8.5.3.2.</span> <span class="toc-text">纯函数：pure</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E6%94%AF%E4%BB%98%E5%87%BD%E6%95%B0%EF%BC%9Anonpayable"><span class="toc-number">1.8.5.3.3.</span> <span class="toc-text">不可支付函数：nonpayable</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%AF%E6%94%AF%E4%BB%98%E5%87%BD%E6%95%B0%EF%BC%9Apayable"><span class="toc-number">1.8.5.3.4.</span> <span class="toc-text">可支付函数：payable</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E6%80%A7%E6%80%BB%E7%BB%93"><span class="toc-number">1.8.5.3.5.</span> <span class="toc-text">可变性总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.8.6.</span> <span class="toc-text">数据类型</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Migrate-from-Valine-to-Waline/msedge_1kiyjac8P9.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="从 Valine 迁移到 Waline 全记录"/></a><div class="content"><a class="title" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录">从 Valine 迁移到 Waline 全记录</a><time datetime="2026-02-15T19:00:46.000Z" title="Created 2026-02-16 03:00:46">2026-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Reverse-Engineering-Cracking-MailMaster/at-748365_1920.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="记一次对某邮箱软件账户数量上限破解"/></a><div class="content"><a class="title" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解">记一次对某邮箱软件账户数量上限破解</a><time datetime="2026-01-19T12:34:03.000Z" title="Created 2026-01-19 20:34:03">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025-Year-End-Summary/" title="2025 年终总结"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/2025-Year-End-Summary/image-20251231025211777.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 年终总结"/></a><div class="content"><a class="title" href="/posts/2025-Year-End-Summary/" title="2025 年终总结">2025 年终总结</a><time datetime="2025-12-30T17:10:19.000Z" title="Created 2025-12-31 01:10:19">2025-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"/></a><div class="content"><a class="title" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破">使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破</a><time datetime="2025-12-19T12:59:03.000Z" title="Created 2025-12-19 20:59:03">2025-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-PCB2025-Preliminary-Round-Writeup/cover.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"/></a><div class="content"><a class="title" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup">2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup</a><time datetime="2025-12-13T11:05:12.000Z" title="Created 2025-12-13 19:05:12">2025-12-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2026 By GamerNoTitle</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">All articles in this blog are licensed under CC BY-NC-SA 4.0 unless stating additionally.<br>
+<a href="https://icp.gov.moe/?keyword=20213338" target="_blank"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src='https://assets.bili33.top/img/GovMoe/icon120.png' width=20px height=20px></img> 萌ICP备 20213338号</a> | <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.bili33.top/gh/biliCDN/bilicdn.github.io@master/images/favicon.png" width="20px" height="20px"> 本站使用 <a href="https://cdn.bili33.top">哔哩CDN</a> 进行加速<br>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.umd.min.js"></script><script src="https://cdn.bili33.top/npm/vanilla-lazyload@17.8.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.bili33.top/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.bili33.top/npm/mermaid@9.1.7/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://assets.bili33.top/css/waline.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.bili33.top',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+      imageUploader: (file) => {
+        let formData = new FormData();
+        let headers = new Headers();
+        let query = new URLSearchParams();
+
+        formData.append('file', file);
+        headers.append('Authorization', 'Bearer imgbed_YdVn2QPSD7RjaCDYIODMnlyY8wAn3FZD')
+        headers.append('User-Agent', 'Paff-Waline/1.0')
+
+        return fetch('https://img.bili33.top/upload', {
+          method: 'POST',
+          headers: headers,
+          body: formData,
+        }).then((resp) => resp.json())
+        .then((data) => 'https://img.bili33.top' + data[0].src)
+      }
+
+    }, {"avatar":"mp","emojiCDN":"https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/","visitor":true,"emoji":["https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibiliHotKey","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibili2233","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibilitv","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Arcaea","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Heybox","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Majotabi"],"locale":{"nick":"昵称","nickError":"昵称不能少于3个字符","mail":"邮箱","mailError":"请填写正确的邮件地址","link":"网址","optional":"可选","placeholder":"📌图片上传大小限制 5MB，请友善发言，并遵守相关法律法规。","sofa":"来发评论吧~","submit":"提交","like":"喜欢","cancelLike":"撤销喜欢","reply":"回复","cancelReply":"撤回","comment":"评论","refresh":"刷新","more":"加载更多...","preview":"预览","emoji":"表情","uploadImage":"上传图片","seconds":"秒前","minutes":"分钟前","hours":"小时前","days":"天前","now":"刚刚","uploading":"Uploading","login":"登录","logout":"登出","admin":"Endministrator","sticky":"📌","word":"字","wordHint":"评论字数应在 $0 到 $1 字之间！\\n当前字数：$2","anonymous":"匿名","level0":"Lv0","level1":"Lv1","level2":"Lv2","level3":"Lv3","level4":"Lv4","level5":"Lv5","gif":"表情包","gifSearchPlaceholder":"搜索表情包","profile":"个人资料","approved":"通过","waiting":"待审核","spam":"垃圾","unsticky":"取消置顶","oldest":"倒序","latest":"正序","hottest":"热度","reactionTitle":"你认为这篇文章怎么样？"},"noCopyright":true,"reaction":false}))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://assets.bili33.top/js/waline.umd.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.bili33.top/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'UA-138072700-2', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

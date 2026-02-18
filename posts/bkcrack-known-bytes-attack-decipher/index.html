@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="zh-cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破 | GamerNoTitle</title><meta name="author" content="GamerNoTitle,admin@bili33.top"><meta name="copyright" content="GamerNoTitle"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在经历了鹏城杯 2025 的各种 bkcrack 明文攻击后，我觉得我需要写一篇文章来汇总一下 bkcrack 这东西  bkcrack: https:&#x2F;&#x2F;github.com&#x2F;kimci86&#x2F;bkcrack&#x2F;releases  如果你想更多地了解原理，可以阅读这篇论文，本文不讲原理  https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;3-540-60590-8_12    先决条件加密方式ZIP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破">
+<meta property="og:url" content="https://bili33.top/posts/bkcrack-known-bytes-attack-decipher/index.html">
+<meta property="og:site_name" content="GamerNoTitle">
+<meta property="og:description" content="在经历了鹏城杯 2025 的各种 bkcrack 明文攻击后，我觉得我需要写一篇文章来汇总一下 bkcrack 这东西  bkcrack: https:&#x2F;&#x2F;github.com&#x2F;kimci86&#x2F;bkcrack&#x2F;releases  如果你想更多地了解原理，可以阅读这篇论文，本文不讲原理  https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;3-540-60590-8_12    先决条件加密方式ZIP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png">
+<meta property="article:published_time" content="2025-12-19T12:59:03.000Z">
+<meta property="article:modified_time" content="2026-02-18T14:32:18.998Z">
+<meta property="article:author" content="GamerNoTitle">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="MISC">
+<meta property="article:tag" content="bkcrack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png"><link rel="shortcut icon" href="https://assets.bili33.top/img/AboutMe/logo-mini.png"><link rel="canonical" href="https://bili33.top/posts/bkcrack-known-bytes-attack-decipher/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1a9dfff1b560a523701cb01384373c75";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-138072700-2"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-138072700-2');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;b259d35cad514e45a226d03906d8fed1&quot;}"></script><link rel="stylesheet" href="https://font.sec.miui.com/font/css?family=MiSans:400,500,700:Chinese_Simplify,Latin&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":180,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"Author: GamerNoTitle","link":"Link: ","source":"Source: GamerNoTitle","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.bili33.top/npm/flickr-justified-gallery@2.1.2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-02-18 22:32:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"3KdcwFGRWCpapHjZ",ck:"3KdcwFGRWCpapHjZ",autoTrack:true,hashMode:true,screenRecord:true})</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta itemprop="name" content="GamerNoTitle"><meta itemprop="image" content="https://assets.bili33.top/img/AboutMe/logo-mini.png"><meta name="description" itemprop="description" content="欢迎来到GamerNoTitle的博客~"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-height.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/BB.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/twikoo-emotion.css"><link rel="stylesheet" type="text/css" href="https://assets.bili33.top/css/Valine-Emotion.css"><script src="https://assets.bili33.top/js/IPblock.js"></script><script src='https://assets.bili33.top/js/console.js'></script><script src="https://cdn.bili33.top/npm/cardlink"></script><script src="//cdn.bili33.top/npm/matter-js@0.19.0"></script><script>(new Date().getDate() === 1 && new Date().getMonth() === 3) && document.write('<script src="https://cdn.bili33.top/gh/Vikutorika/newassets@master/js/smooth-April-Fools.js"><\/script>')</script><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><script src="https://npm.elemecdn.com/echarts@4.9.0/map/js/china.js"></script><script defer src="https://analytics.bili33.top/script.js" data-website-id="eb23a18b-6650-4776-8ded-29107aba832b"></script><script src="/js/solidity.js"></script><link rel="stylesheet" href="/css/solidity.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="http://assets.bili33.top/css/waline-style.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="GamerNoTitle" type="application/atom+xml">
+</head><body><link rel="stylesheet" href="https://cdn.bili33.top/npm/gamernotitle-oss@1.0.10/css/barber-shop.css"/><script src="https://cdn.bili33.top/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="onerror=null;src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">GamerNoTitle</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-gamepad"></i><span> Entertainment</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-image"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/GenshinGacha/"><i class="fa-fw fa-solid fa-star-of-david"></i><span> GenshinGacha</span></a></li><li><a class="site-page child" href="/StarRailGacha/"><i class="fa-fw fa-solid fa-ticket"></i><span> StarRailGacha</span></a></li><li><a class="site-page child" href="/ArknightsGacha/"><i class="fa-fw fa-solid fa-gem"></i><span> ArknightsGacha</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart"></i><span> Link</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Friends</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fas fa-chart-pie"></i><span> Charts</span></a></li><li><a class="site-page child" href="https://moment.bili33.top/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> Moment</span></a></li><li><a class="site-page child" href="https://t.me/DohnaNyan"><i class="fa-fw fa-brands fa-telegram"></i><span> Telegram Group</span></a></li><li><a class="site-page child" href="https://t.me/PaffChannel"><i class="fa-fw fas fa-bullhorn"></i><span> Telegram Channel</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-12-19T12:59:03.000Z" title="Created 2025-12-19 20:59:03">2025-12-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-18T14:32:18.998Z" title="Updated 2026-02-18 22:32:18">2026-02-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>9min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>在经历了鹏城杯 2025 的各种 bkcrack 明文攻击后，我觉得我需要写一篇文章来汇总一下 bkcrack 这东西</p>
+<ul>
+<li>bkcrack: <a href="https://github.com/kimci86/bkcrack/releases">https://github.com/kimci86/bkcrack/releases</a></li>
+</ul>
+<div class="note info flat"><p>如果你想更多地了解原理，可以阅读这篇论文，本文不讲原理</p>
+<ul>
+<li><a href="https://doi.org/10.1007/3-540-60590-8_12">https://doi.org/10.1007/3-540-60590-8_12</a></li>
+</ul>
+</div>
+
+<h1 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h1><h2 id="加密方式"><a href="#加密方式" class="headerlink" title="加密方式"></a>加密方式</h2><p>ZIP 的加密算法常见的就两种，一个是 ZipCrypto，一个是 AES-256；根据压缩方式，有 Deflate 和 Store（不压缩）。为了能够使用 bkcrack 进行明文攻击，我们手上的加密压缩包<strong>必须是 ZipCrypto 加密</strong>，即</p>
+<ul>
+<li>ZipCrypto Store</li>
+<li>ZipCrypto Deflate（至少拥有一个完整明文，即完整文件）</li>
+</ul>
+<p>这两个是可以进行明文攻击的</p>
+<h2 id="已知明文"><a href="#已知明文" class="headerlink" title="已知明文"></a>已知明文</h2><p>从我们的攻击方式「明文攻击」就知道，我们必须知道一部分明文才能够对文件进行攻击。</p>
+<p>根据论文，我们需要知道密文中<strong>已知至少 12 字节的明文</strong>，才能够对压缩包进行攻击操作</p>
+<div class="note info flat"><p>实测上，貌似 12 字节也不是必须的，10 字节也出现过能破解的情况，但是笔者还是建议大家在解题的时候尽量满足 12 字节的要求</p>
+</div>
+
+<h2 id="已知偏移"><a href="#已知偏移" class="headerlink" title="已知偏移"></a>已知偏移</h2><div class="note warning flat"><p>注：ZipCrypto Store 情况下</p>
+</div>
+
+<p>当我们已知明文（非完整文件）的情况下，我们需要知道这部分数据的偏移量，才能够进行攻击操作（下面例子有，如果你不知道我在说啥，可以往下看）</p>
+<h1 id="创建符合条件的压缩包"><a href="#创建符合条件的压缩包" class="headerlink" title="创建符合条件的压缩包"></a>创建符合条件的压缩包</h1><p>ZipCrypto 仍然是现在压缩包加密的主流方式，所以如果你正在用主流的压缩软件，那么你大概率能够找到 ZipCrypto 的加密选项</p>
+<p>以 7zip 为例，对文件选择「添加到压缩包」的时候，就可以看到加密算法里面有且默认选择 ZipCrypto（如下图）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/7zG_H4kNY8S0rs.png"></p>
+<h1 id="ZipCrypto-Store-下不同方向的明文攻击"><a href="#ZipCrypto-Store-下不同方向的明文攻击" class="headerlink" title="ZipCrypto Store 下不同方向的明文攻击"></a>ZipCrypto Store 下不同方向的明文攻击</h1><p>对于我们已经满足上述条件的情况下，我们可以使用 <a href="https://github.com/kimci86/bkcrack">bkcrack</a> 来进行明文攻击</p>
+<h2 id="持有任一文件的明文攻击"><a href="#持有任一文件的明文攻击" class="headerlink" title="持有任一文件的明文攻击"></a>持有任一文件的明文攻击</h2><p>以 <a href="/posts/CTF-CCSSSC2025-Regional-Offline-Competition/#MISC-AI-ez-sight-%E8%B5%9B%E5%90%8E%E5%87%BA">CCSSSC 2025 区域赛的 ezsight 题目</a> 为例，题目附件解压得到</p>
+<ul>
+<li><code>flag.py</code> 用来验证答案并给 flag 的</li>
+<li><code>workspace.zip</code> 被加密的压缩包</li>
+<li><code>公告.txt</code> 已知明文</li>
+</ul>
+<p>打开压缩包，看到算法为 ZipCrypto Store</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219212458575.png"></p>
+<p>通过 <code>bkcrack -L workspace.zip</code> 可以看到里面的具体文件的算法即压缩方式</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219212752748.png"></p>
+<p>因为题目给了 <code>公告.txt</code> 作为已知明文，所以直接打</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C workspace.zip -c 公告.txt -p 公告.txt</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">[21:28:33] Z reduction using 687 bytes of known plaintext</span><br><span class="line">100.0 % (687 / 687)</span><br><span class="line">[21:28:33] Attack on 14755 Z values at index 18</span><br><span class="line">Keys: ffe9e9e9 d65f814a f3c468c9</span><br><span class="line">85.1 % (12551 / 14755)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 12551</span><br><span class="line">[21:28:44] Keys</span><br><span class="line">ffe9e9e9 d65f814a f3c468c9</span><br></pre></td></tr></table></figure>
+
+<p>然后就出来了 keys，直接拿着 keys 去改密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C workspace.zip -k ffe9e9e9 d65f814a f3c468c9 -U decrypted.zip <span class="string">&quot;Volcania&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就直接拿着密码 <code>Volcania</code> 去解压 <code>decrypted.zip</code> 就可以了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219213015735.png"></p>
+<h2 id="已知-zip-的明文攻击"><a href="#已知-zip-的明文攻击" class="headerlink" title="已知 zip 的明文攻击"></a>已知 zip 的明文攻击</h2><div class="note warning flat"><p>注：此情况指的是在需要攻击的 ZIP 文件里面，存在一个 zip 未加密的 zip 包，且已知里面未加密的 zip 包内的任意一个文件名，如下图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219213232881.png"></p>
+</div>
+
+<h3 id="使用-ZIP-文件头-已知文件名攻击"><a href="#使用-ZIP-文件头-已知文件名攻击" class="headerlink" title="使用 ZIP 文件头 + 已知文件名攻击"></a>使用 ZIP 文件头 + 已知文件名攻击</h3><p>这里没有找到合适的题目，就拿上面那个 <code>encrypted.zip</code> 来说吧，这个里面的 <code>debug.zip</code> 里面压了一个 <code>debug.log</code> 文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219213500966.png"></p>
+<p>而 zip 的文件头是 <code>50 4B 03 04</code>，这里有 4 个字节</p>
+<p>文件名 <code>debug.log</code> 为 <code>64 65 62 75 67 2e 6c 6f 67</code>，这里有 9 个字节，加起来超过 12 字节了</p>
+<p>所以直接去明文攻击即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C .\encrypted.zip -c debug.zip -x 0 504b0304 -x 30 64656275672e6c6f67</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">[21:40:32] Z reduction using 1 bytes of known plaintext</span><br><span class="line">100.0 % (1 / 1)</span><br><span class="line">[21:40:32] Attack on 2621440 Z values at index 37</span><br><span class="line">Keys: 138253fb f12a0c93 90b1234f</span><br><span class="line">11.1 % (291960 / 2621440)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 291960</span><br><span class="line">[21:43:53] Keys</span><br><span class="line">138253fb f12a0c93 90b1234f</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-ZIP-文件头-文件尾攻击"><a href="#使用-ZIP-文件头-文件尾攻击" class="headerlink" title="使用 ZIP 文件头 + 文件尾攻击"></a>使用 ZIP 文件头 + 文件尾攻击</h3><p>还有一种方法是使用 ZIP 文件头 + ZIP 文件尾进行攻击，这个是从 lunatic 佬那里偷师学来的</p>
+<p>因为压缩包的最后一定会有 <code>504b050600000000</code>（如图）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219214558043.png"></p>
+<p>所以可以直接认为这部分是已知明文，结合文件头直接对其进行攻击，这部分的位置在 <code>压缩前文件大小-22</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219214649845.png"></p>
+<p>这里 <code>debug.zip</code> 的原大小是 269，减去 22 就是 247，所以得到以下明文攻击方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C .\encrypted.zip -c debug.zip -x 0 504b0304 -x 247 504b050600000000</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">[21:47:17] Attack on 4194304 Z values at index 254</span><br><span class="line">Keys: 138253fb f12a0c93 90b1234f</span><br><span class="line">19.6 % (823978 / 4194304)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 823978</span><br><span class="line">[21:57:01] Keys</span><br><span class="line">138253fb f12a0c93 90b1234f</span><br></pre></td></tr></table></figure>
+
+<p>在不知道里面的文件名的情况下很好用</p>
+<h2 id="使用-EXE-的-DOS-提示信息攻击"><a href="#使用-EXE-的-DOS-提示信息攻击" class="headerlink" title="使用 EXE 的 DOS 提示信息攻击"></a>使用 EXE 的 DOS 提示信息攻击</h2><p>因为 EXE 里面<strong>大多</strong>都存在这一段（注意是大多数，要说什么东西没有的话，你把你的 Steam 拖进 010 看，它就是没有的那个）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">00000040: 0e1f ba0e 00b4 09cd 21b8 014c cd21 5468  ........!..L.!Th</span><br><span class="line">00000050: 6973 2070 726f 6772 616d 2063 616e 6e6f  is program canno</span><br><span class="line">00000060: 7420 6265 2072 756e 2069 6e20 444f 5320  t be run in DOS</span><br><span class="line">00000070: 6d6f 6465 2e0d 0d0a 2400 0000 0000 0000  mode....$.......</span><br></pre></td></tr></table></figure>
+
+<p>所以可以用来攻击</p>
+<p>以 <a href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/#SMB-Solved">鹏城杯 2025 初赛的 SMB 题目</a> 为例，我们发现 zip 包里存在一个 <code>letter.exe</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219221602022.png"></p>
+<p>拿着这一段提示信息来攻击，偏移量在 64</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C .\%5cletter.zip -c letter.exe -x 64 0E1FBA0E00B409CD21B8014CCD21546869732070726F6772616D2063616E6E6F742062652072756E20696E20444F53206D6F64652E0D0D0A2400000000000000</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">[22:16:50] Z reduction using 56 bytes of known plaintext</span><br><span class="line">100.0 % (56 / 56)</span><br><span class="line">[22:16:50] Attack on 141108 Z values at index 71</span><br><span class="line">Keys: 68cc45ab 864060ce ac958caa</span><br><span class="line">75.6 % (106623 / 141108)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 106623</span><br><span class="line">[22:18:10] Keys</span><br><span class="line">68cc45ab 864060ce ac958caa</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-png-头进行攻击"><a href="#使用-png-头进行攻击" class="headerlink" title="使用 png 头进行攻击"></a>使用 png 头进行攻击</h2><p>因为 png 的头是固定的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR</span><br></pre></td></tr></table></figure>
+
+<p>很明显这长度就是足够我们的要求的，所以直接拿来爆</p>
+<p>以 <a href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/#Blue">鹏城杯 2025 初赛的 blue 题目</a> 为例，高位提取得到的压缩包里面存在一个 <code>xor.png</code>，所以我们对其用 png 的头攻击</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/1765620094306-123-1765621747345-243.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C extracted_nibbles_skip1_off0.zip -c xor.png -x 0 89504E470D0A1A0A0000000D49484452</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">[22:22:32] Z reduction using 9 bytes of known plaintext</span><br><span class="line">100.0 % (9 / 9)</span><br><span class="line">[22:22:32] Attack on 707085 Z values at index 6</span><br><span class="line">Keys: 68cc45ab 864060ce ac958caa</span><br><span class="line">29.1 % (206106 / 707085)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 206106</span><br><span class="line">[22:24:47] Keys</span><br><span class="line">68cc45ab 864060ce ac958caa</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-pyc-的结构进行明文攻击"><a href="#使用-pyc-的结构进行明文攻击" class="headerlink" title="使用 pyc 的结构进行明文攻击"></a>使用 pyc 的结构进行明文攻击</h2><p>这个玩法是在某次非公开赛的时候做到的，题目提供了一个压缩包，里面是一个 <code>attack_it.pyc</code> 文件和一个 <code>flag.py</code> 文件，其中 <code>flag.py</code> 文件使用 <code>py_compile</code> 得到了 <code>attack_it.pyc</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219223716553.png"></p>
+<p>通过查阅文档，我们可以看到 pyc 的头部部分结构如下</p>
+<blockquote>
+<p>src: <a href="https://ctf-wiki.org/misc/other/pyc/">https://ctf-wiki.org/misc/other/pyc/</a></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ctf-wiki.org/misc/other/figure/pyc-struct.png"></p>
+<blockquote>
+<p>[!warning]</p>
+<p><strong>此处的「文件大小」指的是源文件大小，上方此图的来源链接里面说它是「pyc 文件大小」，这是有误的！</strong></p>
+</blockquote>
+<p>使用 010 打开这个 zip，可以在尾部发现出题人留下的信息，Python 版本为 3.12.12，BitField 为 <code>00000000</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/image-20251219225105792.png"></p>
+<p>运行同样的大版本的 Python（指 3.12.x），通过下方代码可以获得 Magic Number</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> importlib.util <span class="keyword">import</span> MAGIC_NUMBER</span><br><span class="line"><span class="built_in">print</span>(MAGIC_NUMBER)</span><br><span class="line"></span><br><span class="line"><span class="comment"># b&#x27;\xcb\r\r\n&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>同时可以看看 <code>flag.py</code> 的大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -L .\flag.zip</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">Archive: .\flag.zip</span><br><span class="line">Index Encryption Compression CRC32    Uncompressed  Packed size Name</span><br><span class="line">----- ---------- ----------- -------- ------------ ------------ ----------------</span><br><span class="line">    0 ZipCrypto  Store       373b10b2         3302         3314 attack_it.pyc</span><br><span class="line">    1 ZipCrypto  Store       ac459bd9         1411         1423 flag.py</span><br></pre></td></tr></table></figure>
+
+<p>所以可以得到 <code>-x 0 cb0d0d0a00000000</code> <code>-x 12 83050000</code>，拿来明文攻击</p>
+<blockquote>
+<p>注意这里的文件大小部分是小端序，所以把 1411 转为 <code>0x583</code> 后还要反过来</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C flag.zip -c attack_it.pyc -x 0 cb0d0d0a00000000 -x 12 83050000</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">[22:43:00] Z reduction using 1 bytes of known plaintext</span><br><span class="line">100.0 % (1 / 1)</span><br><span class="line">[22:43:00] Attack on 2490368 Z values at index 6</span><br><span class="line">Keys: d7fe0787 b3af2704 99fa95dc</span><br><span class="line">71.6 % (1782604 / 2490368)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 1782604</span><br><span class="line">[23:06:54] Keys</span><br><span class="line">d7fe0787 b3af2704 99fa95dc</span><br></pre></td></tr></table></figure>
+
+<h1 id="ZipCrypto-Deflate-下的明文攻击"><a href="#ZipCrypto-Deflate-下的明文攻击" class="headerlink" title="ZipCrypto Deflate 下的明文攻击"></a>ZipCrypto Deflate 下的明文攻击</h1><p>这里给出一个例题，这个是某群群友发出来的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/7zFM_GvyFBG71xt.png"></p>
+<p>题目提供了明文 png 文件和一个被加密的 zip 包，打开加密的 Zip 包发现明文图片用 Deflate 压缩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -L .\Flying.zip</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">Archive: .\Flying.zip</span><br><span class="line">Index Encryption Compression CRC32    Uncompressed  Packed size Name</span><br><span class="line">----- ---------- ----------- -------- ------------ ------------ ----------------</span><br><span class="line">    0 ZipCrypto  Store       ba41996d           44           56 f-l-a-g.txt</span><br><span class="line">    1 ZipCrypto  Deflate     5d9fd6ba       167770       167769 椋炲ザ榫?png</span><br></pre></td></tr></table></figure>
+
+<p>对于 Deflate 压缩过后的文件，我们得用同样的方式来构造“明文”，直接用压缩软件压一个就好了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/7zG_z8aoXZDjnP.png"></p>
+<p>只要选择不是 0 的，就不是 Store 了，记得压缩方式不要选到别的了</p>
+<p>压完了以后就可以去测测是不是对的了，如果不是对的会出现类似于这样的提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C .\Flying.zip -c 飞奶龙.png -p 飞奶龙.png -o 0</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">Data error: ciphertext is smaller than plaintext.</span><br></pre></td></tr></table></figure>
+
+<p>这里说密文比明文小，暗示我们要选压缩等级更高的压缩方式，我这里测到这题是最大压缩（9级）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ bkcrack -C .\Flying.zip -c 飞奶龙.png -P 飞奶龙.zip -p 飞奶龙.png</span><br><span class="line">bkcrack 1.8.1 - 2025-10-25</span><br><span class="line">[23:32:44] Z reduction using 167750 bytes of known plaintext</span><br><span class="line">31.3 % (52423 / 167750)</span><br><span class="line">[23:32:47] Attack on 97 Z values at index 115720</span><br><span class="line">Keys: 78a02143 81566f2b 1315c203</span><br><span class="line">100.0 % (97 / 97)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">[23:32:47] Keys</span><br><span class="line">78a02143 81566f2b 1315c203</span><br></pre></td></tr></table></figure>
+
+<p>反正如果遇到 Deflate，就自己手动压缩一下去试试是什么等级压缩，然后构造明文就好了</p>
+<h1 id="常见的可用于爆破的明文内容"><a href="#常见的可用于爆破的明文内容" class="headerlink" title="常见的可用于爆破的明文内容"></a>常见的可用于爆破的明文内容</h1><ul>
+<li><code>pcapng</code>: <code>-x 0 0a0d0d0ab00000004d3c2b1a01000000ffffffffffffffff</code></li>
+<li><code>pcap</code>: <code>-x 0 d4c3b2a10200040000000000000000000000040001000000</code></li>
+<li><code>xml</code>: <code>-x 0 3c3f786d6c2076657273696f6e3d22312e302220656e636f64696e673d225554462d38223f3e</code></li>
+<li><code>vmdk</code>: <code>-x 0 4b444d56010000000300000000007f0000000000</code></li>
+<li><code>svg</code>: <code>-x 0 3c3f786d6c2076657273696f6e3d22312e302220</code></li>
+<li><code>eml</code>: <code>-x 0 44656c69766572792d646174653a</code></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://github.com/GamerNoTitle">GamerNoTitle</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bili33.top/posts/bkcrack-known-bytes-attack-decipher/">https://bili33.top/posts/bkcrack-known-bytes-attack-decipher/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/MISC/">MISC</a><a class="post-meta__tags" href="/tags/bkcrack/">bkcrack</a></div><div class="post_share"><div class="social-share" data-image="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/WeChat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/WeChat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://assets.bili33.top/img/Payments/AliPay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Payments/AliPay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/2025-Year-End-Summary/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/2025-Year-End-Summary/image-20251231025211777.png" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">2025 年终总结</div></div></a></div><div class="next-post pull-right"><a href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-PCB2025-Preliminary-Round-Writeup/cover.jpg" onerror="onerror=null;src='https://assets.bili33.top/img/404/404.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/ADCTF2024-Writeup/" title="ADCTF2024 个人Writeup"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/ADCTF2024-Writeup/msedge_5Mr1PCe98I.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-07</div><div class="title">ADCTF2024 个人Writeup</div></div></a></div><div><a href="/posts/BaseCTF2024-Writeup/" title="BaseCTF2024 个人Writeup"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/BaseCTF2024-Week1/msedge_uIfC9jDQCq.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-30</div><div class="title">BaseCTF2024 个人Writeup</div></div></a></div><div><a href="/posts/CTF-20220529/" title="2022年全国大学生信息安全竞赛创新实践能力赛初赛 —— 部分WriteUp"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Top-img/NEKO-Hackers-Edited.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-29</div><div class="title">2022年全国大学生信息安全竞赛创新实践能力赛初赛 —— 部分WriteUp</div></div></a></div><div><a href="/posts/CTF-20220619/" title="2022年全国大学生信息安全竞赛创新实践能力赛 —— 复赛WriteUp"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-20220619/Cover.jpg?download=true" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-19</div><div class="title">2022年全国大学生信息安全竞赛创新实践能力赛 —— 复赛WriteUp</div></div></a></div><div><a href="/posts/CTF-20220826-wangdingcup-qinglong/" title="2022网鼎杯青龙组——个人WriteUP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Top-img/NEKO-Hackers-Edited.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">2022网鼎杯青龙组——个人WriteUP</div></div></a></div><div><a href="/posts/CTF-CCSSSC2025-National-Finals/" title="第十八届软件系统安全赛 CCSSSC 2025 全国总决赛复盘（旅行日记）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-CCSSSC2025-National-Finals/1748174171442.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-25</div><div class="title">第十八届软件系统安全赛 CCSSSC 2025 全国总决赛复盘（旅行日记）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/AboutMe/logo-mini.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/link/Akarin.webp'" alt="avatar"/></div><div class="author-info__name">GamerNoTitle</div><div class="author-info__description">TECH OTAKUS SAVE THE WORLD</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">188</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" href="https://github.com/GamerNoTitle"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GamerNoTitle" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/44666814" target="_blank" title="bilibili"><i class="fas fa-tv"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a><a class="social-icon" href="mailto:GamerNoTitle@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content"><div align="center"><pre style="font-family: monospace; white-space: pre; line-height: 1 !important;">
+.------.--------.---------.
+| .=====================. |\
+| | 7  3  5  5  6  0  8 | | |
+| +=====================+ | |
+|----------------------\\-. |
+|    *   |      ^|^    || |\|
+|   .-----------------.|| | |
+|   |  1  |  2  |  3  ||| | |
+|   |-----+-----+-----||| | |
+|   |  4  |  5  |  6  ||| | |
+|   |-----+-----+-----||| | |
+|   |  7  |  8  |  9  ||| | |
+|   |-----+-----+-----|// | |
+|   |  *  |  0  |  #  |/  | |
+|   +-----------------+   | |
+|       |       |         | |
++-------+-------+---------+ |
+\______\_______\_________+\/
+</pre></div>
+<div align="center"><span style="color: #e9b891;">gamernotitle</span>@<span style="color: #c5966d;">site_web</span> > <span style="color: #4a6d42;">./plant.sh</span><br>
+Boom has been planted.
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">先决条件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">加密方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E6%98%8E%E6%96%87"><span class="toc-number">1.2.</span> <span class="toc-text">已知明文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E5%81%8F%E7%A7%BB"><span class="toc-number">1.3.</span> <span class="toc-text">已知偏移</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%AC%A6%E5%90%88%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">创建符合条件的压缩包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ZipCrypto-Store-%E4%B8%8B%E4%B8%8D%E5%90%8C%E6%96%B9%E5%90%91%E7%9A%84%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">3.</span> <span class="toc-text">ZipCrypto Store 下不同方向的明文攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E6%9C%89%E4%BB%BB%E4%B8%80%E6%96%87%E4%BB%B6%E7%9A%84%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">3.1.</span> <span class="toc-text">持有任一文件的明文攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5-zip-%E7%9A%84%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">3.2.</span> <span class="toc-text">已知 zip 的明文攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-ZIP-%E6%96%87%E4%BB%B6%E5%A4%B4-%E5%B7%B2%E7%9F%A5%E6%96%87%E4%BB%B6%E5%90%8D%E6%94%BB%E5%87%BB"><span class="toc-number">3.2.1.</span> <span class="toc-text">使用 ZIP 文件头 + 已知文件名攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-ZIP-%E6%96%87%E4%BB%B6%E5%A4%B4-%E6%96%87%E4%BB%B6%E5%B0%BE%E6%94%BB%E5%87%BB"><span class="toc-number">3.2.2.</span> <span class="toc-text">使用 ZIP 文件头 + 文件尾攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-EXE-%E7%9A%84-DOS-%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF%E6%94%BB%E5%87%BB"><span class="toc-number">3.3.</span> <span class="toc-text">使用 EXE 的 DOS 提示信息攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-png-%E5%A4%B4%E8%BF%9B%E8%A1%8C%E6%94%BB%E5%87%BB"><span class="toc-number">3.4.</span> <span class="toc-text">使用 png 头进行攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pyc-%E7%9A%84%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8C%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">3.5.</span> <span class="toc-text">使用 pyc 的结构进行明文攻击</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ZipCrypto-Deflate-%E4%B8%8B%E7%9A%84%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">4.</span> <span class="toc-text">ZipCrypto Deflate 下的明文攻击</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8F%AF%E7%94%A8%E4%BA%8E%E7%88%86%E7%A0%B4%E7%9A%84%E6%98%8E%E6%96%87%E5%86%85%E5%AE%B9"><span class="toc-number">5.</span> <span class="toc-text">常见的可用于爆破的明文内容</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Migrate-from-Valine-to-Waline/msedge_1kiyjac8P9.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="从 Valine 迁移到 Waline 全记录"/></a><div class="content"><a class="title" href="/posts/Migrate-from-Valine-to-Waline/" title="从 Valine 迁移到 Waline 全记录">从 Valine 迁移到 Waline 全记录</a><time datetime="2026-02-15T19:00:46.000Z" title="Created 2026-02-16 03:00:46">2026-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/Reverse-Engineering-Cracking-MailMaster/at-748365_1920.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="记一次对某邮箱软件账户数量上限破解"/></a><div class="content"><a class="title" href="/posts/Reverse-Engineering-Cracking-MailMaster/" title="记一次对某邮箱软件账户数量上限破解">记一次对某邮箱软件账户数量上限破解</a><time datetime="2026-01-19T12:34:03.000Z" title="Created 2026-01-19 20:34:03">2026-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025-Year-End-Summary/" title="2025 年终总结"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/2025-Year-End-Summary/image-20251231025211777.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 年终总结"/></a><div class="content"><a class="title" href="/posts/2025-Year-End-Summary/" title="2025 年终总结">2025 年终总结</a><time datetime="2025-12-30T17:10:19.000Z" title="Created 2025-12-31 01:10:19">2025-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/bkcrack-known-bytes-attack-decipher/cover.png" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破"/></a><div class="content"><a class="title" href="/posts/bkcrack-known-bytes-attack-decipher/" title="使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破">使用 bkcrack 对 ZipCrypto 加密的 ZIP 文件进行明文爆破</a><time datetime="2025-12-19T12:59:03.000Z" title="Created 2025-12-19 20:59:03">2025-12-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://assets.bili33.top/img/CTF-PCB2025-Preliminary-Round-Writeup/cover.jpg" onerror="this.onerror=null;this.src='https://assets.bili33.top/img/404/404.png'" alt="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup"/></a><div class="content"><a class="title" href="/posts/CTF-PCB2025-Preliminary-Round-Writeup/" title="2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup">2025 第五届“鹏城杯”联邦网络靶场协同攻防演练（初赛）个人 Writeup</a><time datetime="2025-12-13T11:05:12.000Z" title="Created 2025-12-13 19:05:12">2025-12-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2026 By GamerNoTitle</div><div class="framework-info"><span>Framework </span><a href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">All articles in this blog are licensed under CC BY-NC-SA 4.0 unless stating additionally.<br>
+<a href="https://icp.gov.moe/?keyword=20213338" target="_blank"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src='https://assets.bili33.top/img/GovMoe/icon120.png' width=20px height=20px></img> 萌ICP备 20213338号</a> | <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.bili33.top/gh/biliCDN/bilicdn.github.io@master/images/favicon.png" width="20px" height="20px"> 本站使用 <a href="https://cdn.bili33.top">哔哩CDN</a> 进行加速<br>
+</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.bili33.top/npm/@fancyapps/ui@4.0.31/dist/fancybox.umd.min.js"></script><script src="https://cdn.bili33.top/npm/vanilla-lazyload@17.8.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.bili33.top/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.bili33.top/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.bili33.top/npm/mermaid@9.1.7/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadWaline () {
+  function insertCSS () {
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://assets.bili33.top/css/waline.css"
+    document.head.appendChild(link)
+  }
+
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.bili33.top',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+      imageUploader: (file) => {
+        let formData = new FormData();
+        let headers = new Headers();
+        let query = new URLSearchParams();
+
+        formData.append('file', file);
+        headers.append('Authorization', 'Bearer imgbed_YdVn2QPSD7RjaCDYIODMnlyY8wAn3FZD')
+        headers.append('User-Agent', 'Paff-Waline/1.0')
+
+        return fetch('https://img.bili33.top/upload', {
+          method: 'POST',
+          headers: headers,
+          body: formData,
+        }).then((resp) => resp.json())
+        .then((data) => 'https://img.bili33.top' + data[0].src)
+      }
+
+    }, {"avatar":"mp","emojiCDN":"https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/","visitor":true,"emoji":["https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibiliHotKey","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibili2233","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/bilibilitv","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Arcaea","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Heybox","https://cdn.bili33.top/gh/GamerNoTitle/ValineCDN@master/Majotabi"],"locale":{"nick":"昵称","nickError":"昵称不能少于3个字符","mail":"邮箱","mailError":"请填写正确的邮件地址","link":"网址","optional":"可选","placeholder":"📌图片上传大小限制 5MB，请友善发言，并遵守相关法律法规。","sofa":"来发评论吧~","submit":"提交","like":"喜欢","cancelLike":"撤销喜欢","reply":"回复","cancelReply":"撤回","comment":"评论","refresh":"刷新","more":"加载更多...","preview":"预览","emoji":"表情","uploadImage":"上传图片","seconds":"秒前","minutes":"分钟前","hours":"小时前","days":"天前","now":"刚刚","uploading":"Uploading","login":"登录","logout":"登出","admin":"Endministrator","sticky":"📌","word":"字","wordHint":"评论字数应在 $0 到 $1 字之间！\\n当前字数：$2","anonymous":"匿名","level0":"Lv0","level1":"Lv1","level2":"Lv2","level3":"Lv3","level4":"Lv4","level5":"Lv5","gif":"表情包","gifSearchPlaceholder":"搜索表情包","profile":"个人资料","approved":"通过","waiting":"待审核","spam":"垃圾","unsticky":"取消置顶","oldest":"倒序","latest":"正序","hottest":"热度","reactionTitle":"你认为这篇文章怎么样？"},"noCopyright":true,"reaction":false}))
+  }
+
+  if (typeof Waline === 'function') initWaline()
+  else {
+    insertCSS()
+    getScript('https://assets.bili33.top/js/waline.umd.js').then(initWaline)
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.bili33.top/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.bili33.top/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.bili33.top/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'UA-138072700-2', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
