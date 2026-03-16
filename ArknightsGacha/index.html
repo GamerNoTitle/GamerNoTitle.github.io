@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明日方舟抽卡记录 | GamerNoTitle</title>
+    <!-- Material 资源 -->
+    <link rel="stylesheet"
+        href="https://gfonts.aby.pub/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://gfonts.aby.pub/css2?family=Material+Icons+Round" />
+    <link rel="stylesheet" href="https://fonts-gstatic.lug.ustc.edu.cn/css?family=Google+Sans:400,500,700&display=swap">
+    <style>
+        /* Material You 样式 */
+        :root {
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-surface-container: #F3EDF7;
+            --md-sys-color-outline: #79747E;
+            --md-sys-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --md-sys-shape-corner-extra-large: 28px;
+        }
+
+        body {
+            font-family: 'Google Sans', Roboto, sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: #1C1B1F;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            color: var(--md-sys-color-primary);
+            font-size: 2.2rem;
+            margin: 1.5rem 0;
+            padding: 16px;
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            background: var(--md-sys-color-surface-container);
+            box-shadow: var(--md-sys-elevation-1);
+            text-align: center;
+        }
+
+        a {
+            color: var(--md-sys-color-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--md-sys-color-secondary);
+            text-decoration: underline;
+        }
+
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chart-item {
+            background: var(--md-sys-color-surface-container);
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            padding: 24px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .chart-item:hover {
+            transform: translateY(-4px);
+        }
+
+        #dataTable {
+            width: 100%;
+            max-width: 1200px;
+            margin: 24px auto;
+            border-collapse: collapse;
+            background: var(--md-sys-color-surface-container);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            padding: 16px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        .chart-info p {
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.05);
+            display: inline-block;
+            margin: 4px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .material-symbols-outlined {
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .chart-container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                padding: 12px;
+            }
+
+            td,
+            th {
+                padding: 12px;
+            }
+        }
+    </style>
+    <script src="https://cdn.bili33.top/npm/chart.js"></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <h1>
+        <span class="material-symbols-outlined">casino</span>
+        <a href="https://bili33.top">@GamerNoTitle</a> 的明日方舟抽卡记录
+    </h1>
+    <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <div
+            style="background: var(--md-sys-color-surface-container); padding: 16px; border-radius: 16px; margin: 16px;">
+            <h3 style="margin: 8px 0;">
+                <span class="material-symbols-outlined">info</span>
+                只有<a href="https://prts.wiki/w/%E5%8D%83%E7%A7%8B%E4%B8%80%E7%B2%9F">千秋一粟</a>池子（2024.2.1）之后的记录
+            </h3>
+            <h3>
+                <span class="material-symbols-outlined">stars</span>
+                原则上非限定不下池，特殊情况可以考虑一下
+            </h3>
+            <h3 style="margin: 8px 0;">
+                <span class="material-symbols-outlined">account_circle</span>
+                B服：喵呜初音#0717
+            </h3>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="chart-item">
+            <canvas id="chartG"></canvas>
+            <div id="chartG-info" class="chart-info"></div>
+        </div>
+        <div class="chart-item">
+            <canvas id="chartL"></canvas>
+            <div id="chartL-info" class="chart-info"></div>
+        </div>
+        <div class="chart-item">
+            <canvas id="chartC"></canvas>
+            <div id="chartC-info" class="chart-info"></div>
+        </div>
+    </div>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>卡池名称</th>
+                <th>星级</th>
+                <th>名字</th>
+                <th>抽卡时间</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+
+</html>
